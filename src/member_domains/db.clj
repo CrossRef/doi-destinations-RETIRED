@@ -35,9 +35,9 @@
 
 (defn unique-member-domains []
   (map :domain (k/select "member_domains"
-                         (modifier "DISTINCT")
-                         (k/fields :domain)
-                         (k/where {:ignored false}))))
+                           (modifier "DISTINCT")
+                           (k/fields :domain)
+                           (k/where {:ignored false}))))
 
 (defn ensure-doi [member-id doi]
   (k/exec-raw ["insert ignore into member_dois (member_id, doi) values (?, ?)" [member-id doi]]))

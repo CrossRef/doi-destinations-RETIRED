@@ -1,13 +1,15 @@
 (ns member-domains.core
   (:require [member-domains.state :as state]
             [member-domains.db :as db]
-            [member-domains.etld :as etld])
+            [member-domains.etld :as etld]
+            [member-domains.gcs :as gcs])
   (:require [crossref.util.doi :as crdoi])
   (:require [korma.core :as k])
   (:require [clj-http.client :as client]
             [robert.bruce :refer [try-try-again]]
             [clojure.data.json :as json])
-  (:require [clojure.java.io :refer [resource]])
+  (:require [clojure.java.io :refer [resource]]
+            [clojure.string :as string])
   (:gen-class))
 
 (def members-endpoint "http://api.crossref.org/v1/members")
@@ -145,13 +147,11 @@
 (defn dump-regular-expression
   "Dump domains to stdout. Each line is full domain"
   []
-  (println (clojure.string/join "|"
+  (println (string/join "|"
                        (map (fn [entry]
          (let [[subdomain domain etld] (etld/get-main-domain entry)]   
           (str domain "\\." etld)))
          (db/unique-member-domains)))))
-
-; Main functions
 
 (defn grab-dois
   "Get a sample of DOIs per publisher."
@@ -185,5 +185,5 @@
     "resolve" (run-resolution-batch)
     "dump" (dump)
     "dump-domains" (dump-domains)
-    "regular-expression" (dump-regular-expression)
-    ))
+    "dump-common-substrings" (gcs/dump-common-substrings)
+    "regular-expression" (dump-regular-expression)))
