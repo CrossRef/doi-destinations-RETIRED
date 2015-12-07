@@ -16,6 +16,14 @@ CREATE TABLE member_domains (
     ignored BOOLEAN NOT NULL DEFAULT FALSE
 );
 
+create table member_urls (
+  id  INTEGER AUTO_INCREMENT PRIMARY KEY,
+  member_id INTEGER NOT NULL,
+  url VARCHAR(1024) NOT NULL,
+  domain VARCHAR(128) NOT NULL,
+  doi VARCHAR(512) NOT NULL 
+);
+
 CREATE UNIQUE INDEX member_domains_unique ON member_domains(member_id, domain);
 CREATE UNIQUE INDEX member_domains_ignore ON member_domains(domain, ignore);
 

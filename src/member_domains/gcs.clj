@@ -4,6 +4,9 @@
   We can do one much smaller linear search for substrings, which will partition the search space massively.
   Then we can do a secondary linear search for only those domains of which the substring is a factor.
   
+  There isn't a single greatest common substring, at least not a useful one (maybe '.'), so find a sensible
+  set of them (~500).
+  
   This cuts ~3000 domains down to ~500 initial comparisons.
   "
   (:require [member-domains.db :as db])
@@ -12,8 +15,15 @@
             [member-domains.etld :as etld]))
 
 (def word-count-threshold
-  "Minimum number of domains that should match a substring. Too few and there's one long substring per domain."
-  10)
+  "Minimum number of domains that should match a substring.
+  Too low and there are lots of substrings each with few secondary searches, few left-overs.
+  Too high and there are few substrings with many secondary searches, plus lots of singleton left-overs."
+  20)
+
+; 4 => 405 average, 7.3 secondary
+; 5 => 381 average 7.7 secondary
+; 10 => 438 substrings, average 6.7 secondary
+; 20 => 523 substrings, average 5.6
 
 (defn substrings-of-length
   "All substrings of given length in the seq of inputs"
@@ -97,17 +107,22 @@
         sorted-substrings (reverse (sort-by #(-> % first count) substrings))
         
         [groups remaining] (reduce (fn [[result-acc domains-to-filter] [substring _]]
-                                      ; (prn "SUBSTRING" substring)
                                       (let [matching-domains (doall (filter #(.contains % substring) domains-to-filter))
                                             non-matching-domains (doall (remove #(.contains % substring) domains-to-filter))
                                             
                                             new-result-acc (conj result-acc [substring matching-domains])]
-                                        ; (prn "IN" (count domains-to-filter) "SUBSTRING " substring " FOUND " (count matching-domains) " LEAVING " (count non-matching-domains))
                                         
-                                        ; (prn matching-domains)
-                                      [new-result-acc non-matching-domains]
-                                      )) [[] all-domains] sorted-substrings)
+                                      [new-result-acc non-matching-domains])) [[] all-domains] sorted-substrings)
         
-        ; Stick the remaining unclassified domains into their own singleton groups.
-        result (concat groups (map #(vector % [%]) remaining))]
-    (json/pprint (doall result))))
+        ; Some substrings will be empty as they're vacuumed up by others.
+        result-groups (remove #(empty? (second %)) groups)
+        empty-groups (filter #(empty? (second %)) groups)]
+    
+    ; Sanity check. Everything should be covered.
+    (assert (empty remaining))
+    ; (prn "Total result groups " (count result-groups))
+    ; (prn "Average secondary" (float (/ (apply +   (map #(-> % second count) result-groups)) (count result-groups))))
+    
+    (json/pprint result-groups)))
+
+
