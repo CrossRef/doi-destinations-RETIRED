@@ -1,11 +1,27 @@
-# member-domains
+# DOI Destinations
 
-Tool to resolve a sample of DOIs to find which domains are used by Crossref members.
+Tool to resolve a sample of DOIs to find which domains are used by Crossref members. Runs at http://destinations.labs.crossref.org . 
 
-## Usage
+## Installation
 
 - Create a mysql database with schema in `etc/schema.sql`.
 - Create `config.edn` with `:database-name`, `:database-username`, `:database-host`.
+
+## To run
+
+Some tasks can be run on the command line but the main mode of operation is as a server.
+
+    lein run server
+
+To update the list of DOI and member IDs per publisher:
+
+  lein run update
+
+To try and resolve the DOIs and extract domains. This will run until all DOIs are resolved (i.e. pretty much indefinitely).
+
+  lein run resolve-all
+
+So a typical cycle is:
 
 ## Ignored domains
 
@@ -13,35 +29,8 @@ Some domains are just too broad (like Google Pages). Maintain a list of these, i
 
     lein run mark-ignored
 
-To update the list of DOIs per publisher:
-
-	lein run dois
-
-To try and resolve the DOIs and extract domains:
-
-	lein run resolve
-
-So a typical cycle is:
-
-    lein run dois
-    lein run resolve
-    lein run mark-ignored
-
-To dump domain and domain name
-
-	lein run dump 
-
-To dump only domain names:
-
-	lein run dump-domains
-
-To dump a big regular expression of domain names:
-  
-	lein run regular-expression
-
 ## License
 
 Copyright © 2015 Crossref
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.

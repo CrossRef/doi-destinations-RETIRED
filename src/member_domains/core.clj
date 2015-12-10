@@ -2,7 +2,8 @@
   (:require [member-domains.state :as state]
             [member-domains.db :as db]
             [member-domains.etld :as etld]
-            [member-domains.gcs :as gcs])
+            [member-domains.gcs :as gcs]
+            [member-domains.server :as server])
   (:require [crossref.util.doi :as crdoi])
   (:require [korma.core :as k])
   (:require [clj-http.client :as client]
@@ -14,7 +15,7 @@
 
 (def members-endpoint "http://api.crossref.org/v1/members")
 (def member-page-size 100)
-(def sample-size 10)
+(def sample-size 1000)
 
 (defn mark-ignored
   "Ignore chosen domains in ignore.txt"
@@ -29,7 +30,7 @@
 (defn big-pmap
   "Copy of pmap with lots of threads."
   ([f coll]
-   (let [n 100
+   (let [n 1000
          rets (map #(future (f %)) coll)
          step (fn step [[x & xs :as vs] fs]
                 (lazy-seq
@@ -38,22 +39,21 @@
                    (map deref vs))))]
      (step rets (drop n rets)))))
 
-(defn- fetch-member-ids []
-  (loop [ids-acc []
+(defn- fetch-member-info []
+  (loop [info-acc []
          page 0]
-    (prn page (count ids-acc))
+    (prn "Page:" page " members:" (count info-acc))
     (let [response (client/get (str members-endpoint \? (client/generate-query-string
                                                           {:rows member-page-size :offset (* page member-page-size)})))
           body (json/read-str (:body response) :key-fn keyword)
-          ids (map :id (-> body :message :items))]
-      
-      (if (empty? ids)
-        ids-acc
-        (recur (concat ids-acc ids) (inc page))))))
+          info (map #(select-keys % [:id :prefixes]) (-> body :message :items))]
+      (if (empty? info)
+        info-acc
+        (recur (concat info-acc info) (inc page))))))
 
 (defn- doi-sample-for-member [member-id]
-  (let [response (client/get (str members-endpoint "/" member-id "/works" \? (client/generate-query-string
-                                                          {:sample sample-size})))
+  (let [response (try-try-again {:sleep 500 :tries 10} #(client/get (str members-endpoint "/" member-id "/works" \? (client/generate-query-string
+                                                            {:sample sample-size}))))
           body (json/read-str (:body response) :key-fn keyword)
           dois (map :DOI (-> body :message :items))]
   dois))
@@ -71,6 +71,7 @@
                                                           :conn-timeout 5000
                                                           :headers {"Referer" "chronograph.crossref.org"
                                                                     "User-Agent" "CrossRefDOICheckerBot (labs@crossref.org)"}}))
+          _ (locking *out* (prn "-> " doi))
           ; Drop the initial dx.doi.org
           redirects (rest (:trace-redirects result))
           first-redirect (first redirects)
@@ -100,10 +101,11 @@
         results (big-pmap (fn [{doi :doi member-id :uniq-member-id}]
                           (when-let [result (resolve-doi doi)]
                             (try
-                              (let [first-host (.getHost (new java.net.URL (first result)))
-                                    second-host (.getHost (new java.net.URL (second result)))]
+                              (let [[first-url last-url] result
+                                    first-host (.getHost (new java.net.URL first-url))
+                                    last-host (.getHost (new java.net.URL last-url))]
                              (swap! doi-counter inc)
-                             [first-host second-host doi member-id])
+                             [first-host last-host first-url last-url doi member-id])
                              (catch Exception e (do
                                                   (prn "ERROR" result)
                                                   nil)))))
@@ -114,9 +116,10 @@
                                 (when (zero? (mod new-state 100))
                                   (prn "DOI" new-state))))
     
-    (doseq [[first-domain last-domain doi member-id] results] 
+    (doseq [[first-domain last-domain first-url last-url doi member-id] results] 
       (db/ensure-domain member-id first-domain)
       (db/ensure-domain member-id last-domain)
+      (db/update-doi-urls doi first-url last-url)
       (db/mark-doi-resolved doi))
     @doi-counter))
 
@@ -124,8 +127,11 @@
   "Resolve all DOIs until there are no more left to resolve."
   []
   (loop []
-    (let [num-resolved (run-resolution-batch)]
-      (when (not (zero? num-resolved))
+    (prn "Before batch run, remaining DOIs: " (db/num-unresolved-dois))
+    (run-resolution-batch)
+    (let [num-unresolved (db/num-unresolved-dois)]
+      (prn "After batch run, remaining DOIs " num-unresolved)
+      (when (> num-unresolved 0)
         (recur)))))
 
 (defn dump
@@ -153,8 +159,8 @@
           (str domain "\\." etld)))
          (db/unique-member-domains)))))
 
-(defn grab-dois
-  "Get a sample of DOIs per publisher."
+(defn update-from-api
+  "Get a sample of DOIs per publisher and other info."
   []
   (let [member-counter (atom 0)
         doi-counter (atom 0)]
@@ -165,24 +171,29 @@
                                 (when (zero? (mod new-state 1000))
                                   (prn "DOI" new-state))))
     (println "Fetch member ids")
-    (reset! state/member-ids (fetch-member-ids))  
-    (prn "Got" (count @state/member-ids) " member ids")
-    (let [all-dois (pmap (fn [member-id]
+    (reset! state/member-info (fetch-member-info))  
+    (prn "Got" (count @state/member-info) " members' info")
+    
+    (doseq [{member-id :id member-prefixes :prefixes} @state/member-info]
+      (doseq [member-prefix member-prefixes]
+        (db/ensure-member-prefix member-id member-prefix)))
+    
+    (let [all-dois (pmap (fn [{member-id :id}]
                     (let [dois (doi-sample-for-member member-id)]
                       (swap! member-counter inc)
-                      [member-id dois])) @state/member-ids)]
+                      [member-id dois])) @state/member-info)]
       (doseq [[member-id dois] all-dois]
         (doseq [doi dois]
           (swap! doi-counter inc)
           (db/ensure-doi member-id doi))))))
 
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
   (condp = (first args)
+    "server" (server/start)
     "mark-ignored" (mark-ignored)
-    "dois" (grab-dois)
-    "resolve" (run-resolution-batch)
+    "update" (update-from-api)
+    "resolve-all" (run-all-resolution-batch)
     "dump" (dump)
     "dump-domains" (dump-domains)
     "dump-common-substrings" (gcs/dump-common-substrings)

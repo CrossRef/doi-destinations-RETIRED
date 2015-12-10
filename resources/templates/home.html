@@ -1,0 +1,56 @@
+{% extends "templates/base.html" %}
+
+{% block "content" %}
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-sm-12" >
+      <p class="lead">Every DOI resolves to a URL. Knowing where DOIs point can help identifying scholarly content where the DOI isn't known.</p>
+
+      <p>We take a representative sample of DOIs from each Crossref member and resolve them to see where they lead. Sometimes a publisher website can redirect several times. We store the first and last redirect.</p>
+      <p>As the data is taken from a sample of DOIs, we can't guarantee that the coverage is perfect. There may be publisher domains that we haven't covered. The data is continually updated.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h2><strong>{{num-dois}}</strong> DOIs, an average of {{average-dois-per-member}} per member</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h2><strong>{{num-domains}}</strong> Domain names</h2>
+          Download
+            <ul>
+              <li><a href="/data/full-domain-names.json">domain names including subdomain</a></li>
+              <li><a href="/data/domain-names.json">domain names</a></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h2><strong>{{num-members}}</strong> members</h2>
+          Download
+          <ul>
+            <li><a href="/data/member-prefixes.json">full list of member prefixes</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+         This is a <a href="http://labs.crossref.org">Crossef Labs</a> project. The code is <a href="http://github.com/crossref/member-domains">open source</a>. You can contact us a labs@crossref.org
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

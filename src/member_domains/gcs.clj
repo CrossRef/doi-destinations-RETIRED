@@ -63,8 +63,8 @@
         (recur remaining (conj substrings-and-freqs [substring freq]))
         [substrings-and-freqs remaining]))))
 
-(defn dump-common-substrings
-  "Write the whole lot out to stout."
+(defn common-substrings
+  "Generate structure of common substrings"
   []
   (let [all-domains (db/unique-member-domains)
         ; Domains without the 'www' or TLD - they would be useless for separating out domains.
@@ -123,6 +123,11 @@
     ; (prn "Total result groups " (count result-groups))
     ; (prn "Average secondary" (float (/ (apply +   (map #(-> % second count) result-groups)) (count result-groups))))
     
-    (json/pprint result-groups)))
+    result-groups))
+
+(defn dump-common-substrings
+  "Write the whole lot out to stout."
+  []
+  (json/pprint (common-substrings)))
 
 

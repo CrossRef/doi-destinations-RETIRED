@@ -1,3 +1,3 @@
 (ns member-domains.state)
 
-(def member-ids (atom nil))
+(def member-info (atom nil))

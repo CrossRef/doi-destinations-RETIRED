@@ -15,7 +15,12 @@
                  [mysql-java "5.1.21"]
                  [robert/bruce "0.8.0"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
-                 [org.clojure/data.csv "0.1.3"]]
+                 [org.clojure/data.csv "0.1.3"]
+                 [compojure "1.4.0"]
+                 [liberator "0.12.2"]
+                 [crossref/heartbeat "0.1.2"]
+                 [selmer "0.9.5"]]
+  
   :main ^:skip-aot member-domains.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})
