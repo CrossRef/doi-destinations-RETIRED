@@ -1,9 +1,9 @@
 doi.org
 %.doi.org
-google.com
-%.google.com
-googlegroups.com
-%.googlegroups.com
+google.%
+%.google.%
+googlegroups.%
+%.googlegroups.%
 weebly.com
 %.weebly.com
 intel.com
@@ -20,3 +20,6 @@ weebly.com
 %.weebly.com
 dropbox.com
 %.dropbox.com
+youtube.com
+%.crossref.org
+handle.net

@@ -14,8 +14,8 @@ CREATE TABLE member_domains (
     member_id INTEGER NOT NULL,
     domain VARCHAR(128) NOT NULL,
     ignored BOOLEAN NOT NULL DEFAULT FALSE,
-    first_url VARCHAR(4096) NULL,
-    last_url VARCHAR(4096) NULL
+    first_url text NULL,
+    last_url text NULL
 );
 
 create table member_urls (
@@ -27,7 +27,7 @@ create table member_urls (
 );
 
 CREATE UNIQUE INDEX member_domains_unique ON member_domains(member_id, domain);
-CREATE UNIQUE INDEX member_domains_ignore ON member_domains(domain, ignore);
+CREATE UNIQUE INDEX member_domains_ignore ON member_domains(domain, ignored);
 
 create table member_prefixes (
   id  INTEGER AUTO_INCREMENT PRIMARY KEY,
