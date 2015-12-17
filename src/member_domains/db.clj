@@ -40,6 +40,14 @@
     ["member_id" :member-id]
     ["member_prefix" :prefix]))
 
+(k/defentity url-doi-cache
+  (k/table "url_doi_cache")
+  (k/pk :id)
+  (k/entity-fields
+    :id
+    :url
+    :doi))
+
 (defn unique-member-domains []
   (map :domain (k/select "member_domains"
                            (modifier "DISTINCT")
@@ -62,8 +70,8 @@
   []
   (let [members-counts (k/exec-raw ["select member_id, count(*) as cnt from member_dois where resolved = true group by member_id" []] :results)
         counts (map :cnt members-counts)
-        average-per-member (/ (apply + counts) (count counts))]
-    (int average-per-member)))
+        average-per-member (when (not-empty counts) (/ (apply + counts) (count counts)))]
+    (int (or average-per-member 0))))
 
 (defn num-members
   []
@@ -91,6 +99,12 @@
 
 (defn update-doi-urls [doi first-url last-url]
   (k/update member-dois (k/where {:doi doi}) (k/set-fields {:first-url first-url :last-url last-url})))
+
+(defn get-cache-doi-for-url [url]
+  (-> (k/select url-doi-cache (k/where {:url url})) first :doi))
+
+(defn set-cache-doi-for-url [url doi]
+  (k/exec-raw ["insert ignore into url_doi_cache (url, doi) values (?, ?)" [url doi]]))
 
 (defn heartbeat []
   ; This will either work or fail.

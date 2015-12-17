@@ -1,6 +1,7 @@
 (ns member-domains.server
   (:require [member-domains.db :as db]
-            [member-domains.etld :as etld])
+            [member-domains.etld :as etld]
+            [member-domains.lookup :as lookup])
   (:require [compojure.core :refer [context defroutes GET ANY POST]]
             [compojure.handler :as handler]
             [compojure.route :as route])
@@ -53,11 +54,32 @@
                (let [prefixes (db/all-prefixes)]
                  prefixes)))
 
+(defresource lookup-url
+  []
+  :available-media-types ["text/plain"]
+  :exists? (fn [ctx]
+            (let [doi (lookup/lookup (get-in ctx [:request :params "url"]))]
+              [doi {::doi doi}]))
+  :handle-ok (fn [ctx]
+              (::doi ctx)))
+
+(defresource guess-doi
+  []
+  :available-media-types ["text/plain"]
+  :malformed? (fn [ctx]
+                (let [input (get-in ctx [:request :params :q])]
+                  [(not input) {::input input}]))
+  :exists? (fn [ctx]
+            (let [doi (lookup/lookup (::input ctx))]
+              [doi {::doi doi}]))
+  :handle-ok (fn [ctx] (::doi ctx)))
+
 (defroutes app-routes
   (GET "/" [] (home))
   (GET "/data/full-domain-names.json" [] (data-full-domain-names))
   (GET "/data/domain-names.json" [] (data-domain-names))
   (GET "/data/member-prefixes.json" [] (member-prefixes))
+  (GET "/guess-doi" [] (guess-doi))
   (route/resources "/"))
 
 (defonce server (atom nil))

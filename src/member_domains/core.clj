@@ -72,6 +72,7 @@
                                                           :headers {"Referer" "chronograph.crossref.org"
                                                                     "User-Agent" "CrossRefDOICheckerBot (labs@crossref.org)"}}))
           _ (locking *out* (prn "-> " doi))
+          ; TODO need to look in :opts first?
           ; Drop the initial dx.doi.org
           redirects (rest (:trace-redirects result))
           first-redirect (first redirects)

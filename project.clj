@@ -19,6 +19,9 @@
                  [compojure "1.4.0"]
                  [liberator "0.12.2"]
                  [crossref/heartbeat "0.1.2"]
+                 [enlive "1.1.6"]
+                 [com.cemerick/url "0.1.1"]
+                 
                  [selmer "0.9.5"]]
   
   :main ^:skip-aot member-domains.core

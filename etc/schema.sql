@@ -36,3 +36,12 @@ create table member_prefixes (
 );
 
 CREATE UNIQUE INDEX member_prefixes ON member_prefixes(member_id, member_prefix);
+
+-- url and doi should be of unbounded size because we're dealing with arbitrary inputs.
+CREATE TABLE url_doi_cache (
+  id  INTEGER AUTO_INCREMENT PRIMARY KEY,
+  url TEXT,
+  doi TEXT
+);
+
+CREATE UNIQUE INDEX url_doi_cache ON url_doi_cache(url(512));
