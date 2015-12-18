@@ -2,6 +2,10 @@
   (:require [clojure.test :refer :all]
             [member-domains.lookup :refer :all]))
 
+
+;TODO mid-underscore?
+; http://biolifejournal.com/10.17812_blj2015.31.30.html
+
 ; Various methods for getting DOIs. Test per-method first, then the top-level function with all inputs.
 
 (def cleanup-doi-inputs [; DOI in various representations
@@ -25,17 +29,31 @@
 
 
 (def get-doi-from-get-params-inputs [; DOI embedded in a publisher URL as a query string.
-                 [ "http://journals.plos.org/plosone/article?id=10.5555/12345678" "10.5555/12345678"]])
+                 ["http://journals.plos.org/plosone/article?id=10.5555/12345678" "10.5555/12345678"]
+                 ["http://synapse.koreamed.org/DOIx.php?id=10.6065/apem.2013.18.3.128" "10.6065/apem.2013.18.3.128"]])
+
 
 (deftest get-doi-from-get-params-test
   (testing "get-toi-from-get-params is able to extract the DOI from the URL parameters"
     (doseq [[input expected] get-doi-from-get-params-inputs]
-      (is (= (get-doi-from-get-params input) expected)))))
+      (is (= (extract-doi-from-get-params input) expected)))))
+
+(def get-embedded-doi-from-url-inputs [
+  ["http://www.nomos-elibrary.de/10.5235/219174411798862578/criminal-law-issues-in-the-case-law-of-the-european-court-of-justice-a-general-overview-jahrgang-1-2011-heft-2" "10.5235/219174411798862578"]
+  ["http://onlinelibrary.wiley.com/doi/10.1002/1521-3951(200009)221:1<453::AID-PSSB453>3.0.CO;2-Q/abstract;jsessionid=FAD5B5661A7D092460BEEDA0D55204DF.f02t01" "10.1002/1521-3951(200009)221:1<453::AID-PSSB453>3.0.CO;2-Q"]
+  ["http://www.ijorcs.org/manuscript/id/12/doi:10.7815/ijorcs.21.2011.012/arul-anitha/network-security-using-linux-intrusion-detection-system" "10.7815/ijorcs.21.2011.012"]])
+
+(deftest get-embedded-doi-from-url-test
+  (testing "get-embedded-doi-from-url is able to extract DOIs from the URL text"
+    (doseq [[input expected] get-embedded-doi-from-url-inputs]
+      (is (= (get-embedded-doi-from-url input) expected)))))
+
+
+
 
 (def resolve-url-inputs [["http://www.bmj.com/content/351/bmj.h6326" "10.1136/bmj.h6326"]
                          ["http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144297" "10.1371/journal.pone.0144297"]
-                         ["http://www.hindawi.com/journals/aan/2015/708915/" "10.1155/2015/708915"]
-                         ])
+                         ["http://www.hindawi.com/journals/aan/2015/708915/" "10.1155/2015/708915"]])
 (deftest resolve-doi-from-url-test
   (testing "resolve-doi-from-url is able to retreive the DOI for the page"
     (doseq [[input expected] resolve-url-inputs]
@@ -49,5 +67,13 @@
     (doseq [[input expected] (concat cleanup-doi-inputs get-doi-from-get-params-inputs resolve-url-inputs)]
       (is (= (lookup-uncached input) expected)))))
 
-
+(deftest get-doi-from-url-batch
+  ; This is more of a smoke test for a load of URLs found in the wild. Ensure that each one returns something. 
+  ; Given that the process awlays includes checking the DOI exists, this should be fine.
+  (testing "Batch of URLs containing DOI prefix can have DOIs extracted from them.")
+  (let [urls (line-seq (clojure.java.io/reader "resources/test/doi-embedded-in-url.txt"))
+        results (pmap #(vector % (get-embedded-doi-from-url %)) urls)]
+    (doseq [[url doi] results]
+      ; Just check that it returns something.
+      (is doi url))))
 

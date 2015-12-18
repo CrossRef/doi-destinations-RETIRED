@@ -7,11 +7,12 @@
             [cemerick.url :as cemerick-url]
             [robert.bruce :refer [try-try-again]]
             [org.httpkit.client :as http])
-  (:import [java.net URL URI]))
+  (:import [java.net URL URI URLEncoder]))
 
 (def whole-doi-re #"^10\.\d{4,9}/[^\s]+$")
 (def doi-re #"10\.\d{4,9}/[^\s]+")
 
+; Helpers
 
 (defn try-url
   "Try to construct a URL."
@@ -36,60 +37,24 @@
   (when-let [match (re-matches #"^[a-zA-Z ]+: ?(10\.\d+/.*)$" input)]
     (.toLowerCase (second match))))
 
-(defn get-doi-from-get-params
-  "If there's a DOI in a get parameter of a URL, return it"
-  [url]
-  (let [params (-> url cemerick-url/query->map clojure.walk/keywordize-keys)
-        doi-like (keep (fn [[k v]] (when (re-matches whole-doi-re v) v)) params)]
-    (first doi-like)))
-
-(defn cleanup-doi
-  "Take a URL or DOI or something that could be a DOI, return the DOI if it is one."
-  [potential-doi]
-  (let [normalized-doi (crdoi/non-url-doi potential-doi)
-        doi-colon-prefixed-doi (remove-doi-colon-prefix potential-doi)]
-
-  ; Find the first operation that produces an output that looks like a DOI.
-  (cond
-    (matches-doi? normalized-doi) normalized-doi
-    (matches-doi? doi-colon-prefixed-doi) doi-colon-prefixed-doi
-    :default nil)))
-
-(defn extract-text-fragments-from-html
-  "Extract all text from an HTML document."
-  [input]
-  (string/join " "
-    (-> input
-    (html/html-snippet)
-    (html/select [:body html/text-node])
-    (html/transform [:script] nil)
-    (html/texts))))
-
-
-(defn extract-doi-in-a-hrefs-from-html
-  "Extract all <a href> links from an HTML document."
-  [input]
-    (let [links (html/select (html/html-snippet input) [:a])
-          hrefs (keep #(-> % :attrs :href) links)
-          dois (keep doi-from-url hrefs)]
-      (distinct dois)))
-
-(defn extract-dois-from-text
-  [text]
-  (let [matches (re-seq doi-re text)]
-        (distinct matches)))
-
 (def max-drops 10)
 (defn validate-doi
   "For a given suspected DOI, validate that it exists against the API, possibly modifying it to get there."
   [doi]
   (loop [i 0
          doi doi]
+         ; (prn "Validate" doi)
+         ; (prn (str "http://api.crossref.org/v1/works/" doi))
+         ; (prn (-> (try-try-again {:sleep 500 :tries 2} #(http/get (str "http://api.crossref.org/v1/works/" (URLEncoder/encode doi "UTF-8"))))
+         ;      deref
+              
+         ;      ))
+
     ; Terminate if we're at the end of clipping things off or the DOI no longer looks like an DOI. 
     ; The API will return 200 for e.g. "10.", so don't try and feed it things like that.
-    (if (or (= i max-drops) (< (.length doi) i) (not (re-matches doi-re doi)))
+    (if (or (= i max-drops) (nil? doi) (< (.length doi) i) (not (re-matches doi-re doi)))
       nil
-      (if (-> (try-try-again {:sleep 500 :tries 2} #(http/get (str "http://api.crossref.org/v1/works/" doi)))
+      (if (-> (try-try-again {:sleep 500 :tries 2} #(http/get (str "http://api.crossref.org/v1/works/" (URLEncoder/encode doi "UTF-8"))))
               deref
               :status
               (= 200))
@@ -111,6 +76,39 @@
           url-match (doi-urls url)]
       (when url-match
         doi))))
+
+(defn extract-text-fragments-from-html
+  "Extract all text from an HTML document."
+  [input]
+  (string/join " "
+    (-> input
+    (html/html-snippet)
+    (html/select [:body html/text-node])
+    (html/transform [:script] nil)
+    (html/texts))))
+
+; DOI Extraction
+; Extract things that look like DOIs. Don't validate them yet.
+
+(defn extract-doi-from-get-params
+  "If there's a DOI in a get parameter of a URL, find it"
+  [url]
+  (let [params (-> url cemerick-url/query->map clojure.walk/keywordize-keys)
+        doi-like (keep (fn [[k v]] (when (re-matches whole-doi-re v) v)) params)]
+    (first doi-like)))
+
+(defn extract-doi-in-a-hrefs-from-html
+  "Extract all <a href> links from an HTML document."
+  [input]
+    (let [links (html/select (html/html-snippet input) [:a])
+          hrefs (keep #(-> % :attrs :href) links)
+          dois (keep doi-from-url hrefs)]
+      (distinct dois)))
+
+(defn extract-dois-from-text
+  [text]
+  (let [matches (re-seq doi-re text)]
+        (distinct matches)))
 
 (defn resolve-doi-from-url
   "Take a URL and try to resolve it to find what DOI it corresponds to."
@@ -157,22 +155,72 @@
             (info "Found matching DOI:" matched-url-doi)
           matched-url-doi)))))
 
+; Combined methods.
+; Combine extraction methods and validate.
+
+(defn get-embedded-doi-from-url
+  "Get DOI that's embedded in a URL by a number of methods."
+  [url]
+  ; First see if it's in the GET params.
+  (if-let [doi (-> url extract-doi-from-get-params validate-doi)]
+    doi
+    ; Next try extracting DOIs with regular expressions.
+    (let [potential-dois (extract-dois-from-text url)
+          validated-doi (->> potential-dois (keep validate-doi) first)]
+      (if validated-doi
+        validated-doi
+
+        ; We may need to do extra things.
+        ; Try splitting in various places.
+        (let [; e.g. nomos-elibrary.de
+              last-slash (map #(clojure.string/replace % #"^(10\.\d+/(.*))/.*$" "$1") potential-dois)
+
+              ; e.g. ijorcs.org
+              first-slash (map #(clojure.string/replace % #"^(10\.\d+/(.*?))/.*$" "$1") potential-dois)
+
+              ; e.g. SICIs
+              semicolon (map #(clojure.string/replace % #"^(10\.\d+/(.*));.*$" "$1") potential-dois)
+              ; eg. JSOR
+              hashchar (map #(clojure.string/replace % #"^(10\.\d+/(.*))#.*$" "$1") potential-dois)
+
+              candidates (distinct (concat first-slash last-slash semicolon hashchar))
+
+              ; Now take the first one that we could validate.
+              doi (->> candidates (keep validate-doi) first)]
+          (if doi
+            doi
+            nil))))))
+
+(defn cleanup-doi
+  "Take a URL or DOI or something that could be a DOI, return the DOI if it is one."
+  [potential-doi]
+  (let [normalized-doi (crdoi/non-url-doi potential-doi)
+        doi-colon-prefixed-doi (remove-doi-colon-prefix potential-doi)]
+
+  ; Find the first operation that produces an output that looks like a DOI.
+  (cond
+    (matches-doi? normalized-doi) normalized-doi
+    (matches-doi? doi-colon-prefixed-doi) doi-colon-prefixed-doi
+    :default nil)))
+
+; External functions.
+
+; This is exposed for testing.
 (defn lookup-uncached
-  "As lookup, but without the cache"
+  "As lookup, but without the cache."
   [input]
   ; Try to treat it as a DOI in a particular encoding.
   (if-let [cleaned-doi (cleanup-doi input)]
     cleaned-doi
 
     ; Try to treat it as a Publisher URL that has a DOI in the URl.
-    (if-let [embedded-doi (get-doi-from-get-params input)]
+    (if-let [embedded-doi (get-embedded-doi-from-url input)]
       embedded-doi
 
-      ; Try to treat it as a Publisher URL that must be fetched to extract its DOI.
+    ; Try to treat it as a Publisher URL that must be fetched to extract its DOI.
     (if-let [resolved-doi (resolve-doi-from-url input)]
       resolved-doi
       nil))))
-
 
 (defn lookup
   "Look up some input and turn it into a DOI. Could be a URL landing page or a DOI in any form. Cached."
