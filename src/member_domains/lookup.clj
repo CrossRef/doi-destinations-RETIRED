@@ -66,26 +66,35 @@
     (html/texts))))
 
 
-
 (defn extract-doi-in-a-hrefs-from-html
   "Extract all <a href> links from an HTML document."
   [input]
     (let [links (html/select (html/html-snippet input) [:a])
           hrefs (keep #(-> % :attrs :href) links)
           dois (keep doi-from-url hrefs)]
-      (set dois)))
+      (distinct dois)))
 
 (defn extract-dois-from-text
   [text]
   (let [matches (re-seq doi-re text)]
-        (set matches)))
+        (distinct matches)))
 
+(def max-drops 10)
 (defn validate-doi
-  "For a given suspected DOI, validate that it exists, possibly cleaning up to get there."
+  "For a given suspected DOI, validate that it exists against the API, possibly modifying it to get there."
   [doi]
-  ; TODO
-  doi
-  )
+  (loop [i 0
+         doi doi]
+    ; Terminate if we're at the end of clipping things off or the DOI no longer looks like an DOI. 
+    ; The API will return 200 for e.g. "10.", so don't try and feed it things like that.
+    (if (or (= i max-drops) (< (.length doi) i) (not (re-matches doi-re doi)))
+      nil
+      (if (-> (try-try-again {:sleep 500 :tries 2} #(http/get (str "http://api.crossref.org/v1/works/" doi)))
+              deref
+              :status
+              (= 200))
+      doi
+      (recur (inc i) (.substring doi 0 (- (.length doi) 1)))))))
 
 (defn url-matches-doi?
   "Does the given DOI resolve to the given URL? Return DOI if so."
@@ -106,6 +115,7 @@
 (defn resolve-doi-from-url
   "Take a URL and try to resolve it to find what DOI it corresponds to."
   [url]
+  (info "Try to resolve:" url)
   (when-let [result (try-try-again {:sleep 500 :tries 2} #(http/get url
                                                          {:follow-redirects true
                                                           :throw-exceptions true
@@ -119,24 +129,33 @@
           dois-from-text (extract-dois-from-text text)
           links-from-text (extract-doi-in-a-hrefs-from-html body)
 
-          ; Now we have a set of DOIs we think it could be. Try to resolve each one to see if we end up in the same place.
-          potential-dois (concat dois-from-text links-from-text)
+          ; Look at the first DOI in the text before any of the others - high chance that it's the first one.
+          first-text-doi (url-matches-doi? url (first dois-from-text))]
 
-          ; Validate ones that exist. The regular expression might be a bit greedy, so this may chop bits off the end to make it work.
-          extant-dois (keep validate-doi potential-dois)
+    (info "Found" (count dois-from-text) "DOIs in text," (count links-from-text) "DOIs from links")
+    (info "Match for first doi" (first dois-from-text) ":" first-text-doi)
 
-          ; Matched DOIs. Some DOIs may map to the same page, e.g. components in PLOS.
-          ; e.g. "10.1371/journal.pone.0144297.g002" goes to the sampe place as "10.1371/journal.pone.0144297"
-          ; In the case of multiple results, choose the shortest.
-          ; This does lots of network requests, so pmap is useful.
-          matched-url-doi (->> extant-dois
-                               (pmap #(url-matches-doi? url %))
-                               (filter identity)
-                               ; sort by length of DOI.
-                               (sort-by count)
-                               first)]
+      ; If the first DOI in the text doesn't work then we need to start looking at the rest.
+      (if first-text-doi
+          first-text-doi
+          (let [; Now we have a set of DOIs we think it could be. Try to resolve each one to see if we end up in the same place.
+                potential-dois (concat (rest dois-from-text) links-from-text)
 
-    matched-url-doi)))
+                ; Validate ones that exist. The regular expression might be a bit greedy, so this may chop bits off the end to make it work.
+                extant-dois (keep validate-doi potential-dois)
+
+                ; Matched DOIs. Some DOIs may map to the same page, e.g. components in PLOS.
+                ; e.g. "10.1371/journal.pone.0144297.g002" goes to the sampe place as "10.1371/journal.pone.0144297"
+                ; In the case of multiple results, choose the shortest.
+                ; This does lots of network requests, so pmap is useful.
+                matched-url-doi (->> extant-dois
+                                     (pmap #(url-matches-doi? url %))
+                                     (filter identity)
+                                     ; sort by length of DOI.
+                                     (sort-by count)
+                                     first)]
+            (info "Found matching DOI:" matched-url-doi)
+          matched-url-doi)))))
 
 (defn lookup-uncached
   "As lookup, but without the cache"

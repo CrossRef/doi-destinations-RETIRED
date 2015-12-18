@@ -32,9 +32,9 @@
     (doseq [[input expected] get-doi-from-get-params-inputs]
       (is (= (get-doi-from-get-params input) expected)))))
 
-(def resolve-url-inputs [;["http://www.bmj.com/content/351/bmj.h6326" "10.1136/bmj.h6326"]
+(def resolve-url-inputs [["http://www.bmj.com/content/351/bmj.h6326" "10.1136/bmj.h6326"]
                          ["http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144297" "10.1371/journal.pone.0144297"]
-                         ;["http://www.hindawi.com/journals/aan/2015/708915/" "10.1155/2015/708915"]
+                         ["http://www.hindawi.com/journals/aan/2015/708915/" "10.1155/2015/708915"]
                          ])
 (deftest resolve-doi-from-url-test
   (testing "resolve-doi-from-url is able to retreive the DOI for the page"
