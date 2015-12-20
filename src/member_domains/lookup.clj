@@ -228,6 +228,11 @@
   (info "Lookup" url)
   (if-let [doi (db/get-cache-doi-for-url url)]
     doi
-    (when-let [doi (lookup-uncached url)]
-      (db/set-cache-doi-for-url url doi)
-      doi)))
+    (if-let [doi (lookup-uncached url)]
+      (do
+        (db/set-cache-doi-for-url url doi true)
+        doi)
+      ; Store for later analysis if it failed.
+      (do
+        (db/set-cache-doi-for-url url "" false)
+        nil))))

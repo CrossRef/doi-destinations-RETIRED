@@ -41,7 +41,8 @@ CREATE UNIQUE INDEX member_prefixes ON member_prefixes(member_id, member_prefix)
 CREATE TABLE url_doi_cache (
   id  INTEGER AUTO_INCREMENT PRIMARY KEY,
   url TEXT,
-  doi TEXT
+  doi TEXT,
+  success BOOLEAN
 );
 
-CREATE UNIQUE INDEX url_doi_cache ON url_doi_cache(url(512));
+CREATE UNIQUE INDEX url_doi_cache ON url_doi_cache(url(512), success);
