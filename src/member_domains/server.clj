@@ -47,6 +47,19 @@
                      domain-names (set (map #(->> % etld/get-main-domain (drop 1)) full-domains))]
                  (map #(clojure.string/join "." %) domain-names))))
 
+; GNIP text format rules for member domains. 
+(defresource data-domain-names-gnip-txt
+  []
+  :available-media-types ["text/plain"] 
+  :handle-ok (fn [ctx]
+               (let [full-domains (db/unique-member-domains)
+                     domain-name-parts (set (map #(->> % etld/get-main-domain (drop 1)) full-domains))
+                     domain-names (map #(clojure.string/join "." %) domain-name-parts)
+                     gnip-rules (map #(format "url_contains:\"%s\"" %) domain-names)
+                     result (clojure.string/join "\n" gnip-rules)]
+                result)))
+
+
 (defresource member-prefixes
   []
   :available-media-types ["application/json"] 
@@ -78,6 +91,7 @@
   (GET "/" [] (home))
   (GET "/data/full-domain-names.json" [] (data-full-domain-names))
   (GET "/data/domain-names.json" [] (data-domain-names))
+  (GET "/data/domain-names.gnip.txt" [] (data-domain-names-gnip-txt))
   (GET "/data/member-prefixes.json" [] (member-prefixes))
   (GET "/guess-doi" [] (guess-doi))
   (route/resources "/"))
