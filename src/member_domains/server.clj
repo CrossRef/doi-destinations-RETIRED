@@ -55,7 +55,8 @@
                (let [full-domains (db/unique-member-domains)
                      domain-name-parts (set (map #(->> % etld/get-main-domain (drop 1)) full-domains))
                      domain-names (map #(clojure.string/join "." %) domain-name-parts)
-                     gnip-rules (map #(format "url_contains:\"%s\"" %) domain-names)
+                     filtered (filter #(re-matches #"[a-z]+\.[a-z]+" %) domain-names)
+                     gnip-rules (map #(format "url_contains:\"%s\"" %) filtered)
                      result (clojure.string/join "\n" gnip-rules)]
                 result)))
 
@@ -66,7 +67,8 @@
                (let [full-domains (db/unique-member-domains)
                      domain-name-parts (set (map #(->> % etld/get-main-domain (drop 1)) full-domains))
                      domain-names (map #(clojure.string/join "." %) domain-name-parts)
-                     gnip-rules (map (fn [domain] {"value" (format "url_contains:\"%s\"" domain)}) domain-names)
+                     filtered (filter #(re-matches #"[a-z]+\.[a-z]+" %) domain-names)
+                     gnip-rules (map (fn [domain] {"value" (format "url_contains:\"%s\"" domain)}) filtered)
                      result {"rules" gnip-rules}]
                 result)))
 
