@@ -18,12 +18,25 @@
 ; Used by Elsevier and others.
 (def pii-re #"[SB][0-9XB]{16}")
 
+; Set of all full member domains.
+(def member-full-domains (atom #{}))
+
+(defn fetch-member-full-domains []
+  (reset! member-full-domains (set (db/unique-member-domains))))
+
+(fetch-member-full-domains)
+
 ; Helpers
 
 (defn try-url
   "Try to construct a URL."
   [text]
   (try (new URL text) (catch Exception _ nil)))
+
+(defn try-hostname
+  "Try to get a hostname from a URL string."
+  [text]
+  (try (.getHostname (new URL text)) (catch Exception _ nil)))
 
 (defn doi-from-url
   "If a URL is a DOI, return the non-URL version of the DOI."
@@ -128,48 +141,51 @@
 
 (defn resolve-doi-from-url
   "Take a URL and try to resolve it to find what DOI it corresponds to."
-  [url]
+  [url limit-to-member-domains]
   (info "Try to resolve:" url)
-  (when-let [result (try-try-again {:sleep 500 :tries 2} #(http/get url
-                                                         {:follow-redirects true
-                                                          :throw-exceptions true
-                                                          :socket-timeout 5000
-                                                          :conn-timeout 5000
-                                                          :headers {"Referer" "chronograph.crossref.org"
-                                                                    "User-Agent" "CrossRefDOICheckerBot (labs@crossref.org)"}}))]
-    (let [body (:body @result)
-          text (extract-text-fragments-from-html body)
-          
-          dois-from-text (extract-dois-from-text text)
-          links-from-text (extract-doi-in-a-hrefs-from-html body)
+  ; Check if we want to bother with this URL.
+  (when (or (-> url try-hostname (get @member-full-domains))
+            (not limit-to-member-domains))
+    (when-let [result (try-try-again {:sleep 500 :tries 2} #(http/get url
+                                                           {:follow-redirects true
+                                                            :throw-exceptions true
+                                                            :socket-timeout 5000
+                                                            :conn-timeout 5000
+                                                            :headers {"Referer" "chronograph.crossref.org"
+                                                                      "User-Agent" "CrossRefDOICheckerBot (labs@crossref.org)"}}))]
+      (let [body (:body @result)
+            text (extract-text-fragments-from-html body)
+            
+            dois-from-text (extract-dois-from-text text)
+            links-from-text (extract-doi-in-a-hrefs-from-html body)
 
-          ; Look at the first DOI in the text before any of the others - high chance that it's the first one.
-          first-text-doi (url-matches-doi? url (first dois-from-text))]
+            ; Look at the first DOI in the text before any of the others - high chance that it's the first one.
+            first-text-doi (url-matches-doi? url (first dois-from-text))]
 
-    (info "Found" (count dois-from-text) "DOIs in text," (count links-from-text) "DOIs from links")
-    (info "Match for first doi" (first dois-from-text) ":" first-text-doi)
+      (info "Found" (count dois-from-text) "DOIs in text," (count links-from-text) "DOIs from links")
+      (info "Match for first doi" (first dois-from-text) ":" first-text-doi)
 
-      ; If the first DOI in the text doesn't work then we need to start looking at the rest.
-      (if first-text-doi
-          first-text-doi
-          (let [; Now we have a set of DOIs we think it could be. Try to resolve each one to see if we end up in the same place.
-                potential-dois (concat (rest dois-from-text) links-from-text)
+        ; If the first DOI in the text doesn't work then we need to start looking at the rest.
+        (if first-text-doi
+            first-text-doi
+            (let [; Now we have a set of DOIs we think it could be. Try to resolve each one to see if we end up in the same place.
+                  potential-dois (concat (rest dois-from-text) links-from-text)
 
-                ; Validate ones that exist. The regular expression might be a bit greedy, so this may chop bits off the end to make it work.
-                extant-dois (keep validate-doi potential-dois)
+                  ; Validate ones that exist. The regular expression might be a bit greedy, so this may chop bits off the end to make it work.
+                  extant-dois (keep validate-doi potential-dois)
 
-                ; Matched DOIs. Some DOIs may map to the same page, e.g. components in PLOS.
-                ; e.g. "10.1371/journal.pone.0144297.g002" goes to the sampe place as "10.1371/journal.pone.0144297"
-                ; In the case of multiple results, choose the shortest.
-                ; This does lots of network requests, so pmap is useful.
-                matched-url-doi (->> extant-dois
-                                     (pmap #(url-matches-doi? url %))
-                                     (filter identity)
-                                     ; sort by length of DOI.
-                                     (sort-by count)
-                                     first)]
-            (info "Found matching DOI:" matched-url-doi)
-          matched-url-doi)))))
+                  ; Matched DOIs. Some DOIs may map to the same page, e.g. components in PLOS.
+                  ; e.g. "10.1371/journal.pone.0144297.g002" goes to the sampe place as "10.1371/journal.pone.0144297"
+                  ; In the case of multiple results, choose the shortest.
+                  ; This does lots of network requests, so pmap is useful.
+                  matched-url-doi (->> extant-dois
+                                       (pmap #(url-matches-doi? url %))
+                                       (filter identity)
+                                       ; sort by length of DOI.
+                                       (sort-by count)
+                                       first)]
+              (info "Found matching DOI:" matched-url-doi)
+            matched-url-doi))))))
 
 ; Combined methods.
 ; Combine extraction methods and validate.
@@ -227,7 +243,7 @@
 ; This is exposed for testing.
 (defn lookup-uncached
   "As lookup, but without the cache."
-  [input]
+  [input limit-to-member-domains]
   ; Try to treat it as a DOI in a particular encoding.
   (if-let [cleaned-doi (cleanup-doi input)]
     cleaned-doi
@@ -237,17 +253,18 @@
       embedded-doi
 
     ; Try to treat it as a Publisher URL that must be fetched to extract its DOI.
-    (if-let [resolved-doi (resolve-doi-from-url input)]
+    (if-let [resolved-doi (resolve-doi-from-url input limit-to-member-domains)]
       resolved-doi
       nil))))
 
 (defn lookup
-  "Look up some input and turn it into a DOI. Could be a URL landing page or a DOI in any form. Cached."
-  [url]
+  "Look up some input and turn it into a DOI. Could be a URL landing page or a DOI in any form. Cached.
+  If limit-to-member-domains is true, don't try and resolve URLs for for domains that aren't member domains."
+  [url limit-to-member-domains]
   (info "Lookup" url)
   (if-let [doi (db/get-cache-doi-for-url url)]
     doi
-    (if-let [doi (lookup-uncached url)]
+    (if-let [doi (lookup-uncached url limit-to-member-domains)]
       (do
         (db/set-cache-doi-for-url url doi true)
         doi)
