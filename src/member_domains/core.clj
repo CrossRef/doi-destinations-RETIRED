@@ -23,9 +23,14 @@
   (with-open [reader (clojure.java.io/reader (resource "ignore.txt"))]
     (let [lines (line-seq reader)]
       (doseq [line lines]
-        (k/update db/member-domains
-          (k/where {:domain [like (str line)]})
-          (k/set-fields {:ignored true}))))))
+        (when-not (clojure.string/blank? line)
+          (k/update db/member-domains
+            (k/where {:domain [like (str line)]})
+            (k/set-fields {:ignored true}))
+
+          (k/update db/member-domains
+            (k/where {:domain [like (str "%." line)]})
+            (k/set-fields {:ignored true})))))))
 
 (defn big-pmap
   "Copy of pmap with lots of threads."

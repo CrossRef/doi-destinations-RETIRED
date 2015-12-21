@@ -53,10 +53,8 @@
   :available-media-types ["text/plain"] 
   :handle-ok (fn [ctx]
                (let [full-domains (db/unique-member-domains)
-                     domain-name-parts (set (map #(->> % etld/get-main-domain (drop 1)) full-domains))
-                     domain-names (map #(clojure.string/join "." %) domain-name-parts)
-                     filtered (filter #(re-matches #"[a-z]+\.[a-z]+" %) domain-names)
-                     gnip-rules (map #(format "url_contains:\"%s\"" %) filtered)
+                     filtered (remove #(re-matches #"^[0-9.]+$" %) full-domains)
+                     gnip-rules (map #(format "url_contains:\"//%s/\"" %) filtered)
                      result (clojure.string/join "\n" gnip-rules)]
                 result)))
 
@@ -65,10 +63,8 @@
   :available-media-types ["application/json"] 
   :handle-ok (fn [ctx]
                (let [full-domains (db/unique-member-domains)
-                     domain-name-parts (set (map #(->> % etld/get-main-domain (drop 1)) full-domains))
-                     domain-names (map #(clojure.string/join "." %) domain-name-parts)
-                     filtered (filter #(re-matches #"[a-z]+\.[a-z]+" %) domain-names)
-                     gnip-rules (map (fn [domain] {"value" (format "url_contains:\"%s\"" domain)}) filtered)
+                     filtered (remove #(re-matches #"^[0-9.]+$" %) full-domains)
+                     gnip-rules (map (fn [domain] {"value" (format "url_contains:\"//%s/\"" domain)}) filtered)
                      result {"rules" gnip-rules}]
                 result)))
 
@@ -104,8 +100,8 @@
   (GET "/" [] (home))
   (GET "/data/full-domain-names.json" [] (data-full-domain-names))
   (GET "/data/domain-names.json" [] (data-domain-names))
-  (GET "/data/domain-names.gnip.txt" [] (data-domain-names-gnip-txt))
-  (GET "/data/domain-names.gnip.json" [] (data-domain-names-gnip-json))
+  (GET "/data/full-domain-names.gnip.txt" [] (data-domain-names-gnip-txt))
+  (GET "/data/full-domain-names.gnip.json" [] (data-domain-names-gnip-json))
   (GET "/data/member-prefixes.json" [] (member-prefixes))
   (GET "/guess-doi" [] (guess-doi))
   (route/resources "/"))
