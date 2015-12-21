@@ -7,7 +7,6 @@
 ; http://biolifejournal.com/10.17812_blj2015.31.30.html
 
 ; Various methods for getting DOIs. Test per-method first, then the top-level function with all inputs.
-
 (def cleanup-doi-inputs [; DOI in various representations
                   ["10.5555/12345678" "10.5555/12345678"]
                   ["doi.org/10.5555/12345678" "10.5555/12345678"]
@@ -41,7 +40,9 @@
 (def get-embedded-doi-from-url-inputs [
   ["http://www.nomos-elibrary.de/10.5235/219174411798862578/criminal-law-issues-in-the-case-law-of-the-european-court-of-justice-a-general-overview-jahrgang-1-2011-heft-2" "10.5235/219174411798862578"]
   ["http://onlinelibrary.wiley.com/doi/10.1002/1521-3951(200009)221:1<453::AID-PSSB453>3.0.CO;2-Q/abstract;jsessionid=FAD5B5661A7D092460BEEDA0D55204DF.f02t01" "10.1002/1521-3951(200009)221:1<453::AID-PSSB453>3.0.CO;2-Q"]
-  ["http://www.ijorcs.org/manuscript/id/12/doi:10.7815/ijorcs.21.2011.012/arul-anitha/network-security-using-linux-intrusion-detection-system" "10.7815/ijorcs.21.2011.012"]])
+  ["http://www.ijorcs.org/manuscript/id/12/doi:10.7815/ijorcs.21.2011.012/arul-anitha/network-security-using-linux-intrusion-detection-system" "10.7815/ijorcs.21.2011.012"]
+  ; A PII
+  ["http://api.elsevier.com/content/article/PII:S0169534701023801?httpAccept=text/plain" "10.1016/s0169-5347(01)02380-1"]])
 
 (deftest get-embedded-doi-from-url-test
   (testing "get-embedded-doi-from-url is able to extract DOIs from the URL text"
@@ -66,14 +67,4 @@
   (testing "lookup-uncached uses the best method to extract the DOI"
     (doseq [[input expected] (concat cleanup-doi-inputs get-doi-from-get-params-inputs resolve-url-inputs)]
       (is (= (lookup-uncached input) expected)))))
-
-(deftest get-doi-from-url-batch
-  ; This is more of a smoke test for a load of URLs found in the wild. Ensure that each one returns something. 
-  ; Given that the process awlays includes checking the DOI exists, this should be fine.
-  (testing "Batch of URLs containing DOI prefix can have DOIs extracted from them.")
-  (let [urls (line-seq (clojure.java.io/reader "resources/test/doi-embedded-in-url.txt"))
-        results (pmap #(vector % (get-embedded-doi-from-url %)) urls)]
-    (doseq [[url doi] results]
-      ; Just check that it returns something.
-      (is doi url))))
 

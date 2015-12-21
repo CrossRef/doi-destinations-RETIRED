@@ -6,11 +6,17 @@
   (:require [net.cgrand.enlive-html :as html]
             [cemerick.url :as cemerick-url]
             [robert.bruce :refer [try-try-again]]
-            [org.httpkit.client :as http])
+            [org.httpkit.client :as http]
+            [clojure.data.json :as json])
   (:import [java.net URL URI URLEncoder]))
 
 (def whole-doi-re #"^10\.\d{4,9}/[^\s]+$")
 (def doi-re #"10\.\d{4,9}/[^\s]+")
+
+
+; https://en.wikipedia.org/wiki/Publisher_Item_Identifier
+; Used by Elsevier and others.
+(def pii-re #"[SB][0-9XB]{16}")
 
 ; Helpers
 
@@ -43,12 +49,6 @@
   [doi]
   (loop [i 0
          doi doi]
-         ; (prn "Validate" doi)
-         ; (prn (str "http://api.crossref.org/v1/works/" doi))
-         ; (prn (-> (try-try-again {:sleep 500 :tries 2} #(http/get (str "http://api.crossref.org/v1/works/" (URLEncoder/encode doi "UTF-8"))))
-         ;      deref
-              
-         ;      ))
 
     ; Terminate if we're at the end of clipping things off or the DOI no longer looks like an DOI. 
     ; The API will return 200 for e.g. "10.", so don't try and feed it things like that.
@@ -61,6 +61,17 @@
       doi
       (recur (inc i) (.substring doi 0 (- (.length doi) 1)))))))
 
+(defn validate-pii
+  "Validate a PII and return the DOI if it's been used as an alternative ID."
+  [pii]
+  (let [result (try-try-again {:sleep 500 :tries 2} #(http/get "http://api.crossref.org/v1/works" {:query-params {:filter (str "alternative-id:" pii)}}))
+        body (-> @result :body json/read-str)
+        items (get-in body ["message" "items"])]
+    ; Only return when there's exactly one match.
+    (when (= 1 (count items))
+      (get (first items) "DOI"))))
+  
+
 (defn url-matches-doi?
   "Does the given DOI resolve to the given URL? Return DOI if so."
   [url doi]
@@ -72,7 +83,7 @@
                                                           :conn-timeout 5000
                                                           :headers {"Referer" "chronograph.crossref.org"
                                                                     "User-Agent" "CrossRefDOICheckerBot (labs@crossref.org)"}}))]
-    (let [doi-urls (set (conj (-> @result :opts :trace-redirects) (-> @result :opts :url)))
+    (let [doi-urls (set (conj (-> @result :trace-redirects) (-> @result :opts :url)))
           url-match (doi-urls url)]
       (when url-match
         doi))))
@@ -108,6 +119,11 @@
 (defn extract-dois-from-text
   [text]
   (let [matches (re-seq doi-re text)]
+        (distinct matches)))
+
+(defn extract-piis-from-text
+  [text]
+  (let [matches (re-seq pii-re text)]
         (distinct matches)))
 
 (defn resolve-doi-from-url
@@ -161,14 +177,17 @@
 (defn get-embedded-doi-from-url
   "Get DOI that's embedded in a URL by a number of methods."
   [url]
-  ; First see if it's in the GET params.
+  ; First see if cleanly represented it's in the GET params.
   (if-let [doi (-> url extract-doi-from-get-params validate-doi)]
     doi
-    ; Next try extracting DOIs with regular expressions.
+    ; Next try extracting DOIs and/or PII with regular expressions.
     (let [potential-dois (extract-dois-from-text url)
-          validated-doi (->> potential-dois (keep validate-doi) first)]
-      (if validated-doi
-        validated-doi
+          validated-doi (->> potential-dois (keep validate-doi) first)
+          potential-alternative-ids (extract-piis-from-text url)
+          validated-pii-doi (->> potential-alternative-ids (keep validate-pii) first)]
+
+      (if (or validated-doi validated-pii-doi)
+        (or validated-doi validated-pii-doi)
 
         ; We may need to do extra things.
         ; Try splitting in various places.
