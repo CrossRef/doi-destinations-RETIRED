@@ -86,13 +86,13 @@
               (::doi ctx)))
 
 (defresource guess-doi
-  []
+  [limit-to-member-domains]
   :available-media-types ["text/plain"]
   :malformed? (fn [ctx]
                 (let [input (get-in ctx [:request :params :q])]
                   [(not input) {::input input}]))
   :exists? (fn [ctx]
-            (let [doi (lookup/lookup (::input ctx))]
+            (let [doi (lookup/lookup (::input ctx) limit-to-member-domains)]
               [doi {::doi doi}]))
   :handle-ok (fn [ctx] (::doi ctx)))
 
@@ -103,7 +103,8 @@
   (GET "/data/full-domain-names.gnip.txt" [] (data-domain-names-gnip-txt))
   (GET "/data/full-domain-names.gnip.json" [] (data-domain-names-gnip-json))
   (GET "/data/member-prefixes.json" [] (member-prefixes))
-  (GET "/guess-doi" [] (guess-doi))
+  (GET "/guess-doi" [] (guess-doi true))
+  (GET "/guess-doi-all-domains" [] (guess-doi false))
   (route/resources "/"))
 
 (defonce server (atom nil))

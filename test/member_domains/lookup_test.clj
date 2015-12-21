@@ -58,7 +58,7 @@
 (deftest resolve-doi-from-url-test
   (testing "resolve-doi-from-url is able to retreive the DOI for the page"
     (doseq [[input expected] resolve-url-inputs]
-      (is (= (resolve-doi-from-url input) expected)))))
+      (is (= (resolve-doi-from-url input false) expected)))))
 
 
 ; The above tests specific types of inputs for each function. 
@@ -66,5 +66,5 @@
 (deftest top-level-lookup-test
   (testing "lookup-uncached uses the best method to extract the DOI"
     (doseq [[input expected] (concat cleanup-doi-inputs get-doi-from-get-params-inputs resolve-url-inputs)]
-      (is (= (lookup-uncached input) expected)))))
+      (is (= (lookup-uncached input false) expected)))))
 
