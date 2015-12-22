@@ -8,10 +8,11 @@
             [robert.bruce :refer [try-try-again]]
             [org.httpkit.client :as http]
             [clojure.data.json :as json])
-  (:import [java.net URL URI URLEncoder]))
+  (:import [java.net URL URI URLEncoder URLDecoder]))
 
 (def whole-doi-re #"^10\.\d{4,9}/[^\s]+$")
 (def doi-re #"10\.\d{4,9}/[^\s]+")
+(def doi-encoded-re #"10\.\d{4,9}%2[fF][^\s]+")
 
 
 ; https://en.wikipedia.org/wiki/Publisher_Item_Identifier
@@ -56,7 +57,7 @@
   (when-let [match (re-matches #"^[a-zA-Z ]+: ?(10\.\d+/.*)$" input)]
     (.toLowerCase (second match))))
 
-(def max-drops 10)
+(def max-drops 5)
 (defn validate-doi
   "For a given suspected DOI, validate that it exists against the API, possibly modifying it to get there."
   [doi]
@@ -130,9 +131,11 @@
       (distinct dois)))
 
 (defn extract-dois-from-text
+  "Extract DOIs from arbitrary text, including URL-encoded ones which will be unencoded."
   [text]
-  (let [matches (re-seq doi-re text)]
-        (distinct matches)))
+  (let [matches (re-seq doi-re text)
+        encoded-matches (map #(URLDecoder/decode %) (re-seq doi-encoded-re text))]
+        (distinct (concat encoded-matches matches))))
 
 (defn extract-piis-from-text
   [text]
@@ -216,13 +219,26 @@
 
               ; e.g. SICIs
               semicolon (map #(clojure.string/replace % #"^(10\.\d+/(.*));.*$" "$1") potential-dois)
+              
               ; eg. JSOR
-              hashchar (map #(clojure.string/replace % #"^(10\.\d+/(.*))#.*$" "$1") potential-dois)
+              hashchar (map #(clojure.string/replace % #"^(10\.\d+/(.*?))#.*$" "$1") potential-dois)
 
-              candidates (distinct (concat first-slash last-slash semicolon hashchar))
+              ; e.g. biomedcentral
+              question-mark (map #(clojure.string/replace % #"^(10\.\d+/(.*?))\?.*$" "$1") potential-dois)
+
+              ; e.g. citeseerx
+              amp-mark (map #(clojure.string/replace % #"^(10\.\d+/(.*?))&.*$" "$1") potential-dois)
+
+              candidates (distinct (concat first-slash last-slash semicolon hashchar question-mark amp-mark))
+              
+              ; Lots of these produce duplicates.
+              distinct-candidates (distinct candidates)
+
+              ; _ (prn "potential dois" potential-dois  )
+              ; _ (prn "distinct-candidates" distinct-candidates)
 
               ; Now take the first one that we could validate.
-              doi (->> candidates (keep validate-doi) first)]
+              doi (->> distinct-candidates (keep validate-doi) first)]
           (if doi
             doi
             nil))))))
@@ -273,3 +289,25 @@
       (do
         (db/set-cache-doi-for-url url "" false)
         nil))))
+
+
+(defn bifurcate
+  "Using the given method, bifurcate a file into successes and failures."
+  [method input-path success-path failure-path]
+  (info "Bifurcate")
+  (info "Input path" input-path)
+  (info "Success path" success-path)
+  (info "Failure path" failure-path)
+  (with-open [success-file (clojure.java.io/writer success-path)]
+    (with-open [failure-file (clojure.java.io/writer failure-path)]
+      (let [method (condp = method :get-embedded-doi-from-url get-embedded-doi-from-url)
+            urls (line-seq (clojure.java.io/reader input-path))
+            results (pmap #(vector % (method %)) urls)]
+        (doseq [[url result] results]
+          (prn "URL" url)
+          (if result
+           (.write success-file (str url "\n"))
+           (.write failure-file (str url "\n")))
+          ; Low volume, this is fine.
+          (.flush success-file)
+          (.flush failure-file))))))

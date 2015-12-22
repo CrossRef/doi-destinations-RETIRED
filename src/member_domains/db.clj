@@ -105,7 +105,7 @@
   (-> (k/select url-doi-cache (k/where {:url url :success true})) first :doi))
 
 (defn set-cache-doi-for-url [url doi success]
-  (k/exec-raw ["insert ignore into url_doi_cache (url, doi, success) values (?, ?, ?)" [url doi success]]))
+  (k/exec-raw ["insert into url_doi_cache (url, doi, success) values (?, ?, ?) on duplicate key update success = ?" [url doi success success]]))
 
 (defn heartbeat []
   ; This will either work or fail.

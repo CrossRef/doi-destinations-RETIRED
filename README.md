@@ -32,6 +32,7 @@ Guess-the-DOI returns the DOI for a given input, if it can find it. Experimental
  - `http://www.nomos-elibrary.de/10.5235/219174411798862578/criminal-law-issues-in-the-case-law-of-the-european-court-of-justice-a-general-overview-jahrgang-1-2011-heft-2`  - URL with a DOI in it, but well buried. [demo](http://destinations.labs.crossref.org/guess-doi?q=http://www.nomos-elibrary.de/10.5235/219174411798862578/criminal-law-issues-in-the-case-law-of-the-european-court-of-justice-a-general-overview-jahrgang-1-2011-heft-2)
  - `http://onlinelibrary.wiley.com/doi/10.1002/1521-3951(200009)221:1<453::AID-PSSB453>3.0.CO;2-Q/abstract;jsessionid=FAD5B5661A7D092460BEEDA0D55204DF.f02t01` - URL with a SICI in the DOI and a gnarly jsessionid too. [demo](http://destinations.labs.crossref.org/guess-doi?q=http://onlinelibrary.wiley.com/doi/10.1002/1521-3951(200009)221:1<453::AID-PSSB453>3.0.CO;2-Q/abstract;jsessionid=FAD5B5661A7D092460BEEDA0D55204DF.f02t01)
  - `http://www.ijorcs.org/manuscript/id/12/doi:10.7815/ijorcs.21.2011.012/arul-anitha/network-security-using-linux-intrusion-detection-system` - URL with a DOI mixed with other text. [demo](http://destinations.labs.crossref.org/guess-doi?q=http://www.ijorcs.org/manuscript/id/12/doi:10.7815/ijorcs.21.2011.012/arul-anitha/network-security-using-linux-intrusion-detection-system)
+ - `http://link.springer.com/article/10.1007%2Fs10552-015-0707-0` - URL with embedded URL encoded DOI. [demo](http://destinations.labs.crossref.org/guess-doi?q=http://link.springer.com/article/10.1007%2Fs10552-015-0707-0)
 
 There will no doubt be a few other methods for figuring out the DOI from the URL in future.
 
@@ -77,3 +78,11 @@ Some domains are just too broad (like Google Pages). Maintain a list of these, i
 Copyright © 2015 Crossref
 
 Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
+
+
+## TODO
+
+### ACM
+
+`http://dl.acm.org/citation.cfm?id=1852107` is quoted, DOI resolves to `http://dl.acm.org/citation.cfm?doid=1852102.1852107`.
+

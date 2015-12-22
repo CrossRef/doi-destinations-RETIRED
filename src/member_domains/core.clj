@@ -3,6 +3,7 @@
             [member-domains.db :as db]
             [member-domains.etld :as etld]
             [member-domains.gcs :as gcs]
+            [member-domains.lookup :as lookup]
             [member-domains.server :as server])
   (:require [crossref.util.doi :as crdoi])
   (:require [korma.core :as k])
@@ -203,4 +204,6 @@
     "dump" (dump)
     "dump-domains" (dump-domains)
     "dump-common-substrings" (gcs/dump-common-substrings)
-    "regular-expression" (dump-regular-expression)))
+    "regular-expression" (dump-regular-expression)
+    ; Bifurcate a file of URLs using the 'embedded url' method and put successes an failures into given files.
+    "bifurcate-lookup-url-embed" (lookup/bifurcate :get-embedded-doi-from-url  (nth args 1) (nth args 2) (nth args 3))))

@@ -42,7 +42,9 @@
   ["http://onlinelibrary.wiley.com/doi/10.1002/1521-3951(200009)221:1<453::AID-PSSB453>3.0.CO;2-Q/abstract;jsessionid=FAD5B5661A7D092460BEEDA0D55204DF.f02t01" "10.1002/1521-3951(200009)221:1<453::AID-PSSB453>3.0.CO;2-Q"]
   ["http://www.ijorcs.org/manuscript/id/12/doi:10.7815/ijorcs.21.2011.012/arul-anitha/network-security-using-linux-intrusion-detection-system" "10.7815/ijorcs.21.2011.012"]
   ; A PII
-  ["http://api.elsevier.com/content/article/PII:S0169534701023801?httpAccept=text/plain" "10.1016/s0169-5347(01)02380-1"]])
+  ["http://api.elsevier.com/content/article/PII:S0169534701023801?httpAccept=text/plain" "10.1016/s0169-5347(01)02380-1"]
+  ; URL encoded.
+  ["http://link.springer.com/article/10.1007%2Fs00423-015-1364-1" "10.1007/s00423-015-1364-1"]])
 
 (deftest get-embedded-doi-from-url-test
   (testing "get-embedded-doi-from-url is able to extract DOIs from the URL text"
