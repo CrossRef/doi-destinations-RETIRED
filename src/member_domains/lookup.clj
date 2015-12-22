@@ -36,7 +36,7 @@
 (defn try-hostname
   "Try to get a hostname from a URL string."
   [text]
-  (try (.getHostname (new URL text)) (catch Exception _ nil)))
+  (try (.getHost (new URL text)) (catch Exception e (do (info "Failed to parse URL:" text) nil))))
 
 (defn doi-from-url
   "If a URL is a DOI, return the non-URL version of the DOI."
@@ -143,8 +143,9 @@
   "Take a URL and try to resolve it to find what DOI it corresponds to."
   [url limit-to-member-domains]
   (info "Try to resolve:" url)
+
   ; Check if we want to bother with this URL.
-  (when (or (-> url try-hostname (get @member-full-domains))
+  (when (or (->> url try-hostname (get @member-full-domains))
             (not limit-to-member-domains))
     (when-let [result (try-try-again {:sleep 500 :tries 2} #(http/get url
                                                            {:follow-redirects true
