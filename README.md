@@ -55,7 +55,7 @@ All of the above formats can be extracted from inside text.
 
  - `Look at this article lol 10.5555/12345678 what is a psycho ceramic neway?` - DOI mentioned in the text of a tweet. [demo](http://destinations.labs.crossref.org/guess-doi?q=Look%20at%20this%20article%20lol%2010.5555/12345678%20what%20is%20a%20psycho%20ceramic%20neway?)
  - `Shrtr DOIs Mns Lgr Twts doi.org/hvx` - ShortDOI mentioned in the text of a tweet. [demo](http://destinations.labs.crossref.org/guess-doi?q=Shrtr DOIs Mns Lgr Twts doi.org/hvx)
- - `Is This The Future of Concise Citation Identifiers? One Psychoceramicist Thinks So 10/hvx` - ShortDOI Handle mentioned in the text of a tweet. [demo](http://destinations.labs.crossref.org/guess-doi?q=http://localhost:8386/guess-doi?q=Is%20This%20The%20Future%20of%20Concise%20Citation%20Identifiers?%20One%Psychoceramicist%20Thinks%20So%2010/hvx)
+ - `Is This The Future of Concise Citation Identifiers? One Psychoceramicist Thinks So 10/hvx` - ShortDOI Handle mentioned in the text of a tweet. [demo](http://destinations.labs.crossref.org/guess-doi?q=Is%20This%20The%20Future%20of%20Concise%20Citation%20Identifiers?%20One%20Psychoceramicist%20Thinks%20So%2010/hvx)
 
 ## All the weird things mentioned in Geoff Bilder's *Appendix A: On the complexity of handling DOIs in the wild*
 
