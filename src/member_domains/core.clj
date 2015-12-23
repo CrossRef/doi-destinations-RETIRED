@@ -205,5 +205,5 @@
     "dump-domains" (dump-domains)
     "dump-common-substrings" (gcs/dump-common-substrings)
     "regular-expression" (dump-regular-expression)
-    ; Bifurcate a file of URLs using the 'embedded url' method and put successes an failures into given files.
-    "bifurcate-lookup-url-embed" (lookup/bifurcate :get-embedded-doi-from-url  (nth args 1) (nth args 2) (nth args 3))))
+    ; Bifurcate a file of URLs using the 'embedded url/string' method and put successes an failures into given files.
+    "bifurcate-lookup-url-embed" (lookup/bifurcate :get-embedded-doi-from-string  (nth args 1) (nth args 2) (nth args 3))))

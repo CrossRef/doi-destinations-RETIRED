@@ -37,19 +37,26 @@
     (doseq [[input expected] get-doi-from-get-params-inputs]
       (is (= (extract-doi-from-get-params input) expected)))))
 
-(def get-embedded-doi-from-url-inputs [
+(def get-embedded-doi-from-string-inputs [
   ["http://www.nomos-elibrary.de/10.5235/219174411798862578/criminal-law-issues-in-the-case-law-of-the-european-court-of-justice-a-general-overview-jahrgang-1-2011-heft-2" "10.5235/219174411798862578"]
-  ["http://onlinelibrary.wiley.com/doi/10.1002/1521-3951(200009)221:1<453::AID-PSSB453>3.0.CO;2-Q/abstract;jsessionid=FAD5B5661A7D092460BEEDA0D55204DF.f02t01" "10.1002/1521-3951(200009)221:1<453::AID-PSSB453>3.0.CO;2-Q"]
+  ; NB lowercase is returned
+  ["http://onlinelibrary.wiley.com/doi/10.1002/1521-3951(200009)221:1<453::AID-PSSB453>3.0.CO;2-Q/abstract;jsessionid=FAD5B5661A7D092460BEEDA0D55204DF.f02t01" "10.1002/1521-3951(200009)221:1<453::aid-pssb453>3.0.co;2-q"]
   ["http://www.ijorcs.org/manuscript/id/12/doi:10.7815/ijorcs.21.2011.012/arul-anitha/network-security-using-linux-intrusion-detection-system" "10.7815/ijorcs.21.2011.012"]
   ; A PII
   ["http://api.elsevier.com/content/article/PII:S0169534701023801?httpAccept=text/plain" "10.1016/s0169-5347(01)02380-1"]
   ; URL encoded.
-  ["http://link.springer.com/article/10.1007%2Fs00423-015-1364-1" "10.1007/s00423-015-1364-1"]])
+  ["http://link.springer.com/article/10.1007%2Fs00423-015-1364-1" "10.1007/s00423-015-1364-1"]
 
-(deftest get-embedded-doi-from-url-test
-  (testing "get-embedded-doi-from-url is able to extract DOIs from the URL text"
-    (doseq [[input expected] get-embedded-doi-from-url-inputs]
-      (is (= (get-embedded-doi-from-url input) expected)))))
+  ; A shortDOI
+  ["https://doi.org/hvx" "10.5555/12345678"]
+  ["doi.org/hvx" "10.5555/12345678"]
+  ; A shortDOI handle
+  ["10/hvx" "10.5555/12345678"]])
+
+(deftest get-embedded-doi-from-string-test
+  (testing "get-embedded-doi-from-string is able to extract DOIs from the URL text"
+    (doseq [[input expected] get-embedded-doi-from-string-inputs]
+      (is (= (get-embedded-doi-from-string input) expected)))))
 
 
 

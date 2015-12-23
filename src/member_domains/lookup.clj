@@ -11,9 +11,18 @@
   (:import [java.net URL URI URLEncoder URLDecoder]))
 
 (def whole-doi-re #"^10\.\d{4,9}/[^\s]+$")
-(def doi-re #"10\.\d{4,9}/[^\s]+")
+(def doi-re #"(10\.\d{4,9}/[^\s]+)")
 (def doi-encoded-re #"10\.\d{4,9}%2[fF][^\s]+")
 
+; TODO not entirely sure what the grammar of ShortDOI is but this seems to fit.
+; Unfortunately this also matches the first half of a DOI.
+; Match the shortcut URL (e.g. "doi.org/aabbe") or the handle (e.g. "10/aabbe").
+
+; Locate a shortDOI in its natural habitat.
+(def shortdoi-find-re #"(?:doi.org|10)/([a-zA-Z0-9]+)")
+
+; The shortDOI itself is just an alphanumeric string, which isn't particularly disinctive.
+(def shortdoi-re #"[a-z0-9]+")
 
 ; https://en.wikipedia.org/wiki/Publisher_Item_Identifier
 ; Used by Elsevier and others.
@@ -37,7 +46,7 @@
 (defn try-hostname
   "Try to get a hostname from a URL string."
   [text]
-  (try (.getHost (new URL text)) (catch Exception e (do (info "Failed to parse URL:" text) nil))))
+  (try (.getHost (new URL text)) (catch Exception e nil)))
 
 (defn doi-from-url
   "If a URL is a DOI, return the non-URL version of the DOI."
@@ -57,23 +66,43 @@
   (when-let [match (re-matches #"^[a-zA-Z ]+: ?(10\.\d+/.*)$" input)]
     (.toLowerCase (second match))))
 
+(defn resolve-doi
+  "Resolve a DOI or ShortDOI, expressed as not-URL form. Return the DOI."
+  [doi]
+  (let [response @(try-try-again {:sleep 500 :tries 2}
+                    #(http/get (str "http://doi.org/" (URLEncoder/encode doi "UTF-8"))
+                      {:follow-redirects false}))
+        status (:status response)
+        redirect-header (-> response :headers :location)]
+      (cond
+        ; If it's a shortDOI it will redirect to the real one. Use this.
+        (= (try-hostname redirect-header) "doi.org") (crdoi/non-url-doi redirect-header)
+        ; If it's a real DOI it will return a 30x. 
+        (= (quot status 100) 3) (crdoi/non-url-doi doi)
+
+        ; If it's not anything then don't return anything.
+        :default nil)))
+
 (def max-drops 5)
 (defn validate-doi
-  "For a given suspected DOI, validate that it exists against the API, possibly modifying it to get there."
+  "For a given suspected DOI or shortDOI, validate that it exists against the API, possibly modifying it to get there."
   [doi]
   (loop [i 0
          doi doi]
-
     ; Terminate if we're at the end of clipping things off or the DOI no longer looks like an DOI. 
     ; The API will return 200 for e.g. "10.", so don't try and feed it things like that.
-    (if (or (= i max-drops) (nil? doi) (< (.length doi) i) (not (re-matches doi-re doi)))
+    (if (or (= i max-drops)
+            (nil? doi)
+            (< (.length doi) i)
+            ; The shortDOI regular expression is rather liberal, but it is what it is.
+            (not (or (re-matches doi-re doi) (re-matches shortdoi-re doi))))
+      ; Stop recursion.
       nil
-      (if (-> (try-try-again {:sleep 500 :tries 2} #(http/get (str "http://api.crossref.org/v1/works/" (URLEncoder/encode doi "UTF-8"))))
-              deref
-              :status
-              (= 200))
-      doi
-      (recur (inc i) (.substring doi 0 (- (.length doi) 1)))))))
+      ; Or try this substring.
+      (if-let [clean-doi (resolve-doi doi)] 
+        ; resolve-doi may alter the DOI it returns, e.g. resolving a shortDOI to a real DOI or lower-casing.
+        clean-doi
+        (recur (inc i) (.substring doi 0 (- (.length doi) 1)))))))
 
 (defn validate-pii
   "Validate a PII and return the DOI if it's been used as an alternative ID."
@@ -130,14 +159,15 @@
           dois (keep doi-from-url hrefs)]
       (distinct dois)))
 
-(defn extract-dois-from-text
-  "Extract DOIs from arbitrary text, including URL-encoded ones which will be unencoded."
+(defn extract-potential-dois-from-text
+  "Extract potential DOIs from arbitrary text, including URL-encoded ones which will be unencoded."
   [text]
-  (let [matches (re-seq doi-re text)
+  ; doi-re and short-doi-find-re have a capture group for the actual value we want to find, hence `second`.
+  (let [matches (map second (concat (re-seq doi-re text) (re-seq shortdoi-find-re text)))
         encoded-matches (map #(URLDecoder/decode %) (re-seq doi-encoded-re text))]
         (distinct (concat encoded-matches matches))))
 
-(defn extract-piis-from-text
+(defn extract-potential-piis-from-text
   [text]
   (let [matches (re-seq pii-re text)]
         (distinct matches)))
@@ -160,7 +190,7 @@
       (let [body (:body @result)
             text (extract-text-fragments-from-html body)
             
-            dois-from-text (extract-dois-from-text text)
+            dois-from-text (extract-potential-dois-from-text text)
             links-from-text (extract-doi-in-a-hrefs-from-html body)
 
             ; Look at the first DOI in the text before any of the others - high chance that it's the first one.
@@ -194,16 +224,16 @@
 ; Combined methods.
 ; Combine extraction methods and validate.
 
-(defn get-embedded-doi-from-url
-  "Get DOI that's embedded in a URL by a number of methods."
+(defn get-embedded-doi-from-string
+  "Get DOI that's embedded in a URL (or an arbitrary string) by a number of methods."
   [url]
   ; First see if cleanly represented it's in the GET params.
   (if-let [doi (-> url extract-doi-from-get-params validate-doi)]
     doi
     ; Next try extracting DOIs and/or PII with regular expressions.
-    (let [potential-dois (extract-dois-from-text url)
+    (let [potential-dois (extract-potential-dois-from-text url)
           validated-doi (->> potential-dois (keep validate-doi) first)
-          potential-alternative-ids (extract-piis-from-text url)
+          potential-alternative-ids (extract-potential-piis-from-text url)
           validated-pii-doi (->> potential-alternative-ids (keep validate-pii) first)]
 
       (if (or validated-doi validated-pii-doi)
@@ -234,9 +264,6 @@
               ; Lots of these produce duplicates.
               distinct-candidates (distinct candidates)
 
-              ; _ (prn "potential dois" potential-dois  )
-              ; _ (prn "distinct-candidates" distinct-candidates)
-
               ; Now take the first one that we could validate.
               doi (->> distinct-candidates (keep validate-doi) first)]
           (if doi
@@ -265,8 +292,8 @@
   (if-let [cleaned-doi (cleanup-doi input)]
     cleaned-doi
 
-    ; Try to treat it as a Publisher URL that has a DOI in the URl.
-    (if-let [embedded-doi (get-embedded-doi-from-url input)]
+    ; Try to treat it as a Publisher URL that has a DOI in the URL, or a string with a DOI in it somehow.
+    (if-let [embedded-doi (get-embedded-doi-from-string input)]
       embedded-doi
 
     ; Try to treat it as a Publisher URL that must be fetched to extract its DOI.
@@ -300,11 +327,11 @@
   (info "Failure path" failure-path)
   (with-open [success-file (clojure.java.io/writer success-path)]
     (with-open [failure-file (clojure.java.io/writer failure-path)]
-      (let [method (condp = method :get-embedded-doi-from-url get-embedded-doi-from-url)
+      (let [method (condp = method :get-embedded-doi-from-string get-embedded-doi-from-string)
             urls (line-seq (clojure.java.io/reader input-path))
             results (pmap #(vector % (method %)) urls)]
         (doseq [[url result] results]
-          (prn "URL" url)
+          (info "URL" url)
           (if result
            (.write success-file (str url "\n"))
            (.write failure-file (str url "\n")))
