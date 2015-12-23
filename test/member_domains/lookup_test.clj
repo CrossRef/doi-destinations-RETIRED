@@ -51,7 +51,16 @@
   ["https://doi.org/hvx" "10.5555/12345678"]
   ["doi.org/hvx" "10.5555/12345678"]
   ; A shortDOI handle
-  ["10/hvx" "10.5555/12345678"]])
+  ["10/hvx" "10.5555/12345678"]
+
+  ; Comes under the category "should be permissable but don't work on proxy"
+  ["http://doi.org/doi:hvx" "10.5555/12345678"]
+  ["http://doi.org/urn:hvx" "10.5555/12345678"]
+  ["http://doi.org/info:doi/hvx" "10.5555/12345678"]
+  ["https://dx.doi.org/doi:hvx" "10.5555/12345678"]
+  ["https://dx.doi.org/urn:hvx" "10.5555/12345678"]
+  ["https://dx.doi.org/info:doi/hvx" "10.5555/12345678"]
+  ])
 
 (deftest get-embedded-doi-from-string-test
   (testing "get-embedded-doi-from-string is able to extract DOIs from the URL text"

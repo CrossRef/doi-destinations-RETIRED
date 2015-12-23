@@ -19,10 +19,10 @@
 ; Match the shortcut URL (e.g. "doi.org/aabbe") or the handle (e.g. "10/aabbe").
 
 ; Locate a shortDOI in its natural habitat.
-(def shortdoi-find-re #"(?:doi.org|10)/([a-zA-Z0-9]+)")
+(def shortdoi-find-re #"(?:(?:(?:dx.)?doi.org/)|10/)(?:info:doi/|urn:|doi:)?([a-zA-Z0-9]+)")
 
 ; The shortDOI itself is just an alphanumeric string, which isn't particularly disinctive.
-(def shortdoi-re #"[a-z0-9]+")
+(def shortdoi-re #"[a-zA-Z0-9]+")
 
 ; https://en.wikipedia.org/wiki/Publisher_Item_Identifier
 ; Used by Elsevier and others.

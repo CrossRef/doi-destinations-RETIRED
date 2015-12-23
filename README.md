@@ -22,7 +22,7 @@ Guess-the-DOI returns the DOI for a given input, if it can find it. Experimental
  - `10.5555/123456789` - a DOI expressed outside a URL. [demo](http://destinations.labs.crossref.org/guess-doi?q=10.5555/123456789).
  - `doi: 10.5555/12345678` - a DOI expressed with a `doi:` prefix, flexibly. [demo](http://destinations.labs.crossref.org/guess-doi?q=doi: 10.5555/12345678).
  - `doi.org/10.5555/12345678` - a DOI expressed as a web address without full scheme. [demo](http://destinations.labs.crossref.org/guess-doi?q=doi.org/10.5555/12345678).
- - `http://doi.org/10.5555/12356789` - a DOI expressed as a full URL. [demo](http://destinations.labs.crossref.org/guess-doi?q=http://doi.org/10.5555/12356789).
+ - `http://doi.org/10.5555/123456789` - a DOI expressed as a full URL. [demo](http://destinations.labs.crossref.org/guess-doi?q=http://doi.org/10.5555/123456789).
 
 ## URLs of landing pages where the DOI can be figured out from the URL
  
