@@ -60,6 +60,9 @@
   ["https://dx.doi.org/doi:hvx" "10.5555/12345678"]
   ["https://dx.doi.org/urn:hvx" "10.5555/12345678"]
   ["https://dx.doi.org/info:doi/hvx" "10.5555/12345678"]
+
+  ; Potentially confusing text from a tweet.
+  ["#Smarkets here click &gt;&gt; https://t.co/ujLKnsw3cU for a £10 Sign Up Bonus / 2% commission #freebet https://t.co/609STAr9OC" nil]
   ])
 
 (deftest get-embedded-doi-from-string-test

@@ -147,9 +147,12 @@
 (defn extract-doi-from-get-params
   "If there's a DOI in a get parameter of a URL, find it"
   [url]
-  (let [params (-> url cemerick-url/query->map clojure.walk/keywordize-keys)
-        doi-like (keep (fn [[k v]] (when (re-matches whole-doi-re v) v)) params)]
-    (first doi-like)))
+  (try
+    (let [params (-> url cemerick-url/query->map clojure.walk/keywordize-keys)
+          doi-like (keep (fn [[k v]] (when (re-matches whole-doi-re v) v)) params)]
+      (first doi-like))
+    ; Some things look like URLs but turn out not to be.
+    (catch IllegalArgumentException _ nil)))
 
 (defn extract-doi-in-a-hrefs-from-html
   "Extract all <a href> links from an HTML document."
