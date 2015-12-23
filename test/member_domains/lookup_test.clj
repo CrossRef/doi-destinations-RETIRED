@@ -75,7 +75,8 @@
 
 (def resolve-url-inputs [["http://www.bmj.com/content/351/bmj.h6326" "10.1136/bmj.h6326"]
                          ["http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144297" "10.1371/journal.pone.0144297"]
-                         ["http://www.hindawi.com/journals/aan/2015/708915/" "10.1155/2015/708915"]])
+                         ["http://www.hindawi.com/journals/aan/2015/708915/" "10.1155/2015/708915"]
+                         ["http://www.nature.com/nrendo/journal/v10/n9/full/nrendo.2014.114.html?WT.mc_id=TWT_NatureRevEndo" "10.1038/nrendo.2014.114"]])
 (deftest resolve-doi-from-url-test
   (testing "resolve-doi-from-url is able to retreive the DOI for the page"
     (doseq [[input expected] resolve-url-inputs]

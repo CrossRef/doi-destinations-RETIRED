@@ -113,23 +113,55 @@
     ; Only return when there's exactly one match.
     (when (= 1 (count items))
       (get (first items) "DOI"))))
-  
+
+(defn strip-extras-from-url
+  "Remove the query string and fragment from a URL"
+  [url]
+  (new URL (.getProtocol url)
+           (.getHost url)
+           (.getPort url)
+           (.getPath url)))
+
+(defn url-in-set?
+  "Fairly liberal test for if needle is in set of URLs.
+  Disregards query string and fragment: only useful in context of checking something we suspect to be true."
+  [needle-url haystack-urls]
+  (let [base-needle (strip-extras-from-url needle-url)]
+  (loop [urls haystack-urls]
+    (cond
+      ; Are they the same file? Removes fragment.
+      (.sameFile needle-url (first urls)) true
+
+      ; Try removing the query string.
+      (= base-needle (strip-extras-from-url (first urls))) true
+
+      (not-empty (rest urls)) (recur (rest urls))
+      :default nil
+
+    )
+
+  )))
 
 (defn url-matches-doi?
   "Does the given DOI resolve to the given URL? Return DOI if so."
   [url doi]
   (info "Check " url " for " doi)
-  (when-let [result (try-try-again {:sleep 500 :tries 2} #(http/get (str "http://doi.org/" doi)
-                                                         {:follow-redirects true
-                                                          :throw-exceptions true
-                                                          :socket-timeout 5000
-                                                          :conn-timeout 5000
-                                                          :headers {"Referer" "chronograph.crossref.org"
-                                                                    "User-Agent" "CrossRefDOICheckerBot (labs@crossref.org)"}}))]
-    (let [doi-urls (set (conj (-> @result :trace-redirects) (-> @result :opts :url)))
-          url-match (doi-urls url)]
-      (when url-match
-        doi))))
+  (when-let [real-url (try-url url)]
+    (when-let [; URL may have a query string on the end. So construct some candidates.
+               result (try-try-again {:sleep 500 :tries 2} #(http/get (str "http://doi.org/" doi)
+                                                           {:follow-redirects true
+                                                            :throw-exceptions true
+                                                            :socket-timeout 5000
+                                                            :conn-timeout 5000
+                                                            :headers {"Referer" "chronograph.crossref.org"
+                                                                      "User-Agent" "CrossRefDOICheckerBot (labs@crossref.org)"}}))]
+      (let [doi-urls (set (conj (-> @result :trace-redirects) (-> @result :opts :url)))
+            doi-real-urls (keep try-url doi-urls)
+
+            ; Now we have a java.net.URL that we're concerned with and a set of java.net.URLs that we're trying to match.
+            url-match (url-in-set? real-url doi-real-urls)]
+        (when url-match
+          doi)))))
 
 (defn extract-text-fragments-from-html
   "Extract all text from an HTML document."

@@ -42,6 +42,7 @@ There will no doubt be a few other methods for figuring out the DOI from the URL
 ## URLs of landing pages where the content of the page must be consulted
 
  - `http://www.hindawi.com/journals/aan/2015/708915/` - a landing page where the DOI is mentioned in the page. [demo](http://destinations.labs.crossref.org/guess-doi?q=http://www.hindawi.com/journals/aan/2015/708915/).
+ - `http://www.nature.com/nrendo/journal/v10/n9/full/nrendo.2014.114.html?WT.mc_id=TWT_NatureRevEndo` - landing page with a DOI, but there are extra bits on the end of the URL compared to the DOI link. [demo](http://destinations.labs.crossref.org/guess-doi?q=http://www.nature.com/nrendo/journal/v10/n9/full/nrendo.2014.114.html?WT.mc_id=TWT_NatureRevEndo)
 
 1. The textual and link content of the page are consulted and all DOIs are extracted.
 2. The first DOI on the page is checked to see if it resolves back to the same URL.
