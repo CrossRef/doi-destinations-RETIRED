@@ -76,6 +76,14 @@
                (let [prefixes (db/all-prefixes)]
                  prefixes)))
 
+(defresource member-prefixes-gnip
+  []
+  :available-media-types ["application/json"] 
+  :handle-ok (fn [ctx]
+               (let [prefixes (db/all-prefixes)
+                     gnip-prefixes (map (fn [domain] {"value" (format "contains:\"%s/\"" domain)}) prefixes)]
+                 {"rules" gnip-prefixes})))
+
 (defresource lookup-url
   []
   :available-media-types ["text/plain"]
@@ -103,6 +111,7 @@
   (GET "/data/full-domain-names.gnip.txt" [] (data-domain-names-gnip-txt))
   (GET "/data/full-domain-names.gnip.json" [] (data-domain-names-gnip-json))
   (GET "/data/member-prefixes.json" [] (member-prefixes))
+  (GET "/data/member-prefixes.gnip.json" [] (member-prefixes-gnip))
   (GET "/guess-doi" [] (guess-doi true))
   (GET "/guess-doi-all-domains" [] (guess-doi false))
   (route/resources "/"))
