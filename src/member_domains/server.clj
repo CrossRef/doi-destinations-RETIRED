@@ -32,20 +32,43 @@
                            :num-members (db/num-members)}]
                  (render-file "templates/home.html" info))))
 
-(defresource data-full-domain-names
+(defresource data-full-domain-names-json
   []
   :available-media-types ["application/json"] 
   :handle-ok (fn [ctx]
                (let [domains (db/unique-member-domains)]
                  domains)))
 
-(defresource data-domain-names
+(defresource data-domain-names-json
+  []
+  :available-media-types ["text/plain"] 
+  :handle-ok (fn [ctx]
+               (let [full-domains (db/unique-member-domains)
+                     domain-names (set (map #(->> % etld/get-main-domain (drop 1)) full-domains))]
+                 (map #(clojure.string/join "." %) domain-names))))
+
+(defresource data-full-domain-names-text
+  []
+  :available-media-types ["text/plain"] 
+  :handle-ok (fn [ctx]
+               (let [domains (db/unique-member-domains)]
+                 (clojure.string/join "\n" domains))))
+
+(defresource data-domain-names-json
   []
   :available-media-types ["application/json"] 
   :handle-ok (fn [ctx]
                (let [full-domains (db/unique-member-domains)
                      domain-names (set (map #(->> % etld/get-main-domain (drop 1)) full-domains))]
                  (map #(clojure.string/join "." %) domain-names))))
+
+(defresource data-domain-names-text
+  []
+  :available-media-types ["text/plain"] 
+  :handle-ok (fn [ctx]
+               (let [full-domains (db/unique-member-domains)
+                     domain-names (set (map #(->> % etld/get-main-domain (drop 1)) full-domains))]
+                 (clojure.string/join "\n" (map #(clojure.string/join "." %) domain-names)))))
 
 ; GNIP text format rules for member domains. 
 (defresource data-domain-names-gnip-txt
@@ -106,8 +129,10 @@
 
 (defroutes app-routes
   (GET "/" [] (home))
-  (GET "/data/full-domain-names.json" [] (data-full-domain-names))
-  (GET "/data/domain-names.json" [] (data-domain-names))
+  (GET "/data/full-domain-names.json" [] (data-full-domain-names-json))
+  (GET "/data/domain-names.json" [] (data-domain-names-json))
+  (GET "/data/full-domain-names.txt" [] (data-full-domain-names-text))
+  (GET "/data/domain-names.txt" [] (data-domain-names-text))
   (GET "/data/full-domain-names.gnip.txt" [] (data-domain-names-gnip-txt))
   (GET "/data/full-domain-names.gnip.json" [] (data-domain-names-gnip-json))
   (GET "/data/member-prefixes.json" [] (member-prefixes))
