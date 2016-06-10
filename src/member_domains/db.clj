@@ -40,15 +40,6 @@
     ["member_id" :member-id]
     ["member_prefix" :prefix]))
 
-(k/defentity url-doi-cache
-  (k/table "url_doi_cache")
-  (k/pk :id)
-  (k/entity-fields
-    :id
-    :url
-    :doi
-    :success))
-
 (defn unique-member-domains []
   (map :domain (k/select "member_domains"
                            (modifier "DISTINCT")
@@ -100,12 +91,6 @@
 
 (defn update-doi-urls [doi first-url last-url]
   (k/update member-dois (k/where {:doi doi}) (k/set-fields {:first-url first-url :last-url last-url})))
-
-(defn get-cache-doi-for-url [url]
-  (-> (k/select url-doi-cache (k/where {:url url :success true})) first :doi))
-
-(defn set-cache-doi-for-url [url doi success]
-  (k/exec-raw ["insert into url_doi_cache (url, doi, success) values (?, ?, ?) on duplicate key update success = ?" [url doi success success]]))
 
 (defn heartbeat []
   ; This will either work or fail.
