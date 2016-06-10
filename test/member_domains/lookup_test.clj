@@ -47,6 +47,8 @@
   ; URL encoded.
   ["http://link.springer.com/article/10.1007%2Fs00423-015-1364-1" "10.1007/s00423-015-1364-1"]
 
+  ["http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144297" "10.1371/journal.pone.0144297"]
+
   ; A shortDOI
   ["https://doi.org/hvx" "10.5555/12345678"]
   ["doi.org/hvx" "10.5555/12345678"]
@@ -74,19 +76,29 @@
 
 
 (def resolve-url-inputs [["http://www.bmj.com/content/351/bmj.h6326" "10.1136/bmj.h6326"]
-                         ["http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144297" "10.1371/journal.pone.0144297"]
                          ["http://www.hindawi.com/journals/aan/2015/708915/" "10.1155/2015/708915"]
                          ["http://www.nature.com/nrendo/journal/v10/n9/full/nrendo.2014.114.html?WT.mc_id=TWT_NatureRevEndo" "10.1038/nrendo.2014.114"]])
 (deftest resolve-doi-from-url-test
   (testing "resolve-doi-from-url is able to retreive the DOI for the page"
     (doseq [[input expected] resolve-url-inputs]
-      (is (= (resolve-doi-from-url input false) expected)))))
+      (is (= (resolve-doi-from-url input) expected)))))
 
 
 ; The above tests specific types of inputs for each function. 
 ; Now test that the top-level function is able to choose the appropriate method.
 (deftest top-level-lookup-test
-  (testing "lookup-uncached uses the best method to extract the DOI"
-    (doseq [[input expected] (concat cleanup-doi-inputs get-doi-from-get-params-inputs resolve-url-inputs)]
-      (is (= (lookup-uncached input false) expected)))))
+  (testing "lookup uses the best method to extract the DOI"
+
+    (doseq [[input expected] get-doi-from-get-params-inputs]
+      (is (= (lookup input) (when expected [:embedded expected]))))
+
+    (doseq [[input expected] get-embedded-doi-from-string-inputs]
+      (prn input expected)
+      (is (= (lookup input) (when expected [:embedded expected]))))
+
+    (doseq [[input expected] resolve-url-inputs]
+      (is (= (lookup input) (when expected [:resolved expected]))))
+
+
+    ))
 

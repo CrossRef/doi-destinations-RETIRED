@@ -70,42 +70,12 @@
                      domain-names (set (map #(->> % etld/get-main-domain (drop 1)) full-domains))]
                  (clojure.string/join "\n" (map #(clojure.string/join "." %) domain-names)))))
 
-; GNIP text format rules for member domains. 
-(defresource data-domain-names-gnip-txt
-  []
-  :available-media-types ["text/plain"] 
-  :handle-ok (fn [ctx]
-               (let [full-domains (db/unique-member-domains)
-                     filtered (remove #(re-matches #"^[0-9.]+$" %) full-domains)
-                     gnip-rules (map #(format "url_contains:\"//%s/\"" %) filtered)
-                     result (clojure.string/join "\n" gnip-rules)]
-                result)))
-
-(defresource data-domain-names-gnip-json
-  []
-  :available-media-types ["application/json"] 
-  :handle-ok (fn [ctx]
-               (let [full-domains (db/unique-member-domains)
-                     filtered (remove #(re-matches #"^[0-9.]+$" %) full-domains)
-                     gnip-rules (map (fn [domain] {"value" (format "url_contains:\"//%s/\"" domain)}) filtered)
-                     result {"rules" gnip-rules}]
-                result)))
-
-
 (defresource member-prefixes
   []
   :available-media-types ["application/json"] 
   :handle-ok (fn [ctx]
                (let [prefixes (db/all-prefixes)]
                  prefixes)))
-
-(defresource member-prefixes-gnip
-  []
-  :available-media-types ["application/json"] 
-  :handle-ok (fn [ctx]
-               (let [prefixes (db/all-prefixes)
-                     gnip-prefixes (map (fn [domain] {"value" (format "contains:\"%s/\"" domain)}) prefixes)]
-                 {"rules" gnip-prefixes})))
 
 (defresource lookup-url
   []
@@ -117,15 +87,16 @@
               (::doi ctx)))
 
 (defresource guess-doi
-  [limit-to-member-domains]
+  []
   :available-media-types ["text/plain"]
   :malformed? (fn [ctx]
                 (let [input (get-in ctx [:request :params :q])]
                   [(not input) {::input input}]))
   :exists? (fn [ctx]
-            (let [doi (lookup/lookup (::input ctx) limit-to-member-domains)]
-              [doi {::doi doi}]))
-  :handle-ok (fn [ctx] (::doi ctx)))
+            (let [[method doi] (lookup/lookup (::input ctx))]
+              [doi {::doi doi ::method method}]))
+  :handle-ok (fn [ctx] (ring-response {:body (::doi ctx)
+                                       :headers {"X-Method" (name (::method ctx))}})))
 
 (defroutes app-routes
   (GET "/" [] (home))
@@ -133,12 +104,8 @@
   (GET "/data/domain-names.json" [] (data-domain-names-json))
   (GET "/data/full-domain-names.txt" [] (data-full-domain-names-text))
   (GET "/data/domain-names.txt" [] (data-domain-names-text))
-  (GET "/data/full-domain-names.gnip.txt" [] (data-domain-names-gnip-txt))
-  (GET "/data/full-domain-names.gnip.json" [] (data-domain-names-gnip-json))
   (GET "/data/member-prefixes.json" [] (member-prefixes))
-  (GET "/data/member-prefixes.gnip.json" [] (member-prefixes-gnip))
-  (GET "/guess-doi" [] (guess-doi true))
-  (GET "/guess-doi-all-domains" [] (guess-doi false))
+  (GET "/guess-doi" [] (guess-doi))
   (route/resources "/"))
 
 (defonce server (atom nil))

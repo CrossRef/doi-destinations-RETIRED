@@ -1,0 +1,1489 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html
+      xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Sign In </title>
+      <meta name="googlebot" content="NOODP" />
+      <meta name="HW.ad-path" content="/cgi/content/full/108/6/djw160" />
+      <link rel="stylesheet" type="text/css" media="all" href="/shared/css/hw-global.css" />
+      <link rel="stylesheet" type="text/css" media="print" href="/shared/css/hw-print.css" />
+      <link rel="stylesheet" type="text/css" media="all"
+            href="/local/css/hw-local-global.css" />
+      <link rel="stylesheet" type="text/css" media="all"
+            href="/publisher/css/hw-publisher-global.css" />
+      <link rel="stylesheet" type="text/css" media="all"
+            href="/publisher/css/hw-publisher-ac.css" />
+      <link rel="stylesheet" type="text/css" media="all"
+            href="/shared/css/hw-page-login.css" />
+      <link rel="stylesheet" type="text/css" media="all"
+            href="/publisher/css/hw-publisher-page-login.css" /><script type="text/javascript" id="session-d323099e1">var callbackToken='576EFF8F62C070B';</script><script type="text/javascript">
+            var gAuthTimeStamp = '2016-06-09T06:32:05.164-07:00';
+            var gSessionId = 'XR6aIa8i-rLbjKMttVT7ng';
+            var gAuthzRequired = 'true';
+            var gAuthnMethods1 = '';
+            var gAuthnMethods2 = '';
+            var gAuthnIPs = '';
+            var gAuthnIndividuals = '';
+            var gAuthnInstitutions = '';
+            </script><script type="text/javascript" src="/shared/js/jquery-min.js"></script><script type="text/javascript" src="/shared/js/fingerprint.js"></script><script type="text/javascript" src="/shared/js/hw-shared.js"></script><script type="text/javascript" src="/publisher/js/hw-publisher-site.js"></script><script type="text/javascript" src="/local/js/local-js-vars.js"></script><script type="text/javascript" src="/shared/js/date_utils.js"></script><script type="text/javascript" src="/shared/js/catalog_client.js"></script><script type="text/javascript">
+      
+      
+      
+      var siqDOI = encodeURIComponent("10.1093/jnci/djw160");
+      var siqIsOpenAccess = encodeURIComponent("");
+      var siqPubDate = encodeURIComponent("20160601");
+
+      if (siqDOI.length == 0) {
+          siqDOI = "UNKNOWN";
+      }
+      
+      
+    
+    
+      if (gAuthnIndividuals.length != 0) {
+    if (gAuthnInstitutions.length != 0) {
+        authnEntity = encodeURIComponent(gAuthnIndividuals
+            + ',' + gAuthnInstitutions);
+    } else {
+        authnEntity = encodeURIComponent(gAuthnIndividuals);
+    }
+      } else {
+          authnEntity = encodeURIComponent(gAuthnInstitutions);
+      }
+
+      var commonString =
+    'authSessionId=' + gSessionId + String.fromCharCode(0x26)
+    + 'authzRequired=' + gAuthzRequired + String.fromCharCode(0x26)
+    + 'authentication_method=' + encodeURIComponent(gAuthnMethods2) + String.fromCharCode(0x26)
+    + 'authnIPs=' + gAuthnIPs + String.fromCharCode(0x26)
+    + 'authnInstitutions=' + authnEntity;
+
+    
+    
+    
+    
+
+      var gPageId = "pageid-login";
+      var gVariant = "full-text";
+
+      
+    var eventType = "Login-" + gVariant;
+    var NTPT_PGEXTRA =
+        commonString + String.fromCharCode(0x26)
+        + 'event_type=' + eventType + String.fromCharCode(0x26)
+    
+
+      // alert("NTPT_PGEXTRA is " + NTPT_PGEXTRA);
+  </script>
+      
+      <link rel="stylesheet" type="text/css" media="all" href="/resource/css/hw20.css" />
+      
+      <link rel="stylesheet" type="text/css" media="all"
+            href="/resource/css/h20-oup-header.css" />
+      
+      <link rel="stylesheet" type="text/css" media="all"
+            href="/resource/css/h20-oup-footer.css" />
+      
+      <link rel="stylesheet" type="text/css" media="all"
+            href="/resource/css/h20-oup-sidebars.css" />
+      
+      <link type="text/css" media="all" rel="stylesheet" href="/site/resource/jnci_h20.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resource/css/print.css" media="print" />
+      <script type="text/javascript" src="/resource/js/main.js"></script>
+      <link rel="stylesheet" type="text/css" media="all"
+            href="http://oi-underbar.ifactory.com/underbar/css/pf_oiunderbar.css" />
+      
+      <link rel="stylesheet" type="text/css" media="screen"
+            href="http://gab.cookie.oup.com/aws-cookie/jquery.fancybox-1.3.4_1.css" />
+      <script type="text/javascript" src="/resource/js/oup_ad_size.js"></script>
+      </head>
+   <body class="general_page journal jnci">
+      <div class="hw-gen-page pagetype-content hw-pub-id-article" id="pageid-login">
+         <noscript>
+            
+            <p>We use cookies to enhance your experience on our website. By continuing to use our website, you are agreeing to our use of
+               cookies. You can change your cookie settings at any time. <a href="http://global.oup.com/cookiepolicy/">Find out more</a></p>
+            
+         </noscript>
+         
+         
+         <p class="hide">
+            <a href="#content">Skip Navigation</a>
+            
+         </p>
+         
+         
+         <div id="secondary_nav">
+            <strong id="page_logo" title="Oxford Journals"><a href="http://www.oxfordjournals.org/"><span>Oxford Journals</span></a></strong>
+            
+            <ul>
+               
+               <li id="nav_contact_us" title="Contact Us"><a href="http://www.oxfordjournals.org/contact_us.html"><span>Contact Us</span></a></li>
+               
+               <li id="nav_my_basket" title="My Basket"><a href="https://secure.oxfordjournals.org/basket.html"><span>My Basket</span></a></li>
+               
+               <li id="nav_my_account" title="My Account"><a href="http://services.oxfordjournals.org/cgi/tslogin?url=http://www.oxfordjournals.org/service/Register"><span>My 
+                        
+                        Account</span></a></li>
+               
+            </ul>
+            
+         </div>
+         
+         
+         <div id="header">
+            
+            <h1 id="page_title" title="JNCI: Jnl of National Cancer Institute">
+               
+               
+               <a href="/"><span>
+                     JNCI: Jnl of National Cancer Institute
+                     </span></a>
+               
+            </h1>
+            
+         </div>
+         
+         
+         <div id="primary_nav">
+            
+            <ul>
+               
+               <li id="nav_about_this_journal" title="About This Journal">
+                  <a href="http://www.oxfordjournals.org/jnci/about.html">
+                     
+                     <span>About This Journal</span>
+                     </a>
+                  
+               </li>
+               
+               <li id="nav_contact_this_journal" title="Contact This Journal"><a href="/cgi/feedback/"><span>Contact This Journal</span></a></li>
+               
+               <li id="nav_subscriptions" title="Subscriptions">
+                  <a href="http://www.oxfordjournals.org/jnci/access_purchase/buy_online.html">
+                     
+                     <span>Subscriptions</span>
+                     </a>
+                  
+               </li>
+               
+               <li id="nav_current_issue" title="Current"><a href="/content/current"><span>View Current Issue (Volume 108 Issue 5 May 2016)</span></a></li>
+               
+               <li id="nav_archive" title="Archive"><a href="/content/by/year"><span>Archive</span></a></li>
+               
+               <li id="nav_search" title="Search"><a href="/search"><span>Search</span></a></li>
+               
+            </ul>
+            
+         </div>
+         
+         
+         <div id="user_nav">
+            
+            <div class="header-ac-elements">
+               
+               <div id="authstring">
+                  
+                  
+               </div>   
+               
+            </div>
+            
+         </div>
+         
+         
+         <ul id="site-breadcrumbs">
+            <li class="first"><a href="http://services.oxfordjournals.org/cgi/tslogin?url=http%3A%2F%2Fwww.oxfordjournals.org">Oxford Journals</a></li>
+            <li><span class="breadcrumb_subjects"><a href="http://www.oxfordjournals.org/subject/medicine/"
+                     class="breadcrumb_subject">Medicine &amp; Health</a></span></li>
+            <li><a href="/">JNCI: Jnl of National Cancer Institute</a></li>
+            <li><a href="/content/108/6.toc">
+                  <span xmlns="" class="volume-value">Volume 108</span>
+                  <span xmlns="" class="issue-value"> Issue 6</span></a></li>
+            <li class="last">10.1093/jnci/djw160</li>
+         </ul>
+         
+         
+         
+         
+         <div id="oas_top" class="ad_hidden">
+            <iframe id="id_advertframe_top"
+                    src="/resource/htmlfiles/advert.html?p=Top&amp;u=jnci.oxfordjournals.org/content/108/6/djw160.full"
+                    width="0"
+                    height="0"
+                    frameborder="0"
+                    scrolling="no"
+                    class="resize_ad"></iframe>
+            
+         </div>
+         
+         
+         <a name="content"></a>
+         
+         
+         <div id="h20_page"></div>
+         <img src="/shared/img/pages/login/login_hit_hidden.gif?timestamp=2016-06-09T06:32:05.209-07:00"
+              id="hw-login-tracking-gif"
+              width="2"
+              height="2"
+              alt=" " /><div id="content-block">
+            <div id="hw-login-msg-box">
+               
+               
+               <div id="hw-login-msg-box-text">
+                  
+                  
+                  
+                  <div>
+                     <span>
+                        
+                        
+                        <strong xmlns="">This item requires a subscription* to JNCI Journal of the National Cancer Institute.</strong>
+                        
+                        
+                        <div class="additional-access-denied-text">
+                           
+                           * Please  note that articles prior to 1996 are not normally available via a current subscription.
+                           In order to view content before this time, access to the Oxford Journals 
+                           <a href="http://services.oxfordjournals.org/cgi/tslogin?url=http%3A%2F%2Fwww.oxfordjournals.org%2Fjnls%2Fcollections%2Farchives.html">digital archive</a> is required.
+                           
+                           
+                           
+                           
+                           If you would like to access this item you must have a personal account. Please sign in below with your personal 
+                           username and password or 
+                           
+                           <a href="http://www.oxfordjournals.org/jnls/register/userdetailsadduser.html?URL=http%3A%2F%2Fjnci.oxfordjournals.org%2Fcontent%2F108%2F6%2Fdjw160.full">
+                              
+                              Register
+                              
+                              </a>
+                           
+                           to obtain a username and password for free.
+                           
+                           
+                        </div>
+                        
+                        
+                        </span>
+                     
+                  </div>
+                  
+               </div> 
+               
+            </div>
+            <div id="hw-login-item-group">
+               
+               <div id="hw-login-content-item-group">
+                  <img src="/content/108/6.cover.gif" id="hw-login-cover-image" alt="Cover" width="59"
+                       height="80" />  
+                  
+                  <div id="hw-login-content-item"><span id="hw-login-item-view">Full Text (HTML)</span>
+                     
+                     
+                     <div class="cit">
+                        <div class="cit-metadata"><span class="cit-first-element cit-section">News<span class="cit-sep cit-sep-after-article-section">:</span> </span><ul class="cit-auth-list">
+                              <li class="first-item"><span class="cit-auth cit-auth-type-author">Mike Fillon</span></li>  
+                           </ul><span class="cit-title">Continuing To Smoke After Breast Cancer Diagnosis Lowers Survival Rate </span> <cite><abbr title="Journal of the National Cancer Institute" class="site-title">JNCI J Natl Cancer Inst</abbr> <span class="cit-print-date"><span class="cit-sep cit-sep-before-article-print-date">(</span>2016<span class="cit-sep cit-sep-after-article-print-date">)</span> </span><span class="cit-vol">108 </span><span class="cit-issue"><span class="cit-sep cit-sep-before-article-issue">(</span>6<span class="cit-sep cit-sep-after-article-issue">):</span> </span><span class="cit-elocation">djw160 </span><span class="cit-doi"><span class="cit-sep cit-sep-before-article-doi"> doi:</span>10.1093/jnci/djw160 </span><span class="cit-online-date"><span class="cit-sep cit-sep-before-article-online-date">First published online </span>June 2, 2016 </span><span class="cit-page-count"><span class="cit-sep cit-sep-before-article-page-count">(</span>2<span class="cit-sep cit-sep-after-article-page-count"> pages)</span> </span></cite>  
+                        </div>
+                        <div class="cit-extra"><span class="accesscheck jnci;108/6/djw160 pdf_extract,full,reprint"></span> 
+                           <ul class="cit-views">
+                              <li class="first-item"><a href="/content/108/6/djw160.extract" rel="extract">Extract</a></li>
+                              <li><a href="/content/108/6/djw160.full" rel="full-text">Full Text (HTML)</a></li>
+                              <li class="last-item"><a href="/content/108/6/djw160.full.pdf+html" rel="full-text.pdf">Full Text (PDF)</a></li>
+                           </ul>  
+                        </div> 
+                     </div>
+                     
+                  </div>
+                  
+               </div>
+               
+               
+               
+            </div>
+            <div id="hw-login-instruction">To view this item, select one of the options below:</div>
+            <div id="hw-login-sign-in-group">
+               
+               <div id="hw-login-sign-in-header" class="hw-login-section-header">
+                  <img alt="*" width="9" height="15" src="/shared/img/pages/login/redtri.gif" />
+                  
+                  Oxford Journals Subscribers and Registrants Sign In  
+                  
+                  
+               </div>
+               <div>
+                  If your subscription is through Oxford University Press, or you have signed up for personalization on this site, sign in below.
+                  
+               </div>
+               
+               <div id="hw-login-sign-in-box">
+                  
+                  <form action="/content/108/6/djw160.full" method="post"
+                        class="hw-ac-standalone-form hw-login-form">
+                     
+                     
+                     <fieldset>
+                        <input value="http://t.co/JunQe7i58X" type="hidden" name="login_referer" />
+                        
+                        <legend class="ext-legend">Sign In</legend>
+                        <span>
+                           <label for="username"> 
+                              Username
+                              </label>
+                           <input type="text" name="username" value="" size="10" maxlength="150" tabindex="1"
+                                  id="username" />
+                           </span>
+                        
+                        <span>
+                           <label for="password">Password</label>
+                           <input type="password" name="code" value="" size="10" maxlength="25" tabindex="2"
+                                  id="password" />
+                           </span>
+                        <span class="login-submit">
+                           <input type="submit" name="signin" value="Sign In" tabindex="3" /></span>
+                        
+                        <span class="save-pwd">
+                           <input type="checkbox" name="storepwd" value="yes" id="savepwd" />
+                           <label for="savepwd">Remember my username &amp; password.</label>
+                           </span>
+                        
+                     </fieldset>
+                     
+                     <div id="hw-login-forgot-pwd">
+                        <a href="http://services.oxfordjournals.org/cgi/tslogin?url=http%3A%2F%2Fwww.oxfordjournals.org%2Fservice%2Fforgottenpassword">Forgotten</a>
+                        your username or password?
+                        
+                     </div>
+                     
+                     <ul class="hw-login-option-list">
+                        
+                        
+                        
+                        <li>
+                           <a href="/help/subscriptions/privacy-policy#cookie-problems">Can't get past this page?</a> 
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="/help/subscriptions/privacy-policy">Help with Cookies.</a> 
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="http://www.oxfordjournals.org/service/Register">Need to Activate?</a> 
+                           
+                        </li>
+                        
+                        
+                        
+                     </ul>
+                     
+                  </form>
+                  
+               </div>
+               
+               
+               
+            </div>
+            <div id="hw-login-ppv-group" class="hw-login-extra-group">
+               
+               <div id="hw-login-ppv-header" class="hw-login-section-header"><img alt="*" width="9" height="15" src="/shared/img/pages/login/redtri.gif" /> 
+                  Purchase Short-Term Access
+               </div>
+               
+               
+               <ul id="hw-login-ppv-options" class="hw-login-option-list">
+                  
+                  
+                  
+                  
+                  
+                  <li id="hw-login-ppv-require-user-text">
+                     <strong>Pay per View</strong> 
+                     - If you would like to purchase short-term access you must have a personal account. 
+                     Please sign in with your personal username and password or 
+                     
+                     <a href="http://www.oxfordjournals.org/jnls/register/userdetailsadduser.html?URL=http%3A%2F%2Fjnci.oxfordjournals.org%2Fcontent%2F108%2F6%2Fdjw160.full">
+                        
+                        Register
+                        
+                        </a>
+                     
+                     to obtain a username name and password for free. 
+                     <span>You may access this article for 1 </span><span>day</span><span> for US$40.00.  </span>
+                     
+                     
+                     
+                  </li>
+                  
+                  
+               </ul>
+               
+               
+               
+            </div>
+            <div id="hw-login-shib-athens-group" class="hw-login-extra-group">
+               
+               
+               <div id="hw-login-openathens-header" class="hw-login-section-header"><img alt="*" width="9" height="15" src="/shared/img/pages/login/redtri.gif" />
+                  OpenAthens Users
+                  
+               </div>
+               <ul class="hw-login-option-list hw-login-section-body">
+                  
+                  <li><a href="http://openathens.highwire.org/initiate-login?returnURL=http%3A%2F%2Fjnci.oxfordjournals.org%2Fcontent%2F108%2F6%2Fdjw160.full&amp;subcode=oupjournals">
+                                  Sign in via OpenAthens
+                              </a>: If your organization uses OpenAthens, you can log in using your OpenAthens username and password. Contact your library for
+                     more details.
+                  </li>
+                  
+                  <li><a href="http://auth.athensams.net/orglist.php">List of OpenAthens registered sites</a>, including contact details.
+                  </li>
+                  
+               </ul>
+               <div id="hw-login-shib-athens-group" class="hw-login-extra-group">
+                            
+                  <div id="hw-login-shib-only-header" class="hw-login-section-header">
+                                  <img alt="*" width="9" height="15" src="/shared/img/pages/login/redtri.gif" />
+                                  Login via Your Institution
+                              
+                  </div>
+                            
+                  <ul class="hw-login-option-list hw-login-section-body">
+                                  
+                     <li>
+                                          <a href="/login/shibboleth?uri=http%3A%2F%2Fjnci.oxfordjournals.org%2Fcontent%2F108%2F6%2Fdjw160.full&amp;subcode=oupjournals&amp;env=prod">Login via your institution</a>
+                                          : You may be able to gain access using your login credentials for your institution. Contact your library
+                        if you do not have a username and password.
+                                      
+                     </li>
+                              
+                  </ul>
+                  
+               </div> 
+               
+            </div>
+            <div id="hw-login-sign-up-group" class="hw-login-extra-group">
+               
+               <div id="hw-login-sign-up-header" class="hw-login-section-header"><img alt="*" width="9" height="15" src="/shared/img/pages/login/redtri.gif" />
+                  Register or Subscribe
+               </div>
+               
+               <ul class="hw-login-option-list hw-login-section-body">
+                  
+                  <li>
+                     <a href="/subscriptions">
+                        Subscribe to the Journal
+                        </a> - Subscribe to the print and/or online journal.
+                     
+                  </li>
+                  <li>
+                     
+                     <a href="http://www.oxfordjournals.org/jnls/register/userdetailsadduser.html?URL=http%3A%2F%2Fjnci.oxfordjournals.org%2Fcontent%2F108%2F6%2Fdjw160.full">
+                        
+                        Register
+                        
+                        </a>
+                     - 
+                     Register online for access to selected content and to use Pay per View. Registration is free.
+                     
+                  </li>
+                  
+               </ul>
+               
+            </div>
+            <div id="hw-login-patient-access-group" class="hw-login-extra-group">
+               
+               <div class="hw-login-section-header"><img alt="*" width="9" height="15" src="/shared/img/pages/login/redtri.gif" />
+                  Patient Access
+               </div>
+               
+               <ul class="hw-login-option-list hw-login-section-body">
+                  
+                  <li>
+                     <a href="http://www.oxfordjournals.org/our_journals/jnci/patientinform.html">Access for Patients</a> - Patients desiring access should contact the journal.
+                  </li>
+                  
+               </ul>
+               
+            </div>
+         </div>
+         <div id="col-2">
+            
+            <div class="content-box" id="article-cb-main">
+               <div class="cb-contents">
+                  <h3 class="cb-contents-header"><span>This Article</span></h3>
+                  <div class="cb-section cb-slug">
+                     <ol>
+                        
+                        
+                        
+                        
+                        <li>
+                           <div id="slugline">
+                              
+                              <cite>
+                                 <abbr title="JNCI Journal of the National Cancer Institute" class="slug-jnl-abbrev">
+                                    
+                                    <nlm:abbrev-journal-title xmlns:nlm="http://schema.highwire.org/NLM/Journal" abbrev-type="publisher">JNCI J Natl Cancer Inst</nlm:abbrev-journal-title></abbr><span class="slug-pub-date">
+                                    (2016) 
+                                    </span>
+                                 
+                                 <span class="slug-vol">
+                                    108
+                                    </span><span class="slug-issue">
+                                    (6):
+                                    </span><span class="slug-elocation">
+                                    
+                                    djw160
+                                    </span>
+                                 <span class="slug-doi-wrapper">
+                                    
+                                    doi:
+                                    
+                                    <span title="10.1093/jnci/djw160" class="slug-doi">10.1093/jnci/djw160</span>
+                                    </span>
+                                 </cite>
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                           </div>
+                        </li>
+                        
+                        
+                        
+                     </ol>
+                  </div>
+                  <div class="cb-section cb-views">
+                     <ol>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="abstract-view-link primary"><a href="/content/108/6/djw160.extract" rel="view-extract">Extract</a><span class="free">Free</span></li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="notice full-text-view-link"><span class="variant-indicator">» <span>Full Text (HTML)</span></span></li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="notice full-text-pdf-view-link"><a href="/content/108/6/djw160.full.pdf+html" rel="view-full-text.pdf">Full Text (PDF)</a></li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                                          
+                        
+                        
+                     </ol>
+                  </div>
+                  <div class="cb-section collapsible" id="cb-art-cat">
+                     <h4 class="cb-section-header"><span>Classifications</span></h4>
+                     <ol>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li>
+                           <ul class="subject-headings last-child">
+                              <li><a class="tocsection-search"
+                                    href="/search?tocsectionid=News&amp;sortspec=date&amp;submit=Submit">News</a></li>
+                           </ul>
+                        </li>
+                        
+                        
+                        
+                        
+                     </ol>
+                  </div>
+                  <div class="cb-section collapsible" id="cb-art-svcs">
+                     <h4 class="cb-section-header"><span>Services</span></h4>
+                     <ol>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="usage-stats-link icon-link"><a href="/articleusage?gca=jnci;108/6/djw160" rel="nofollow">Article metrics</a></li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="alert-link icon-link"><a href="/cgi/alerts/ctalert?alertType=citedby&amp;addAlert=cited_by&amp;cited_by_criteria_resid=jnci%3B108%2F6%2Fdjw160&amp;saveAlert=no&amp;return-type=article&amp;return_url=http://jnci.oxfordjournals.org/content/108/6/djw160.full">Alert me when cited</a></li>
+                        <li class="alert-link icon-link"><a href="/cgi/alerts/ctalert?alertType=correction&amp;addAlert=correction&amp;correction_criteria_value=108/6/djw160&amp;saveAlert=no&amp;return-type=article&amp;return_url=http://jnci.oxfordjournals.org/content/108/6/djw160.full">Alert me if corrected</a></li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="similar-link"><a href="/search?qbe=jnci%3Bdjw160&amp;citation=Fillon%20108%20%286%29&amp;submit=yes">Find similar articles</a></li>
+                        
+                        
+                        
+                        <li class="similar-link"><a href="/external-ref?access_num=jnci%3B108%2F6%2Fdjw160&amp;link_type=ISI_RELATEDRECORDS"
+                              id="cb-isi-similar-articles"
+                              class="similar-link">Similar articles in Web of Science</a></li>
+                        
+                        
+                        
+                        <li class="similar-link"><a href="/external-ref?access_num=27257027&amp;link_type=MED_NBRS"
+                              class="similar-link">Similar articles in PubMed</a></li>
+                        
+                        
+                        
+                        <li class="folder-link icon-link"><a href="/cgi/folders?action=addtofolder&amp;wherefrom=JOURNALS&amp;wrapped_id=jnci%3B108%2F6%2Fdjw160">Add to my archive</a></li>
+                        
+                        
+                        
+                        <li class="cit-man-link icon-link cite-link"><a href="/citmgr?gca=jnci%3B108%2F6%2Fdjw160">Download citation</a></li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li><a class="request-permissions"
+                              href="https://s100.copyright.com/AppDispatchServlet?publisherName=oup&amp;publication=jnci&amp;title=Continuing%20To%20Smoke%20After%20Breast%20Cancer%20Diagnosis%20Lowers%20Survival%20Rate%3A%20&amp;publicationDate=06%2F01%2F2016&amp;author=Mike%20Fillon&amp;copyright=Oxford%20University%20Press&amp;contentID=10.1093%2Fjnci%2Fdjw160&amp;volumeNum=108&amp;issueNum=6&amp;startPage=&amp;endPage=&amp;orderBeanReset=true"
+                              target="_blank">Request Permissions</a></li>
+                        
+                        
+                        
+                        
+                        
+                        
+                     </ol>
+                  </div>
+                  <div class="cb-section collapsible default-closed" id="cb-art-cit">
+                     <h4 class="cb-section-header"><span>Citing Articles</span></h4>
+                     <ol>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="hw-citing-link"><a href="/content/108/6/djw160.full?cited-by=yes&amp;legid=jnci;108/6/djw160#cited-by"
+                              id="cb-hw-citing-articles">Load citing article information</a></li>
+                        
+                        
+                        
+                        <li><a href="/cgi/crossref-forward-links/108/6/djw160" rel="external-nw"
+                              id="cb-crossref-citing-articles">Citing articles via CrossRef</a></li>
+                        
+                        
+                        
+                        <li><a href="/scopus-links/jnci/108/6/djw160?access_num=/jnci/108/6/djw160"
+                              rel="external-nw"
+                              id="cb-scopus-citing-articles">Citing articles via Scopus</a></li>
+                        
+                        
+                        
+                        <li><a href="/external-ref?access_num=%2Fjnci%2F108%2F6%2Fdjw160&amp;link_type=ISI_CITING&amp;accnum_type=native"
+                              rel="external-nw"
+                              id="cb-isi-citing-articles">Citing articles via Web of Science</a></li>
+                        
+                        
+                        
+                        
+                        
+                        
+                     </ol>
+                  </div>
+                  <div class="cb-section collapsible default-closed" id="cb-art-gs">
+                     <h4 class="cb-section-header"><span>Google Scholar</span></h4>
+                     <ol>
+                        
+                        
+                        
+                        
+                        
+                        <li class="cb-art-gs-auth author-link"><a href="http://scholar.google.com/scholar?q=%22author%3AFillon%20author%3AM.%22"
+                              class="cb-art-gs-auth author-link">Articles by  Fillon, M.</a></li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                     </ol>
+                  </div>
+                  <div class="cb-section collapsible default-closed" id="cb-art-pm">
+                     <h4 class="cb-section-header"><span>PubMed</span></h4>
+                     <ol>
+                        
+                        
+                        
+                        
+                        
+                        <li class="cb-art-pm-cite cite-link icon-link"><a href="/external-ref?access_num=27257027&amp;link_type=PUBMED"
+                              class="cb-art-pm-cite cite-link icon-link">PubMed citation</a></li>
+                        
+                        
+                        
+                        <li class="cb-art-pm-auth author-link"><a href="/external-ref?access_num=Fillon%20M&amp;link_type=AUTHORSEARCH"
+                              class="cb-art-pm-auth author-link">Articles by  Fillon, M.</a></li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                     </ol>
+                  </div>
+                  <div class="cb-section collapsible default-closed" id="cb-art-rel">
+                     <h4 class="cb-section-header"><span>Related Content</span></h4>
+                     <ol>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li><a href="/content/108/6/djw160.full?related-urls=yes&amp;legid=jnci;108/6/djw160#related-urls"
+                              id="cb-related-urls">Load related web page information</a></li>
+                        
+                        
+                        
+                        
+                     </ol>
+                  </div>
+                  <div class="cb-section collapsible" id="cb-art-soc">
+                     <h4 class="cb-section-header"><span>Share</span></h4>
+                     <ol>
+                        
+                        
+                        <li><a href="/email?gca=jnci%3B108%2F6%2Fdjw160&amp;current-view-path=/content/108/6/djw160.full">
+                              Email this article</a></li>
+                        
+                          
+                            
+                                          
+                            
+                          
+                        
+                     </ol>
+                  </div>
+               </div>
+            </div>
+            
+            
+            
+         </div>
+         <div id="col-3">
+            
+            <div id="col-3-qs" class="sidebar-qs">
+               
+               
+               <form class="searchbox" action="/search" method="get">
+                  
+                  <p>Search this journal:</p>
+                  
+                  <div>
+                      
+                      
+                      <input value="" type="text" name="fulltext" id="header-qs-input" />
+                     <input type="hidden" name="submit" value="yes" />
+                     
+                     <input class="inline_button" type="image" alt="Go" src="/publisher/img/buttons/go.gif" />
+                     
+                     <div class="adv-search-link"><a href="/search">Advanced »</a></div>
+                     
+                     
+                  </div>
+                  
+               </form>
+               
+            </div>
+            <div class="cb-contents">
+               
+               <div id="sidebar-current-issue" class="content-box">
+                    
+                  <h3 class="cb-contents-header">Current Issue</h3>
+                    
+                  <div class="cb-section">
+                        
+                     <ol>
+                              
+                        <li>
+                                  <a href="/content/current"><span>
+                                      <span class="current-issue-date">
+                                    May 2016
+                                    </span><span class="toc-citation-volume">
+                                    
+                                    108
+                                    </span><span class="toc-citation-issue">(5)</span>
+                                      
+                                    </span></a>
+                                
+                        </li>
+                            
+                     </ol>
+                      
+                  </div>
+                    
+                  <div class="cb-section">
+                        
+                     <ol>
+                              
+                        <li>
+                           <a href="/content/current"><img src="/content/108/5.cover.gif" alt="JNCI: Jnl of National Cancer Institute"
+                                   id="cover" /></a>
+                           
+                        </li>
+                            
+                     </ol>
+                      
+                  </div>
+                    
+                  <div class="cb-section sidebar-etoc-link">
+                        
+                     <ol>
+                              
+                        <li><a href="/cgi/alerts/etoc">Alert me to new issues</a></li>
+                            
+                     </ol>
+                      
+                  </div>
+                  
+               </div>
+               
+            </div>
+            
+            <div id="second">
+               
+               <div class="ad_hidden" id="oas_right1">
+                  <iframe id="id_advertframe_right1"
+                          src="/resource/htmlfiles/advert.html?p=Right1&amp;u=jnci.oxfordjournals.org/content/108/6/djw160.full"
+                          width="0"
+                          height="0"
+                          frameborder="0"
+                          scrolling="no"
+                          class="resize_ad"></iframe>
+                  
+               </div>
+               
+               <div class="features">
+                  
+                  <div class="feature separator_after first">
+                     
+                     <h2 id="the_journal" title="The Journal">
+                        <span>The Journal</span>
+                        
+                     </h2>
+                     
+                     <ul class="emphasised">
+                        
+                        <li>
+                           <a href="http://www.oxfordjournals.org/our_journals/jnci/about.html" rel=""
+                              title="About this journal">About this journal</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="http://www.oxfordjournals.org/our_journals/jnci/contact_us.html" rel=""
+                              title="Contact Us">Contact Us</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="http://www.oxfordjournals.org/access_purchase/rights_permissions.html"
+                              rel=""
+                              title="Rights &amp; Permissions">Rights &amp; Permissions</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="HTTP://www.oxfordjournals.org/access_purchase/dispatch_dates.html#JNCI.JP"
+                              rel=""
+                              title="Dispatch date of next issue">Dispatch date of next issue</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="http://publicationethics.org/" rel=""
+                              title="This journal is a member of the Committee on Publication Ethics (COPE)">This journal is a member of the Committee on Publication Ethics (COPE)</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="http://www.oxfordjournals.org/mobile_faqs.html" rel=""
+                              title="We are mobile – find out more">We are mobile – find out more</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="http://medicine-and-health-careernetwork.oxfordjournals.org/jobseeker/search/results/?t730=&amp;t732=469986&amp;t731=&amp;t733=&amp;t735=&amp;t737=&amp;max=25&amp;site_id=20102"
+                              rel=""
+                              title="Journals Career Network">Journals Career Network</a>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>
+                        <a href="https://www.oxfordjournals.org/our_journals/jnci/jnci_episodes.html">
+                           <img alt="Podcast Logo" style="float:left"
+                                src="http://www.oxfordjournals.org/podcasts/podcast_icon_35x35.gif" />JNCI Podcast</a>
+                        <br />
+                        <br />
+                        
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="feature separator_after">
+                     
+                     <h3>Connect with us!</h3>
+                     <a href="https://twitter.com/JNCI_Now">
+                        <img class="small_margin" alt="Connect with us on Twitter!"
+                             src="http://www.oxfordjournals.org/our_journals/phisci/connect_twitter.png"
+                             style="vertical-align: top; float: left; " />
+                        </a>
+                     <a href="https://www.facebook.com/thejnci">
+                        <img class="small_margin" alt="Connect with us on Facebook!"
+                             src="http://www.oxfordjournals.org/our_journals/phisci/facebook.png"
+                             style="vertical-align: top; float: left; " />
+                        </a>
+                     
+                     <p>
+                        <br />
+                        <br />
+                        
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="feature separator_after">
+                     
+                     <h3>Editor-in-Chief</h3>
+                     
+                     <p>Carmen J. Allegra</p>
+                     
+                     <ul class="emphasised">
+                        
+                        <li>
+                           <a href="http://www.oxfordjournals.org/our_journals/jnci/editorial_board.html"
+                              rel=""
+                              title="View full editorial board">View full editorial board</a>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="feature separator_after">
+                     
+                     <h3>Impact factor: 12.583</h3>
+                     
+                     <h3 class="five_year">5-Yr impact factor: 13.584</h3>
+                     
+                  </div>
+                  
+                  <div class="feature">
+                     
+                     <h3>For the Media</h3>
+                     
+                     <ul class="emphasised">
+                        
+                        <li>
+                           <a href="http://www.oxfordjournals.org/our_journals/jnci/press_room.html" rel=""
+                              title="JNCI PRESS ROOM">JNCI PRESS ROOM</a>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="feature">
+                     
+                     <h2 id="for_authors" title="For Authors">
+                        <span>For Authors</span>
+                        
+                     </h2>
+                     
+                     <ul class="emphasised">
+                        
+                        <li>
+                           <a href="http://www.oxfordjournals.org/our_journals/jnci/for_authors/index.html"
+                              rel=""
+                              title="Instructions to authors">Instructions to authors</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="http://www.oxfordjournals.org/access_purchase/self-archiving_policyb.html"
+                              rel=""
+                              title="Self Archiving/Public Access Policy">Self Archiving/Public Access Policy</a>
+                           
+                        </li>
+                        
+                     </ul>
+                     <a href="http://www.oxfordjournals.org/oxfordopen/ ">
+                        <img alt="Open access options for authors - visit Oxford Open"
+                             src="http://www.oxfordjournals.org/resource/image/promos/oxford_open_small.gif" />
+                        </a>
+                     <a href="http://www.oxfordjournals.org/oxfordopen/funder_policies/">
+                        <img alt="RCUK Wellcome Trust Open Access"
+                             src="http://www.oxfordjournals.org/resource/image/wellcome-trust-180x100.jpg" />
+                        </a>
+                     
+                     <p>Open access options for authors - visit <a href="http://www.oxfordjournals.org/oxfordopen/">Oxford Open</a>
+                        
+                     </p>
+                     <a href="http://publicaccess.nih.gov/submit_process_journals.htm">
+                        <img alt="PMC Logo" src="http://www.oxfordjournals.org/resource/image/pmc-logo.gif" />
+                        </a>
+                     
+                     <ul class="emphasised">
+                        
+                        <li>
+                           <a href="http://publicaccess.nih.gov/submit_process_journals.htm" rel=""
+                              title="This journal enables compliance with the NIH Public Access Policy">This journal enables compliance with the NIH Public Access Policy</a>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <link rel="stylesheet" type="text/css"
+                           href="//www.oxfordjournals.org/resource/css/jobboard_widget.css" />
+                     
+                     <div class="jobboard-widget" id="jobboard-widget">
+                        <span class="code" style="display:none">WhsSvhnOkaAwYG81FJCYgwG7z1LnIP2F</span>
+                        <span class="branded" style="display:none">true</span>
+                        
+                        <div class="widgetHead">
+                           
+                           <h3 class="widgetTagline">Looking for your next opportunity?</h3>
+                           
+                        </div>
+                        
+                        <div class="widgetBody">
+                           
+                           <div class="jt_job_list">
+                              
+                              <p class="job-widget-error" style="text-align: center;">Looking for jobs...</p>
+                              
+                           </div>
+                           
+                        </div>
+                        
+                        <div class="widgetFoot">
+                           <a href="//globaljobs-careernetwork.oxfordjournals.org/home/index.cfm?site_id=20101">
+                              <img class="jcnLogo"
+                                   src="//www.oxfordjournals.org/resource/image/journals-career-network.png"
+                                   alt="Journals Career Network" />
+                              </a>
+                           <a href="//global.oup.com">
+                              <img class="oupLogo" src="//www.oxfordjournals.org/resource/image/oup-logo.png"
+                                   alt="Oxford University Press" />
+                              </a>
+                           
+                        </div>
+                        
+                     </div>
+                     <script defer="defer" type="text/javascript"
+                             src="//www.oxfordjournals.org/resource/js/jobboard_widget.js"></script>
+                     </div>
+                  
+                  <div class="feature">
+                     
+                     <h2 id="alerting_services" title="Alerting Services">
+                        <span>Alerting Services</span>
+                        
+                     </h2>
+                     
+                     <ul class="emphasised">
+                        
+                        <li>
+                           <a href="/cgi/alerts/etoc" rel="" title="Email table of contents">Email table of contents</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="/cgi/alerts/etoc" rel="" title="Email Advance Access">Email Advance Access</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="//jnci.oxfordjournals.org/help/citetrack/index.dtl" rel=""
+                              title="CiteTrack">CiteTrack</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="/rss" rel="" title="XML RSS feed">XML RSS feed</a>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="feature">
+                     
+                     <h2 id="corporate_services" title="Corporate Services">
+                        <span>Corporate Services</span>
+                        
+                     </h2>
+                     
+                     <ul class="emphasised">
+                        
+                        <li>
+                           <a href="http://www.oxfordjournals.org/corporate_services/advertising.html" rel=""
+                              title="Advertising sales">Advertising sales</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="http://www.oxfordjournals.org/corporate_services/reprints.html" rel=""
+                              title="Reprints">Reprints</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="http://www.oxfordjournals.org/corporate_services/classifiedadinprint.html"
+                              rel=""
+                              title="Classified Advertising">Classified Advertising</a>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+               </div>
+               <script type="text/javascript">var taxonomies = ["MED00300"];</script>
+               </div>
+            
+            <div class="most-links-box js-marker">
+               
+               <div class="most-header">
+                  
+                  <h3>Most</h3>
+                  
+               </div>
+               
+               <ul>
+                  
+                    
+                  <li class="most-cur-sel">
+                     <h4>Most Read</h4>
+                        
+                     <div class="most-list">
+                              
+                        <ol>
+                                  
+                           <li class="first-item"><a href="https://jnci.oxfordjournals.org/cgi/content/short/92/13/1037?rss=1&amp;ssource=mfr">Cuban Vaccine Tested in Canadian Trial</a></li>
+                           <li><a href="https://jnci.oxfordjournals.org/cgi/content/short/90/9/713?rss=1&amp;ssource=mfr">The Female Prostate</a></li>
+                           <li><a href="https://jnci.oxfordjournals.org/cgi/content/short/92/6/443?rss=1&amp;ssource=mfr">Breast Density and Cancer Risk: What Is the Relationship?</a></li>
+                           <li><a href="https://jnci.oxfordjournals.org/cgi/content/short/91/14/1194?rss=1&amp;ssource=mfr">Tobacco Smoke Carcinogens and Lung Cancer</a></li>
+                           <li class="last-item"><a href="https://jnci.oxfordjournals.org/cgi/content/short/92/3/249?rss=1&amp;ssource=mfr">Prospective Study of Talc Use and Ovarian Cancer</a></li>
+                                
+                        </ol>
+                              <a href="https://jnci.oxfordjournals.org/reports/mfr1.dtl" class="view-all">» View all Most Read articles</a>
+                            
+                     </div>
+                      
+                  </li>
+                  
+                  
+                  
+                  <li>
+                     <h4>Most Cited</h4>
+                      
+                     <div class="most-list">
+                            
+                        <ol>
+                                
+                           <li class="first-item"><a href="https://jnci.oxfordjournals.org/cgi/content/short/92/3/205?rss=1&amp;ssource=mfc">New Guidelines to Evaluate the Response to Treatment in Solid Tumors</a></li>
+                           <li><a href="https://jnci.oxfordjournals.org/cgi/content/short/90/18/1371?rss=1&amp;ssource=mfc">Tamoxifen for Prevention of Breast Cancer: Report of the National Surgical Adjuvant Breast and Bowel Project P-1 Study</a></li>
+                           <li><a href="https://jnci.oxfordjournals.org/cgi/content/short/85/5/365?rss=1&amp;ssource=mfc">The European Organization for Research and Treatment of Cancer QLQ-C30: A Quality-of-Life Instrument for Use in International
+                                 Clinical Trials in Oncology</a></li>
+                           <li><a href="https://jnci.oxfordjournals.org/cgi/content/short/82/13/1107?rss=1&amp;ssource=mfc">New Colorimetric Cytotoxicity Assay for Anticancer-Drug Screening</a></li>
+                           <li class="last-item"><a href="https://jnci.oxfordjournals.org/cgi/content/short/82/1/4?rss=1&amp;ssource=mfc">What Is the Evidence That Tumors Are Angiogenesis Dependent?</a></li>
+                              
+                        </ol>
+                            <a href="https://jnci.oxfordjournals.org/reports/mfc1.dtl" class="view-all">» View all Most Cited articles</a>
+                          
+                     </div>
+                     
+                  </li>
+                  
+                  
+               </ul>
+               
+            </div>
+            
+            
+            
+         </div>
+         
+         
+         
+         <div id="oas_bottom" class="ad_hidden">
+            <iframe id="id_advertframe_bottom"
+                    src="/resource/htmlfiles/advert.html?p=Bottom&amp;u=jnci.oxfordjournals.org/content/108/6/djw160.full"
+                    width="0"
+                    height="0"
+                    frameborder="0"
+                    scrolling="no"
+                    class="resize_ad"></iframe>
+            
+         </div>
+         
+         
+         
+         
+         
+         
+         <div id="secondary_footer">
+            
+            <div id="issn">Online ISSN 1460-2105 - Print ISSN 0027-8874</div>
+            
+            
+            <div id="copyright"><a href="http://www.oxfordjournals.org/our_journals/terms.html">Copyright ©</a> 
+               <span>2016</span> Oxford University Press
+               
+            </div>
+            
+         </div>
+         
+         <div id="primary_footer">
+            
+            <div id="site_logo">
+               <strong><span>Oxford Journals</span></strong>
+               <em><span>Oxford University Press</span></em>
+               
+            </div>
+            
+            
+            <div id="third_nav">
+               
+               <ul>
+                  
+                  <li><a href="http://www.oxfordjournals.org/site_map.html">Site Map</a></li>
+                  
+                  
+                  <li><a href="http://www.oxfordjournals.org/legal/privacy_policy.html">Privacy Policy</a></li>
+                  
+                  <li><a href="http://global.oup.com/cookiepolicy/?siteid=journals">Cookie Policy</a></li>
+                  
+                  <li><a href="http://www.oxfordjournals.org/legal/legal_notices.html">Legal Notices</a></li>
+                  
+                  <li><a href="http://www.oxfordjournals.org/faq/">Frequently Asked Questions</a></li>
+                  
+               </ul>
+               
+            </div>
+            
+            
+            <div id="other_oup_sites">
+               
+               <form action="http://www.oxfordjournals.org/service/redirect">
+                  
+                  <div>
+                     <label for="site_list">Other Oxford University Press sites:</label>
+                     <select name="url" id="site_list">
+                        
+                        <option value="http://www.oup.com">Oxford University Press</option>
+                        
+                        <option value="http://www.oxfordjournals.org/china/">Oxford Journals China</option>
+                        
+                        <option value="http://www.oxfordjournals.org/japan/">Oxford Journals Japan</option>
+                        
+                        <option value="http://www.oup.com/uk/academic">Academic &amp; Professional books</option>
+                        
+                        <option value="http://www.oup.com/oxed">Children's &amp; Schools Books</option>
+                        
+                        <option value="http://www.oup.com/uk/dictionaries">Dictionaries &amp; Reference</option>
+                        
+                        <option value="http://www.oup.co.uk/newdnb/">Dictionary of National Biography</option>
+                        
+                        <option value="http://www.oup.com/uk/digital_reference">Digital Reference</option>
+                        
+                        <option value="http://www.oup.com/elt/">English Language Teaching</option>
+                        
+                        <option value="http://www.oup.com/uk/textbooks">Higher Education Textbooks</option>
+                        
+                        <option value="http://www.oup.co.uk/ieu/">International Education Unit</option>
+                        
+                        <option value="http://www.oup.com/uk/law">Law</option>
+                        
+                        <option value="http://www.oup.com/uk/medicine">Medicine</option>
+                        
+                        <option value="http://www.oup.com/uk/music">Music</option>
+                        
+                        <option value="http://www.oup.com/online">Online Products &amp; Publishing</option>
+                        
+                        <option value="http://oxfordbibliographiesonline.com">Oxford Bibliographies Online</option>
+                        
+                        <option value="http://oxforddictionaries.com">Oxford Dictionaries Online</option>
+                        
+                        <option value="http://www.oed.com">Oxford English Dictionary</option>
+                        
+                        <option value="http://www.oxfordlanguagedictionaries.com">Oxford Language Dictionaries Online</option>
+                        
+                        <option value="http://www.oxfordscholarship.com">Oxford Scholarship Online</option>
+                        
+                        <option value="http://www.oup.com/uk/reference">Reference</option>
+                        
+                        <option value="http://www.oup.com/uk/rights">Rights and Permissions</option>
+                        
+                        <option value="http://www.oup.com/uk/booksellers">Resources for Retailers &amp; Wholesalers</option>
+                        
+                        <option value="http://www.oup.com/uk/corporate">Resources for the Healthcare Industry</option>
+                        
+                        <option value="http://www.oup.com/vsi">Very Short Introductions</option>
+                        
+                        <option value="http://www.oup.com/worldsclassics">World's Classics</option>
+                        </select>
+                     
+                     <input type="image" src="/resource/image/buttons/go.gif" alt="Go"
+                            class="inline_button" />
+                     
+                  </div>
+                  
+               </form>
+               
+            </div>
+            
+         </div>
+         <script type="text/javascript"
+                 src="http://gab.cookie.oup.com/aws-cookie/oup.cookiepolicy.pack.js"
+                 defer="defer"></script>
+         
+         <script defer="defer"
+                 src="http://oi-underbar.ifactory.com/underbar/js/jquery-ui.min.js"
+                 type="text/javascript"></script>
+         <script defer="defer"
+                 src="http://oi-underbar.ifactory.com/underbar/js/jcarousellite.js"
+                 type="text/javascript"></script>
+         <script defer="defer"
+                 src="http://oi-underbar.ifactory.com/underbar/js/pf_oiunderbarinit.js"
+                 type="text/javascript"></script>
+         <script defer="defer" src="/resource/js/underbar_local.js" type="text/javascript"></script>
+         <script defer="defer" type="text/javascript">
+    function fnc_onDomLoaded() {
+        var query_context = getQueryContext();
+        PF_initOIUnderbar(query_context,":QS:default","","JRN"); 
+        PF_insertOIUnderbar(0);
+    };
+    if (window.addEventListener) { 
+        window.addEventListener('load', fnc_onDomLoaded, false); 
+    } else if (window.attachEvent) { 
+        window.attachEvent('onload', fnc_onDomLoaded); 
+    } 
+</script>
+         <noscript> 
+                <img src="//ouptag.scholarlyiq.com/ntpagetag.gif?js=0" height="1" width="1"
+                 border="0"
+                 hspace="0"
+                 vspace="0"
+                 alt="" /> 
+              
+         </noscript><script type="text/javascript" src="//ouptag.scholarlyiq.com/ntpagetag.js"></script><script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        </script><script type="text/javascript">
+        try {
+        var pageTracker = _gat._getTracker("UA-189672-16");
+        pageTracker._setDomainName(".oxfordjournals.org");
+        pageTracker._trackPageview();
+        } catch(err) {}
+        </script></div>
+   </body>
+</html>

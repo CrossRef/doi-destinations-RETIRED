@@ -1,0 +1,582 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  "http://www.w3.org/TR/html4/loose.dtd">
+<html prefix="og: http://ogp.me/ns#"><head><title>The Spillovers, Interactions, and (Un)Intended Consequences of Monetary and Regulatory Policies</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="citation_title" content="The Spillovers, Interactions, and (Un)Intended Consequences of Monetary and Regulatory Policies">
+<meta name="keyword" content="Kristin Forbes">
+<meta name="keyword" content="Dennis Reinhardt">
+<meta name="keyword" content="Tomasz Wieladek">
+<meta name="citation_author" content="Forbes, Kristin">
+<meta name="citation_author" content="Reinhardt, Dennis">
+<meta name="citation_author" content="Wieladek, Tomasz">
+<meta name="DC.Date" content="2016-06-02">
+<meta name="citation_date" content="2016-06-02">
+<meta property="og:site_name" content="NBER">
+<meta property="og:URL" content="http://www.nber.org/papers/w22307">
+<meta name="citation_technical_report_institution" content="National Bureau of Economic Research">
+<meta name="citation_technical_report_number" content="w22307">
+<meta property="og:type" content="article">
+<meta name="google_sort_date" content="2016-06-02">
+<meta name="citation_pdf_url" content="http://www.nber.org/papers/w22307.pdf">
+<script type="text/javascript">
+        var djConfig = {
+            parseOnLoad: true,
+            isDebug: false
+        };
+</script>
+<script type="text/javascript"
+        src="/2009_redesign/dojo-1.3/dojo/dojo.js"></script>
+<link rel="stylesheet" href="/2009_redesign/dojo-1.3/dijit/themes/tundra/tundra.css">
+<link rel="stylesheet" href="/2009_redesign/2009.css" type="text/css">
+<link rel="image_src" href="http://www.nber.org/img_2009/NBER_logo_2014.jpg" / ><!--formatted-->
+<script language="JavaScript" type="text/javascript" src="/2009_redesign/top.js"></script>
+<!--style applied-->
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-28569388-1', 'auto');  // Replace with your property ID.
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+</head>
+<body>
+<div id="printTopDiv">NATIONAL BUREAU OF ECONOMIC RESEARCH</div>
+<div id="topDiv"><a href="/" title="Return to Home Page">
+<img border="0" src="/img_2009/main_top.jpg" height="95" width="997" alt="NATIONAL BUREAU OF ECONOMIC RESEARCH">
+</a></div>
+    
+<div id="currentDate"></div>
+<!-- removed at Dans request 2012-10-20
+<div id="currentWeather"></div>
+-->
+<div id="homeLink">
+<a href="/" title="return to home">HOME PAGE</a></div>
+<div id="searchBoxDiv">
+<form action="/s/search" name="googleSearchForm" method=GET>
+<input type="hidden" name="client" value="test3_fe">
+<input type="hidden" name="proxystylesheet" value="test3_fe">
+<input type="hidden" name="site" value="default_collection">
+<input type="hidden" name="btnG" value="Search">
+<input type="hidden" name="entqr" value="0">
+<input type="hidden" name="ud" value="1">
+<input type="hidden" name="output" value="xml_no_dtd">
+<input type="hidden" name="oe" value="UTF-8">
+<input type="hidden" name="ie" value="UTF-8">
+<input type="text" name="q" id="mainSearchBoxId" class="yellowInput"
+       value="Search the NBER site" onClick="if (this.value == 'Search the NBER site') 
+                  {this.value =''; this.style.textAlign = 'left'}"></form></div>
+
+<div id="mainNewsDiv">
+<table border=0 cellspacing=0 cellpadding=0 id="mainTable"><tr>
+   <td id="mainContentTd" valign="top" style="padding-bottom: 10px;">
+<h1 class='title'>The Spillovers, Interactions, and (Un)Intended Consequences of Monetary and Regulatory Policies</h1>
+<p><b style="color:red">Online access to NBER Working Papers denied, you have no subscription</b></p>
+<h2 class='bibtop' style='text-align:center'><a href="/people/kristin_forbes">Kristin Forbes</a>, <a href="/people/DennisReinhardt">Dennis Reinhardt</a>, <a href="/people/tomaszwieladek">Tomasz Wieladek</a></h2>
+<p class='bibtop' style='text-align:center'>
+  <b>NBER Working Paper No. 22307</b><br>
+<b>Issued in June 2016</b><br>
+<b>NBER Program(s):&nbsp;&nbsp;&nbsp;<a href="http://www.nber.org/papersbyprog/IFM.html">IFM</a>&nbsp;&nbsp;&nbsp;<a href="http://www.nber.org/papersbyprog/ME.html">ME</a></b>
+<br>
+</p>
+
+<p style="margin-left: 40px; margin-right: 40px; text-align: justify">
+Have bank regulatory policies and unconventional monetary policies—and any possible interactions—been a factor behind the recent “deglobalisation” in cross-border bank lending? To test this hypothesis, we use bank-level data from the UK—a country at the heart of the global financial system. Our results suggest that increases in microprudential capital requirements tend to reduce international bank lending and some forms of unconventional monetary policy can amplify this effect. Specifically, the UK’s Funding for Lending Scheme (FLS) significantly amplified the effects of increased capital requirements on cross-border lending. Quantitative easing did not appear to have a similar effect. We find that this interaction between microprudential regulations and the FLS can explain roughly 30% of the contraction in aggregate UK cross-border bank lending between mid-2012 and end-2013, corresponding to around 10% of the global contraction in cross-border lending. This suggests that unconventional monetary policy designed to support domestic lending can have the unintended consequence of reducing foreign lending.
+</p>
+
+<p>You may <a href="http://papers.ssrn.com/sol3/Determine_Quantity.cfm?nber_id=w22307">purchase this paper on-line</a> in .pdf format
+from SSRN.com ($5) for electronic delivery.</p>
+
+<p>
+
+<form action="http://papers.nber.org/papers/expecting/" method="POST">
+<h2 align="center">Information about Free Papers</h2>
+
+<p>You should expect a free download if you are a subscriber, a corporate 
+associate of the NBER, <a href="/help/wp/journal.html">a journalist</a>,
+an employee of the U.S. federal government with a ".GOV" domain name,
+or a resident of nearly any <a href="/help/wp/dcte.html">
+developing country or transition economy</a>.</p>
+
+<p>If you usually get free papers at work/university but do not at home,
+you can either
+connect to your work VPN or proxy (if any) or elect to have a link to the paper 
+emailed to your work email address below.  The email address must be
+connected to a
+subscribing college, university, or other subscribing institution.
+ Gmail and other free email addresses will not have access.</p>
+
+E-mail: <input name="email" size="40" value="" type="text" class="yellowInput" style="text-align: left">
+<input name="skip_verify" type="hidden" value="1">
+<input name="paper" value="w22307" type="hidden">
+<input type="submit" name="submit" value="send">
+</form>
+<br></p>
+
+<p><b></b></p>
+<p class="ackdis_link"><a href="/papers/w22307.ack">Acknowledgments and Disclosures</a></p>
+<p> Machine-readable bibliographic record - 
+ <a href = "/papers/w22307.marc">MARC</a>,
+ <a href = "/papers/w22307.ris">RIS</a>,
+ <a href = "/papers/w22307.bib">BibTeX</a>
+</p>
+<p>Document Object Identifier (DOI): 10.3386/w22307</p>
+<td>
+<td style="height: 250px; min-height: 250px">&nbsp;</td>
+</tr></table>
+
+<div id="leftNav">
+<img src="http://img.nber.org/img_2009/nav1_pubs.gif" alt="Publications" 
+    onMouseOver="this.src='http://img.nber.org/img_2009/nav1_pubs_active.gif'" 
+    onMouseOut="this.src='http://img.nber.org/img_2009/nav1_pubs.gif'" onClick="showNav(1,0)"><br>
+
+<img src="http://img.nber.org/img_2009/nav2_activities.gif" alt="Activities" 
+    onMouseOver="this.src='http://img.nber.org/img_2009/nav2_activities_active.gif'" 
+    onMouseOut="this.src='http://img.nber.org/img_2009/nav2_activities.gif'" 
+    onClick="showNav(2,0)"><br>
+
+<img src="http://img.nber.org/img_2009/nav3_meetings.gif" alt="Meetings" 
+    onMouseOver="this.src='http://img.nber.org/img_2009/nav3_meetings_active.gif'" 
+    onMouseOut="this.src='http://img.nber.org/img_2009/nav3_meetings.gif'" 
+    onClick="showNav(3,0)"><br>
+
+<img src="http://img.nber.org/img_2009/nav8_video.gif" alt="NBER Videos" 
+    onMouseOver="this.src='http://img.nber.org/img_2009/nav8_video_active.gif'" 
+    onMouseOut="this.src='http://img.nber.org/img_2009/nav8_video.gif'" 
+    onClick="showNav(8,0)"><br>
+
+<img src="http://img.nber.org/img_2009/nav9_themes_4.gif" alt="Themes" 
+    onMouseOver="this.src='http://img.nber.org/img_2009/nav9_themes_4_active.gif'" 
+    onMouseOut="this.src='http://img.nber.org/img_2009/nav9_themes_4.gif'" 
+    onClick="showNav(9,0)"><br>
+
+<img src="http://img.nber.org/img_2009/nav4_data.gif" alt="Data" 
+    onMouseOver="this.src='http://img.nber.org/img_2009/nav4_data_active.gif'" 
+    onMouseOut="this.src='http://img.nber.org/img_2009/nav4_data.gif'" 
+    onClick="showNav(4,0)"><br>
+
+<img src="http://img.nber.org/img_2009/nav5_people.gif" alt="People" 
+    onMouseOver="this.src='http://img.nber.org/img_2009/nav5_people_active.gif'" 
+    onMouseOut="this.src='http://img.nber.org/img_2009/nav5_people.gif'" 
+    onClick="showNav(5,0)"><br>
+
+<img src="http://img.nber.org/img_2009/nav6_about.gif" alt="About" 
+    onMouseOver="this.src='http://img.nber.org/img_2009/nav6_about_active.gif'"
+    onMouseOut="this.src='http://img.nber.org/img_2009/nav6_about.gif'" 
+    onClick="showNav(6,0)"><br>
+
+<!--<img src="http://img.nber.org/img_2009/nav7_support.gif" alt="Support" 
+    onMouseOver="this.src='http://img.nber.org/img_2009/nav7_support_active.gif'" 
+    onMouseOut="this.src='http://img.nber.org/img_2009/nav7_support.gif'" 
+    onClick="showNav(7,0)"><br>-->
+
+
+<img src="http://img.nber.org/img_2009/nav_bottom.gif" alt=""><br>
+<div style="display: none">
+
+<img src="http://img.nber.org/img_2009/nav1_pubs_active.gif"
+height="1" width="1.5" alt="">
+<img src="http://img.nber.org/img_2009/nav2_activities_active.gif"
+height="1" width="1" alt="">
+<img src="http://img.nber.org/img_2009/nav3_meetings_active.gif"
+height="1" width="1" alt="">
+<img src="http://img.nber.org/img_2009/nav8_video_active.gif"
+height="1" width="1" alt="">
+
+<img src="http://img.nber.org/img_2009/nav9_themes_4_active.gif"
+height="1" width="1" alt="">
+
+
+<img src="http://img.nber.org/img_2009/nav4_data_active.gif"
+height="1" width="1" alt="">
+<img src="http://img.nber.org/img_2009/nav5_people_active.gif"
+height="1" width="1" alt="">
+<img src="http://img.nber.org/img_2009/nav6_about_active.gif"
+height="1" width="1" alt="">
+
+
+
+
+<!--height="1" width="1" alt=""><img src="http://img.nber.org/img_2009/nav7_support_active.gif"-->
+
+
+</div>
+</div>
+<div id="middleSeparator"><img src="http://img.nber.org/img_2009/middle_sep.jpg" alt=""></div>
+<div id="bottomSectionBackground">
+<div id="bottomSection">
+  <div id="bottomSectionContent"></div>
+<div align="center" id="nberContactInfo">
+National Bureau of Economic Research, 1050 Massachusetts Ave.,
+Cambridge, MA 02138;  <a href="callto:+16178683900">617-868-3900</a>; email: info@nber.org<BR><BR> <a href="/contact/">Contact Us</a>
+</div>
+</div> <!-- bottomSection -->
+</div> <!-- bottomSectionBackground -->
+
+<div id="navDiv1_outer" class="navDivOuter"></div>
+<div id="navDiv1_inner" class="navDivInner">
+<h2 class="withinNav">Working Papers & Publications</h2>
+
+<form action="/s/search" name="wpSearchForm" method="GET">
+<div style="background-image:url('http://img.nber.org/img_2009/wp_washed.gif'); background-repeat:no-repeat; background-position: center right;">
+<h2>&nbsp;<a href="/papers.html">Working Papers</a> &nbsp; 
+  <a href="/papers.html" style="font-size: 6pt; color: #134656">(MORE SEARCH OPTIONS)</a></h2>
+<div id="wpSearchCaption" style="display:
+                                 none">&nbsp; <span style="font-size:
+                                                           6pt;">
+  AUTHOR OR TITLE SEARCH OF WORKING PAPERS</span></div>
+<input type="hidden" name="restrict_papers" value="yes">
+<input type="hidden" name="whichsearch" value="db">
+<input type="hidden" name="client" value="test3_fe">
+<input type="hidden" name="proxystylesheet" value="test3_fe">
+<input type="hidden" name="site" value="default_collection">
+<input type="hidden" name="entqr" value="0">
+<input type="hidden" name="ud" value="1">
+<input type="hidden" name="output" value="xml_no_dtd">
+<input type="hidden" name="oe" value="UTF-8">
+<input type="hidden" name="ie" value="UTF-8">
+<input type="hidden" name="sort" value="date%3AD%3AL%3Ad1">
+<input type="text" name="q" id="wpSearchBoxId" size=40 style="text-align: left" class="yellowInput"
+       value="Search Author or Title of Working Papers" 
+       onClick="if (this.value == 'Search Author or Title of Working Papers') 
+                  {this.value =''; dojo.byId('wpSearchCaption').style.display = 'block'}"><br>
+&nbsp; <a href="/new.html">This Week's Working Papers</a><BR>
+&nbsp; <a href="/help/wp/free.html">Check to see if you are eligible for Free Downloads</a><br>
+&nbsp; <a href="/wpsubscribe.html">Become a subscriber</a><BR>
+</div>
+</form>
+&nbsp;<br>
+<!-- <a href="/wpsubmit/eligibilitytosubmit.html">Submit to WP Series</a><BR><BR>-->
+
+<form action="/s/search" name="booksSearchForm" method="GET">
+<div style="padding-left: 140px; background-image:url('http://img.nber.org/img_2009/books_washed.gif'); background-repeat:no-repeat">
+<h2>&nbsp;Books</h2>
+<div id="booksSearchCaption" style="display: none">&nbsp; <span style="font-size: 6pt;">SEARCH NBER BOOKS</span></div>
+<input type="hidden" name="restrict_books" value="yes">
+<input type="hidden" name="client" value="test3_fe">
+<input type="hidden" name="proxystylesheet" value="test3_fe">
+<input type="hidden" name="site" value="default_collection">
+<input type="hidden" name="entqr" value="0">
+<input type="hidden" name="ud" value="1">
+<input type="hidden" name="output" value="xml_no_dtd">
+<input type="hidden" name="oe" value="UTF-8">
+<input type="hidden" name="ie" value="UTF-8">
+<input type="hidden" name="sort" value="date%3AD%3AL%3Ad1">
+<input type="text" name="q" id="bookSearchBoxId" size=40 style="text-align: left" class="yellowInput"
+       value="Search NBER Books" onClick="if (this.value == 'Search NBER Books') 
+                  {this.value =''; dojo.byId('booksSearchCaption').style.display = 'block'}"><br>
+&nbsp; <a href="/books.html">Recent Books</a><br>
+&nbsp; <a href="/booksbyyear/">Earlier Books (by decade)</a><br>
+&nbsp; <a href="/booksbyseries/">Browse books by Series</a><BR>
+&nbsp; <a href="/books_in_progress/">Chapters from Books In Process</a><br>
+
+<!--<a href="">New Chapters</a><br>-->
+</div>
+</form>
+&nbsp;<br>
+
+<h2>Free Publications</h2>
+<a href="/aginghealth/">Bulletin on Aging and Health</a><br>
+<a href="/digest/">Digest</a> &mdash; Non-technical summaries of 4-8 working papers per month<br>
+<a href="/reporter/">Reporter</a> &mdash; News about the Bureau and its activities.<br>
+<a href="/othersubscribe.html">Become a subscriber</a><BR><br><br>
+
+<h2><a href="/researchdisclosurepolicy.html">NBER Research Disclosure Policy</a></h2>
+
+
+<div class="bottomRight" onClick="hideNavs(0)">Close</div>
+</div>
+
+<!--<div id="navDiv2_inner" class="navDivInner" style="height: 560px">-->
+<div id="navDiv2_outer" class="navDivOuter" style="height: 610px"></div>
+
+<!--<div id="navDiv2_inner" class="navDivInner" style="height: 440px">-->
+<!--<div id="navDiv2_inner" class="navDivInner" style="height: 500px">-->
+<div id="navDiv2_inner" class="navDivInner" style="height: 560px">
+
+<h2 class="withinNav">Activities</h2>
+<div style="padding-bottom: 10px"><center>NBER activities are organized into
+  <a href="/programs/"><B>Programs</B></a> and <a href="/workinggroups/">Working Groups.</center></a>  <!--Most NBER research is published in <a href="/papers/">Working Papers</a>.
+
+<span class="smallcaps" style="color: #666666">( bold = NBER Program )</span>-->
+</div>
+<table style="width: 100%"><tr><td style="padding-left: 10px; padding-right: 10px; width:
+                    45%; min-width:40%">
+<div class="singleHang"><b><A HREF="/programs/ag/">Aging</A></b></div> 
+<div class="singleHang"><b><A HREF="/programs/ap/ap.html">Asset Pricing</A></b></div> 
+<div class="singleHang"><A HREF="/workinggroups/bf/bf.html">Behavioral Finance</a></div>
+<div class="singleHang"><b><A HREF="/programs/ch/ch.html">Children</A></b></div> 
+<div class="singleHang"><A HREF="/workinggroups/ce/ce.html">Chinese Economy</a></div>
+<div class="singleHang"><A HREF="/workinggroups/cs/cs.html">Cohort Studies</a></div>
+<div class="singleHang"><b><A HREF="/programs/cf/cf.html">Corporate Finance</A></b></div> 
+<div class="singleHang"><A HREF="/workinggroups/cri/cri.html">Economics of Crime</a></div>
+<div class="singleHang"><b><A HREF="/programs/dev/dev.html"> Development Economics </a></b></div> 
+<div class="singleHang"><b><A HREF="/programs/dae/dae.html"> Development of  the American Economy </a></b></div>
+<div class="singleHang"><b><A HREF="/programs/efg/efg.html">Economic Fluctuations and Growth</a></b></div> 
+<div class="singleHang"><b><A HREF="/programs/ed/ed.html">Education</a></b></div> 
+<div class="singleHang"><A HREF="/workinggroups/ent/ent.html">Entrepreneurship</a></div>
+<div class="singleHang"><b><A HREF="/programs/eee/eee.html">Environment and Energy</a></b></div> 
+<div class="singleHang"><A HREF="/workinggroups/fr/fr.html">Financial Risks</A></div>
+<div class="singleHang"><b><A HREF="/programs/hc/hc.html">Health Care</a></b></div> 
+<div class="singleHang"><b><A HREF="/programs/he/he.html">Health Economics</a></b></div>
+<div class="singleHang"><A HREF="/workinggroups/hf/hf.html">Household Finance</a></div>
+</td><td style="padding-left: 10px; width: 50%; min-width: 40%">
+<div class="singleHang"><b><A HREF="/programs/io/io.html">Industrial Organization</a></b></div> 
+<div class="singleHang"><A HREF="/workinggroups/ipe/ipe.html">Innovation Policy</a></div> 
+<div class="singleHang"><A HREF="/workinggroups/ins/ins.html">Insurance</a></div>
+<div class="singleHang"><b><A HREF="/programs/ifm/ifm.html">International Finance & Macroeconomics</a></b></div> 
+<div class="singleHang"><b><A HREF="/programs/iti/iti.html">International Trade and Investment</a></b></div> 
+<div class="singleHang"><b><A HREF="/programs/ls/ls.html">Labor</a></b></div> 
+<div class="singleHang"><b><A HREF="/programs/le/le.html">Law & Economics</a></b></div> 
+<div class="singleHang"><A HREF="/workinggroups/md/md.html">Market Design</a></div>
+<div class="singleHang"><A HREF="/workinggroups/mm/mm.html">Market Microstructure</a></div>
+<div class="singleHang"><b><A HREF="/programs/me/me.html">Monetary Economics</A></b></div> 
+<!--
+<div class="singleHang"><A HREF="/workinggroups/ens/ens.html">National Security</a></div>
+-->
+<div class="singleHang"><A HREF="/workinggroups/oe/oe.html">Organizational Economics</a></div>
+<div class="singleHang"><A HREF="/workinggroups/per/per.html">Personnel Economics</A></div>
+<div class="singleHang"><b><A HREF="/programs/pol/pol.html">Political Economy</A></b></div> 
+<div class="singleHang"><b><A HREF="/programs/pr/pr.html">Productivity, Innovation, and Entrepreneurship</A></b></div> 
+<div class="singleHang"><b><A HREF="/programs/pe/pe.html">Public
+      Economics</A></b></div>
+<div class="singleHang"><A HREF="/workinggroups/ue/ue.html">Urban Economics</A></div>
+</td></tr></table>
+<div style="padding-left: 10px;"><h3 style="margin-bottom: 0px">Special Projects:</h3>
+<div class="singleHang"><A HREF="/AfricanSuccesses/"><I> African Successes Project</i></A></div>
+<div class="singleHang"><A HREF="/programs/ag/cahr/cahrhome.html"><i>Center for Aging & Health Research <span class="smallcaps">(CAHR)</span></i></A></div> 
+<div class="singleHang"><A HREF="/CEME/"><I>Conference on Econometrics
+      & Mathematical Economics <span class="smallcaps">(CEME)</span></i></a></div>
+<div class="singleHang"><a href="/CRIW/"><I>Conference on Research in
+      Income & Wealth <span class="smallcaps">(CRIW)</span></i></a></div>
+<div class="singleHang"><A HREF="/aging/drc/"><I>Disability Research Center<span class="smallcaps"> (DRC)</span></i></A></div> 
+<div class="singleHang"><A HREF="/programs/ag/rrc/rrchome.html"><I>Retirement Research Center <span class="smallcaps">(RRC)</span></i></A></div> 
+<div class="singleHang"><A HREF="/~sewp/"><I>Science & Engineering Workforce <span class="smallcaps">(SEWP)</span></i></a></div>
+</div>
+
+<div class="bottomRight" onClick="hideNavs(0)">Close</div>
+</div>
+
+
+
+
+<div id="navDiv3_outer" class="navDivOuter" style="height: 400px"></div>
+<div id="navDiv3_inner" class="navDivInner" style="height: 340px">
+<h2 class="withinNav">Meetings</h2>
+<center class="withinNav"><font size=".5">(by invitation only)</font></center>
+
+
+<h2>Recent Meetings</h2>
+&nbsp;
+<table>
+
+
+<tr><td class="padR10">  June 1</td><td>
+<A HREF="http://www.nber.org/confer/2016/PHEs16/summary.html">
+Productivity in Higher Education</a></td></tr>
+
+
+<tr><td class="padR10">May 28-29</td><td>
+<A HREF="http://www.nber.org/confer/2016/CEs16/summary.html">
+Chinese Economy</a></td></tr>
+
+
+<tr><td class="padR10">May 27-28</td><td>
+<A HREF="http://www.nber.org/confer/2016/ICs16/summary.html">
+International Comparisons of Income, Prices, and Production</a></td></tr>
+
+
+<tr><td class="padR10">May 21-22</td><td>
+<A HREF="http://www.nber.org/confer/2016/WWLs16/summary.html">
+Women Working Longer</a></td></tr>
+
+
+
+
+
+
+</table>
+<div align="right" style="padding-top: 12px; color: #5386A6;">
+(<a href="/meeting_summaries.html">...More summaries of NBER Meetings...</a>)</div>
+<!--<h2 style="margin-bottom: 0px; margin-top: 12px">-->
+
+<h2>Other Meeting Links</h2>
+
+<a href="/summer-institute/">NBER Summer Institutes</a><BR>
+
+<a href="http://www.nber.org/SI_econometrics_lectures.html">Summer Institute Econometric Lectures</a><BR>
+
+<a href="/macroannualconference/MacroAnnualConference.html">NBER Annual Conference on Macroeconomics</a><BR><br>
+<a href="/callforpapers/callpapers.html">Calls for Papers</a>
+
+
+<div class="bottomRight" onClick="hideNavs(0)">Close</div>
+</div>
+
+
+<div id="navDiv8_outer" class="navDivOuter" style="height: 260px"></div>
+<div id="navDiv8_inner" class="navDivInner" style="height: 200px">
+<h2 class="withinNav">NBER Videos</h2>
+
+
+<a href="/SI_econometrics_lectures.html">Summer Institute Methods Lectures</a><br>
+<a href="/feldstein_lectures.html">Martin Feldstein Lectures</a><br>
+<a href="/video_archives.html">Other NBER Videos</a><br>
+
+<div class="bottomRight" onClick="hideNavs(0)">Close</div>
+</div></div>
+
+
+
+<div id="navDiv9_outer" class="navDivOuter" style="height: 260px"></div>
+<div id="navDiv9_inner" class="navDivInner" style="height: 200px">
+<h2 class="withinNav">Themes in NBER Research</h2>
+
+<a href="http://www.nber.org/themes/commodity/commoditysummary.shtml">Economics of Commodity Prices</a><br>
+<a href="http://www.nber.org/themes/taxpolicy/taxpolicysummary.shtml">Tax Policy and the Economy</a><br>
+<a href="http://www.nber.org/themes/charterschools/charterschoolssummary.shtml">Charter Schools</a><br>
+<a href="http://www.nber.org/themes/childhood/childhoodsummary.shtml">Childhood Interventions: What Works?</a><br>
+<a href="http://www.nber.org/themes/inequality/inequalitysummary.shtml">Sources of Inequality</a><br>
+<a href="http://www.nber.org/themes/greece_eurocrisis/summary.shtml">The Greek Crisis and the Euro</a><br>
+<a href="http://www.nber.org/themes/energy/energysummary.shtml ">Energy Issues</a><br>
+<a href="http://www.nber.org/themes/china2015/chinasummary.shtml">China Issues</a><br>
+<div class="bottomRight" onClick="hideNavs(0)">Close</div>
+</div>
+
+
+
+
+
+<div id="navDiv4_outer" class="navDivOuter" style="height: 260px"></div>
+<div id="navDiv4_inner" class="navDivInner" style="height: 200px">
+<h2 class="withinNav">Data</h2>
+
+<div style="background-image:url('http://img.nber.org/img_2009/data_washed.gif'); background-repeat:no-repeat; background-position: top right;">
+<div class="singleHang"><A HREF="/brdc/">Boston Census Research Data Center <span class="smallcaps">(BRDC)</span></a></div>
+<a href="/data/">Public Use Data Archive</a>&nbsp;<br><BR>
+<!--<a href="/data/">&nbsp;Data Created by NBER Researchers </a>&nbsp;<br><BR>-->
+
+<h2>Frequently Requested:</h2>
+<a href="/cycles/main.html">Business Cycle Memos, FAQ, Members</a><br>
+<a href="/cycles/cyclesmain.html">Business Cycle Dates</a><br>
+<a href="/cps/">Current Population Survey</a><br>
+<a href="/erp/2014_economic_report_of_the_president.pdf"> Economic Report of the President</a><BR>
+<a href="/releases/">New Economic Releases</a><br>
+<a href="/data/#demographic">Vital Statistics</a><BR>
+</div>
+
+
+
+    
+<!--<img src="http://img.nber.org/images/pencil_arrow.png"><A HREF="prefs/releases">Register here to receive free
+e-mail notification of new economic releases</A>-->
+<div class="bottomRight" onClick="hideNavs(0)">Close</div>
+</div></div>
+
+
+
+
+<div id="navDiv5_outer" class="navDivOuter" style="height: 400px"></div>
+<div id="navDiv5_inner" class="navDivInner" style="height: 340px">
+<h2 class="withinNav">People</h2>
+<table><tr><td><!--<img src="http://img.nber.org/img_2009/poterba_pic.jpg" alt="" align="left">-->
+</td><td><h2><a href="/poterba.html">James Poterba</a>, president</h2><BR>
+James Poterba is President of the National Bureau of Economic Research.
+He is also the Mitsui Professor of Economics at M.I.T. 
+</td></tr></table>
+<table width="100%"><tr><td>
+<h2>NBER Researchers</h2>
+<a href="/programs/program_members.html">Researchers by NBER Program</a><br>
+<!-- <a href="">Researchers with Recent Working Papers</a><br> -->
+<a href="/vitae.html">Complete NBER Research Family List</a><br>
+</td><td>
+<form action="/s/search" name="peopleSearchForm" method=GET>
+<div id="peopleSearchCaption" style="display: none">&nbsp; <span style="font-size: 6pt;">SEARCH NBER RESEARCHERS</span></div>
+<input type="hidden" name="whichsearch" value="dbfam">
+<input type="hidden" name="client" value="default_frontend">
+<input type="hidden" name="proxystylesheet" value="test3_fe">
+<input type="hidden" name="site" value="default_collection">
+<input type="hidden" name="entqr" value="0">
+<input type="hidden" name="ud" value="1">
+<input type="hidden" name="output" value="xml_no_dtd">
+<input type="hidden" name="oe" value="UTF-8">
+<input type="hidden" name="ie" value="UTF-8">
+<input type="text" name="q" id="peopleSearchBoxId" size=20 style="text-align: left" class="yellowInput"
+       value="Search NBER researchers" onClick="if (this.value == 'Search NBER researchers') 
+                  {this.value =''; dojo.byId('peopleSearchCaption').style.display = 'block'}"></form>
+
+<!-- <input class="yellowInput" type="text" value="Search NBER researchers"> -->
+</td></tr></table>
+<table><tr><td width="80"><img src="http://img.nber.org/img_2009/people_sil.gif"
+                               alt="image of people"></td><td>
+<h2>Other People Links</h2>
+<a href="/staff.html">Staff</a><br>
+<a href="/board.html">Board of Directors</a><br>
+</td></tr></table>
+<div class="bottomRight" onClick="hideNavs(0)">Close</div>
+</div></div>
+
+<!-- height outer was 377px, inner was was 317px, increased by Alex 2011-06-27 -->
+
+<div id="navDiv6_outer" class="navDivOuter" style="height: 395px"></div>
+<div id="navDiv6_inner" class="navDivInner" 
+
+style="height: 335px;
+       background-image: url('/images/lobby_new.jpg');
+       background-repeat: no-repeat;
+       background-position: 0px 40px;
+">
+<h2 class="withinNav">About</h2>
+<div style="padding-left: 220px; position: relative; top: -10px">
+<p><a href="/info.html">About Us</A><BR>
+<a href="/contact/">Contact Information</a><br>
+<a href="/nberhistory/">Historical Archives</a></p>
+<p><a href="/programs/">Research Programs</A><BR>
+<a href="/workinggroups/">Working Groups</A><BR>
+<a href="/researchdisclosurepolicy.html">Research Disclosure Policy</A><BR>
+<a href="/jobs/">Employment and Fellowships</a><br>
+<!-- <a href="/fellowships/">Fellowships</a><br> -->
+<a href="/siteguide.html">Sitemap</a><br>
+<a href="/links/">Links to other Resources</a><br>
+<a href="/s/search/">Search</a></p>
+<p>Map/Directions:<br>
+<a
+href="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=NBER&amp;sll=42.373764,-71.105211&amp;sspn=0.00531,0.013175&amp;ie=UTF8&amp;ll=42.374937,-71.111112&amp;spn=0.010621,0.02635&amp;z=15"
+title="Directions to NBER" target="_new">1050 Massachusetts Ave., Cambridge, MA 02138</a></p>
+<p>ph: <a href="callto:+16178683900" title="dial the NBER">617-868-3900</a><br>
+email: <a href="mailto:info@nber.org" title="email the NBER">info@nber.org</a></p>
+
+<div class="bottomRight" onClick="hideNavs(0)">Close</div>
+</div>
+
+
+
+
+
+<div id="navDiv7_outer" class="navDivOuter" style="height: 260px"></div>
+<div id="navDiv7_inner" class="navDivInner" style="height: 200px">
+<h2 class="withinNav"></h2>
+
+<h2></h2>
+<!-- The research activities of the NBER are funded by grants from federal research agencies, by private foundations, and by generous donations from our corporate associates and from private individuals.  The NBER is a non-profit, 501(c)(3) organization.  For information on supporting the NBER, please contact:<br><br>
+
+Mr. Denis Healy, Director of Development<br>
+NBER<br>
+1050 Massachusetts Avenue<br>
+Cambridge, MA 02138-5398<br>
+<p>ph: <a href="callto:+16178683900" title="dial the NBER">617-868-3900</a><br>
+email: <a href="mailto:dhealy@nber.org" title="Denis Healy">dhealy@nber.org</a></p>-->
+<br><br><br><br>
+<div class="bottomRight" onClick="hideNavs(0)">Close</div>
+
+</div>
+
+</div> <!-- closes mainNewsDiv -->
+
+
+</body>
+</html>

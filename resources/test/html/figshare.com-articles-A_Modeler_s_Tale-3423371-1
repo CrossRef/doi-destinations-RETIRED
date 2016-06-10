@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js ie lt-ie9 lt-ie8 lt-ie7 gray-background fg-item-page"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js ie lt-ie9 lt-ie8 gray-background fg-item-page"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js ie lt-ie9 gray-background fg-item-page"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js ie ie9 gray-background fg-item-page"> <![endif]-->
+<!--[if IE  ]>         <html class="no-js ie gray-background fg-item-page"> <![endif]-->
+<!--[if IE]><!--> <html class="no-js gray-background fg-item-page" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      
+A Modeler&#39;s Tale
+
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="csrf_token" content="64237b6a-c11f-4eb1-97ae-3155a210cfb0" />
+    
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/public/global/favicon//apple-touch-icon-57x57.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/public/global/favicon//apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/public/global/favicon//apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/public/global/favicon//apple-touch-icon-144x144.png" />
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="/assets/public/global/favicon//apple-touch-icon-60x60.png" />
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/public/global/favicon//apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/public/global/favicon//apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/public/global/favicon//apple-touch-icon-152x152.png" />
+<link rel="icon" type="image/png" href="/assets/public/global/favicon//favicon-196x196.png" sizes="196x196" />
+<link rel="icon" type="image/png" href="/assets/public/global/favicon//favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/assets/public/global/favicon//favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/assets/public/global/favicon//favicon-16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/assets/public/global/favicon//favicon-128.png" sizes="128x128" />
+<meta name="application-name" content="&nbsp;"/>
+<meta name="msapplication-TileColor" content="#FFFFFF" />
+<meta name="msapplication-TileImage" content="/assets/public/global/favicon//mstile-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/assets/public/global/favicon//mstile-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/assets/public/global/favicon//mstile-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/assets/public/global/favicon//mstile-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/assets/public/global/favicon//mstile-310x310.png" />
+    
+    <meta name="citation_title" content="A Modeler&#39;s Tale" />
+    <meta name="citation_publication_date" content="2016-06-09T06:49:04Z" />
+    
+    <meta name="citation_author" content="markus, wolfien" />
+    
+    <meta name="citation_author" content="andrea, bagnacani" />
+    
+    <meta name="citation_author" content="tom, gebhardt" />
+    
+    <meta name="citation_author" content="martin, scharm" />
+    
+    <meta name="description" content="A Modeler&#39;s Tale" />
+    <meta name="google" content="notranslate" />
+    
+    <meta name="DC.identifier" content="doi:10.6084/m9.figshare.3423371.v1" />
+    
+
+    
+      <link rel="stylesheet" type="text/css" href="//figshare.com/assets/public/global/styles/main.88f0914c.css" />
+    
+    <link rel="stylesheet" type="text/css" href="//figshare.com/assets/public.dd2352c0.css" />
+    
+    <meta name="viewport" content="width=device-width">
+    
+    
+  </head>
+  <body>
+    <div id="main-container">
+    
+      
+
+<header role="banner" class="main-header">
+  <div class="center-layout clearfix">
+    
+      
+        <a class="figshare-logo hide-text" href="https://figshare.com/">
+    https://figshare.com/
+  </a>
+      
+    
+    
+    <div class="h-search">
+      <a class="normal-link underline my-data" href="https://figshare.com/account/home">My data</a>
+      <form action="https://figshare.com/search" method="get">
+        <div class="search-input-wrap">
+          <input type="search" name="q" placeholder="search on figshare" />
+        </div>
+        <input type="hidden" name="quick" value="1">
+        <input type="submit" class="hs-button" value="go" />
+      </form>
+      <a class="normal-link underline" href="https://figshare.com/browse">Browse</a>
+      <a class="normal-link underline" href="https://figshare.com/account/home?_f=%2Fupload">Upload</a>
+    </div>
+    
+    
+    <div class="h-options">
+        
+          <div id="ho-sign-in">
+            <a href="https://figshare.com/account/register" id="user_register_but" class="styled-link-grey">Sign up</a>
+            
+            <a href="https://figshare.com/account/login" id="user_login_but" class="styled-link-pink">Log in</a>
+            
+          </div>
+        
+    </div>
+    
+  </div>
+</header>
+    
+
+    
+
+<div id="app-root" data-app="item">
+  <div class="item-page">
+    <div class="loader show-content">
+      <div class="item-page">
+        <div class="global-message-queue"></div>
+        <div class="item-preview expanded">
+          <div class="figshare-viewer">
+            <div class="display"></div>
+            <div class="controls-wrapper"></div>
+          </div>
+          <div class="actions-bar-wrap">
+            <div class="actions-bar">
+              <div class="items">
+                <a class="download-button simple-pink-button" href="/file/download/3000006">
+                  Download
+                </a>
+                <a class="normal-link">Share</a>
+                <a class="normal-link">Cite</a>
+                <a class="normal-link">Embed</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="item-wrap">
+          <div class="center-layout cf">
+            <div class="item-left">
+              <h2 class="title">A Modeler&#39;s Tale</h2>
+              <div class="details section">
+                <span>2016-06-09T06:49:04Z</span> (GMT)
+                <span>
+                  by
+                  <span class="authors-holder">
+                    
+                    
+                      
+  
+<a class="normal-link author" href=""">
+  markus wolfien
+</a>
+                    
+                      
+  
+<a class="normal-link author" href=""">
+  andrea bagnacani
+</a>
+                    
+                      
+  
+<a class="normal-link author" href=""">
+  tom gebhardt
+</a>
+                    
+                      
+  
+    
+  
+<a class="normal-link author" href="https://figshare.com/authors/_/2106580"">
+  martin scharm
+</a>
+                    
+                  </span>
+                </span>
+              </div>
+              <div class="description section">We created the movie for the &lt;b&gt;10&lt;sup&gt;th&lt;/sup&gt; International CellML Workshop&lt;/b&gt; June 2016 in Auckland, New Zealand.&lt;br&gt;&lt;br&gt;The video shows &lt;i&gt;Researcher 1 (GMT)&lt;/i&gt;, who developed a model that may cure stupidity. He wants to share the simulation study with his collaborator &lt;i&gt;Researcher 2 (GMT+7)&lt;/i&gt; to get some feedback. However, it turns out that sharing the simulation study is not that easy and &lt;i&gt;Researcher 2 (GMT+7)&lt;/i&gt; is not able to reproduce the results of &lt;i&gt;Researcher 1 (GMT)&lt;/i&gt; using &lt;i&gt;The Simulator.&lt;/i&gt;&lt;br&gt;Fortunately, &lt;i&gt;Supervisor&lt;/i&gt; comes in to help &lt;i&gt;Researcher 1 (GMT).&lt;/i&gt; He points &lt;i&gt;Researcher 1 (GMT)&lt;/i&gt; to COMBINE archives. &lt;b&gt;A COMBINE archive is a container format meant to organise and annotate all files necessary to reproduce a simulation study.&lt;/b&gt;&lt;br&gt;Eventually, &lt;i&gt;Researcher 1 (GMT)&lt;/i&gt; is able to transfer his late-breaking research results bundled into a COMBINE archive to &lt;i&gt;Researcher 2 (GMT+7).&lt;/i&gt; &lt;i&gt;The Simulator &lt;/i&gt;finally knows what to do, as there is now everything available and in the right place. It turns out that the model is valid and stupidity is going to cease!&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;Thanks&lt;/b&gt;&lt;br&gt;We would like to thank the whole Free Software Community, as most of the video was produced using Free Software! Special thanks to&lt;br&gt;* Debian GNU/Linux (debian.org)&lt;br&gt;* Cheese (wiki.gnome.org/Apps/Cheese)&lt;br&gt;* Flowblade (github.com/jliljebl/flowblade)&lt;br&gt;* Gimp (gimp.org)&lt;br&gt;* Kevin MacLeod (incompetech.com) for providing the music as CC:BY&lt;br&gt;</div>
+              <div class="comments section">Comments are currently unavailable</div>
+            </div>
+            <div class="item-right">
+            
+            
+              <div class="categories section">
+                <h4>Categories</h4>
+                <ul class="normal-list">
+                  
+                  <li><a class="normal-link">Bioinformatics Software</a></li>
+                  
+                  <li><a class="normal-link">Computer Software</a></li>
+                  
+                  <li><a class="normal-link">Data Format</a></li>
+                  
+                  <li><a class="normal-link">Open Software</a></li>
+                  
+                  <li><a class="normal-link">Simulation and Modelling</a></li>
+                  
+                </ul>
+              </div>
+            
+            
+              <div class="tags section">
+                <h4>Tags</h4>
+                <div>
+                 
+                  <a class="tag-wrap"><span>COMBINE</span></a>
+                
+                  <a class="tag-wrap"><span>COMBINE archive</span></a>
+                
+                  <a class="tag-wrap"><span>Reproducibility</span></a>
+                
+                  <a class="tag-wrap"><span>Sharing</span></a>
+                
+                  <a class="tag-wrap"><span>research results</span></a>
+                
+                  <a class="tag-wrap"><span>collaborations</span></a>
+                
+                </div>
+              </div>
+            
+            
+              <div class="license section">
+                <h4>License</h4>
+                <div>CC-BY</div>
+              </div>
+            
+              <div class="exports-wrap section">
+                <h4>Export</h4>
+                  <div>
+                    <a class="normal-link" href="/articles/2000082/1/citations/refworks" target="_blank">RefWorks</a>
+                  </div>
+                  <div>
+                    <a class="normal-link" href="/articles/2000082/1/citations/bibtex" target="_blank">BibTeX</a></div>
+                  <div>
+                    <a class="normal-link" href="/articles/2000082/1/citations/reference_manager" target="_blank">Ref. manager</a></div><div><a class="normal-link" href="/articles/2000082/1/citations/mendeley" target="_blank">Mendeley</a>
+                  </div>
+                  <div>
+                    <a class="normal-link" href="/articles/2000082/1/citations/endnote" target="_blank">Endnote</a></div><div><a class="normal-link" href="/articles/2000082/1/citations/datacite" target="_blank">DataCite</a></div><div><a class="normal-link" href="/articles/2000082/1/citations/nlm" target="_blank">NLM</a>
+                  </div>
+                  <div>
+                    <a class="normal-link" href="/articles/2000082/1/citations/dc" target="_blank">DC</a>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  </div>
+
+  <footer role="contentinfo">
+    <div class="f-sitemap">
+      <div class="center-layout clearfix">
+        <ul class="fs-links">
+          <li><a href="https://figshare.com/about">About</a></li>
+          <li><a href="https://figshare.com/features">Features</a></li>
+          <li><a href="https://figshare.com/tools">Tools</a></li>
+          <li><a href="https://figshare.com/blog">Blog</a></li>
+          <li><a href="https://figshare.com/contact">Contact</a></li>
+          <li><a target="_blank" href="https://support.figshare.com">FAQs</a></li>
+          <li><a href="https://figshare.com/privacy">Privacy Policy</a></li>
+          <li class="last"><a href="https://figshare.com/terms">Terms &amp; Conditions</a></li>
+        </ul>
+
+        <ul class="fs-social">
+          <li><a class="fss-facebook hide-text" target="_blank" href="//facebook.com/FigShare">facebook page</a></li>
+          <li><a class="fss-twitter hide-text" target="_blank" href="//twitter.com/figshare">twitter page</a></li>
+          <li><a class="fss-google hide-text" target="_blank" href="//plus.google.com/107997370406416536977">google plus page</a></li>
+          <li><a class="fss-vimeo hide-text" target="_blank" href="//vimeo.com/figshare">vimeo page</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-informations">
+      <div class="center-layout clearfix">
+        <div class="fi-figshare">fig<strong>share</strong>. credit for <strong>all</strong> your research.</div>
+        <ul class="fi-partners">
+          <li><a class="fip-digital hide-text" target="_blank"  href="//www.digital-science.com/">digital science page</a></li>
+          <li><a class="fip-dpn hide-text" target="_blank"  href="http://www.dpn.org/">dpn page</a></li>
+          <li><a class="fip-datacite hide-text" target="_blank"  href="//www.datacite.org/">datacite page</a></li>
+          <li><a class="fip-cope hide-text" target="_blank" href="http://publicationethics.org/">publication ethics page</a></li>
+            <li><a class="fip-open hide-text" target="_blank" href="//creativecommons.org/licenses/by/3.0/">creative commons page</a></li>
+          </ul>
+        </div>
+    </div>
+  </footer>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-20427479-1', 'figshare.com');
+    ga('require', 'displayfeatures');
+    ga('send', 'pageview');
+  </script>
+  
+  <script type="text/javascript" src="//figshare.com/assets/commons.2241830a.js"></script>
+  
+<script id="app-data" type="text/json">
+    {
+      "article": {"isLastVersion": true, "linkbackCollection": null, "filesCount": 1, "branding": null, "citation": {"doi": "10.6084/m9.figshare.3423371.v1", "title": "A Modeler's Tale", "branding": "figshare", "format": "{authors} ({year}): {title}. {branding}.\n {doi}\n Retrieved: {date}", "authors": "wolfien, markus; bagnacani, andrea; gebhardt, tom; scharm, martin", "year": 2016, "date": "11 57, Jun 09, 2016 (GMT)"}, "confidentialReason": "", "actions": [], "embargoType": 2, "isMetadataRecord": false, "curationStatus": null, "resourceTitle": null, "id": 3423371, "accountId": 1268410, "funding": "", "thumb": "https://s3-eu-west-1.amazonaws.com/pfigshare-u-previews/5357942/thumb.png", "title": "A Modeler's Tale", "tags": ["COMBINE", "COMBINE archive", "Reproducibility", "Sharing", "research results", "collaborations"], "version": 1, "categories": [{"urlName": "Bioinformatics_Software", "name": "Bioinformatics Software", "parentId": 52, "relativePath": "/categories/Bioinformatics_Software/960", "id": 960, "publicUrl": "https://figshare.com/categories/Bioinformatics_Software/960"}, {"urlName": "Computer_Software", "name": "Computer Software", "parentId": 52, "relativePath": "/categories/Computer_Software/181", "id": 181, "publicUrl": "https://figshare.com/categories/Computer_Software/181"}, {"urlName": "Data_Format", "name": "Data Format", "parentId": 52, "relativePath": "/categories/Data_Format/182", "id": 182, "publicUrl": "https://figshare.com/categories/Data_Format/182"}, {"urlName": "Open_Software", "name": "Open Software", "parentId": 52, "relativePath": "/categories/Open_Software/965", "id": 965, "publicUrl": "https://figshare.com/categories/Open_Software/965"}, {"urlName": "Simulation_and_Modelling", "name": "Simulation and Modelling", "parentId": 52, "relativePath": "/categories/Simulation_and_Modelling/951", "id": 951, "publicUrl": "https://figshare.com/categories/Simulation_and_Modelling/951"}], "customFields": [], "size": 271496871, "isConfidential": false, "metadataReason": "", "publicUrl": "https://figshare.com/articles/A_Modeler_s_Tale/3423371", "files": [{"status": "available", "previewMeta": {"videoKey": "5357942/video_preview.mp4", "baseUrl": "https://ndownloader.figshare.com/files/5357942/preview", "originalHeight": 576, "version": "1.0.0", "originalWidth": 720, "previewKey": "5357942/img_preview.png"}, "isLinkOnly": false, "thumb": "https://s3-eu-west-1.amazonaws.com/pfigshare-u-previews/5357942/thumb.png", "previewState": "preview_available", "size": 271496871, "downloadUrl": "https://ndownloader.figshare.com/files/5357942", "viewerType": "video", "md5": "ebe59dfd5a39da33cbc7010481810751", "id": 5357942, "previewLocation": "https://s3-eu-west-1.amazonaws.com/pfigshare-u-previews", "name": "a-modelers-tale.mp4"}], "description": "We created the movie for the <b>10<sup>th</sup> International CellML Workshop</b> June 2016 in Auckland, New Zealand.<br><br>The video shows <i>Researcher 1 (GMT)</i>, who developed a model that may cure stupidity. He wants to share the simulation study with his collaborator <i>Researcher 2 (GMT+7)</i> to get some feedback. However, it turns out that sharing the simulation study is not that easy and <i>Researcher 2 (GMT+7)</i> is not able to reproduce the results of <i>Researcher 1 (GMT)</i> using <i>The Simulator.</i><br>Fortunately, <i>Supervisor</i> comes in to help <i>Researcher 1 (GMT).</i> He points <i>Researcher 1 (GMT)</i> to COMBINE archives. <b>A COMBINE archive is a container format meant to organise and annotate all files necessary to reproduce a simulation study.</b><br>Eventually, <i>Researcher 1 (GMT)</i> is able to transfer his late-breaking research results bundled into a COMBINE archive to <i>Researcher 2 (GMT+7).</i> <i>The Simulator </i>finally knows what to do, as there is now everything available and in the right place. It turns out that the model is valid and stupidity is going to cease!<br><br><br><b>Thanks</b><br>We would like to thank the whole Free Software Community, as most of the video was produced using Free Software! Special thanks to<br>* Debian GNU/Linux (debian.org)<br>* Cheese (wiki.gnome.org/Apps/Cheese)<br>* Flowblade (github.com/jliljebl/flowblade)<br>* Gimp (gimp.org)<br>* Kevin MacLeod (incompetech.com) for providing the music as CC:BY<br>", "publishedDate": "2016-06-09T06:49:04Z", "embargoDate": null, "isPublic": true, "authorId": null, "modifiedDate": "2016-06-09T06:49:06Z", "isEmbargoed": false, "authors": [{"domain": 0, "name": "markus wolfien", "firstName": "markus", "title": "", "lastName": "wolfien", "isPublic": true, "photoUrl": null, "location": "", "jobTitle": "", "urlName": "_", "id": 2821587, "isActive": false}, {"domain": 0, "name": "andrea bagnacani", "firstName": "andrea", "title": "", "lastName": "bagnacani", "isPublic": true, "photoUrl": null, "location": "", "jobTitle": "", "urlName": "_", "id": 2821589, "isActive": false}, {"domain": 0, "name": "tom gebhardt", "firstName": "tom", "title": "", "lastName": "gebhardt", "isPublic": true, "photoUrl": null, "location": "", "jobTitle": "", "urlName": "_", "id": 2821585, "isActive": false}, {"domain": 0, "name": "martin scharm", "firstName": "martin", "title": "", "lastName": "scharm", "isPublic": true, "photoUrl": "https://secure.gravatar.com/avatar/0034257abedd9dd580439a51010d803c?s=250&d=%2F%2Ffigshare.com%2Fassets%2Fpublic%2Fprofile%2Favatar.jpg", "location": "", "jobTitle": "", "urlName": "_", "id": 2106580, "isActive": true, "publicUrl": "https://figshare.com/authors/_/2106580"}], "hasLinkedFile": false, "isActive": true, "createdDate": "2016-06-09T06:49:05Z", "doi": "10.6084/m9.figshare.3423371.v1", "isEmbargoedPublished": false, "license": {"url": "http://creativecommons.org/licenses/by/3.0/us/", "name": "CC-BY", "value": 1}, "versions": [{"date": "2016-06-09T06:49:04Z", "downloadUrl": "https://ndownloader.figshare.com/articles/3423371/versions/1", "id": 1}], "definedType": 2, "embargoReason": "", "resourceDOI": null, "downloadUrl": "https://ndownloader.figshare.com/articles/3423371", "status": "public", "references": []}
+    }
+</script>
+<script type="text/javascript" src="//figshare.com/assets/public/index.38e5aab2.js"></script>
+<script type="text/javascript" src="//figshare.com/assets/vendor/altmetric/altmetric.a4baebcc.js"></script>
+
+  </body>
+</html>

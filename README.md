@@ -60,9 +60,8 @@ All of the above formats can be extracted from inside text.
 
 ## All the weird things mentioned in Geoff Bilder's *Appendix A: On the complexity of handling DOIs in the wild*
 
- - `10.1002/(SICI)1099-050X(199823/24)37:3/4<197::AID-HRM2>3.0.CO;2-#` [demo](http://destinations.labs.crossref.org/guess-doi?q=10.1002/(SICI)1099-050X(199823/24)37:3/4<197::AID-HRM2>3.0.CO;2-#)
- - `doi:10.1002/(SICI)1099-050X(199823/24)37:3/4<197::AID-HRM2>3.0.` [demo](http://destinations.labs.crossref.org/guess-doi?q=doi:10.1002/(SICI)1099-050X(199823/24)37:3/4<197::AID-HRM2>3.0.)
- - `DOI:10.1002/(SICI)1099-050X(199823/24)37:3/4<197::AID-HRM2>3.0.CO;2-#` [demo](http://destinations.labs.crossref.org/guess-doi?q=DOI:10.1002/(SICI)1099-050X(199823/24)37:3/4<197::AID-HRM2>3.0.CO;2-#)
+ - `10.1002%2F(SICI)1099-050X(199823%2F24)37%3A3%2F4%3C197%3A%3AAID-HRM2%3E3.0.CO%3B2-%23` [demo](http://destinations.labs.crossref.org/guess-doi?q=10.1002%2F(SICI)1099-050X(199823%2F24)37%3A3%2F4%3C197%3A%3AAID-HRM2%3E3.0.CO%3B2-%23) - SICI with URLEncdoded trailing slash
+ - `DOI%3A10.1002%2F(SICI)1099-050X(199823%2F24)37%3A3%2F4%3C197%3A%3AAID-HRM2%3E3.0.CO%3B2-%23` [demo](http://destinations.labs.crossref.org/guess-doi?q=DOI%3A10.1002%2F(SICI)1099-050X(199823%2F24)37%3A3%2F4%3C197%3A%3AAID-HRM2%3E3.0.CO%3B2-%23)
  - `http://doi.org/10.1002/(SICI)1099-050X(199823/24)37:3/4<197::AID-HRM2>3.0.CO;2-#` [demo](http://destinations.labs.crossref.org/guess-doi?q=http://doi.org/10.1002/(SICI)1099-050X(199823/24)37:3/4<197::AID-HRM2>3.0.CO;2-#)
  - `http://doi.org/10.1002%2F(SICI)1099-050X(199823%2F24)37%3A3%2F4%3C197%3A%3AAID-HRM2%3E3.0.CO%3B2-%23` [demo](http://destinations.labs.crossref.org/guess-doi?q=http://doi.org/10.1002%2F(SICI)1099-050X(199823%2F24)37%3A3%2F4%3C197%3A%3AAID-HRM2%3E3.0.CO%3B2-%23)
  - `http://doi.org/doi:10.1002%2F(SICI)1099-050X(199823%2F24)37%3A3%2F4%3C197%3A%3AAID-HRM2%3E3.0.CO%3B2-%23` [demo](http://destinations.labs.crossref.org/guess-doi?q=http://doi.org/doi:10.1002%2F(SICI)1099-050X(199823%2F24)37%3A3%2F4%3C197%3A%3AAID-HRM2%3E3.0.CO%3B2-%23)

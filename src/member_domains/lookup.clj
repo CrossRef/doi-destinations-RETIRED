@@ -1,5 +1,7 @@
 (ns member-domains.lookup
-  (:require [member-domains.db :as db])
+  (:require [member-domains.db :as db]
+            [member-domains.structured-extraction :as structured-extraction]
+            [member-domains.unstructured-extraction :as unstructured-extraction])
   (:require [crossref.util.doi :as crdoi])
   (:require [clojure.string :as string])
   (:require [clojure.tools.logging :refer [info]])
@@ -67,14 +69,17 @@
     (.toLowerCase (second match))))
 
 (defn resolve-doi
-  "Resolve a DOI or ShortDOI, expressed as not-URL form. Return the DOI."
+  "Resolve a DOI or ShortDOI, expressed as not-URL form. May or may not be URLEscaped. Return the DOI."
   [doi]
   (let [response @(try-try-again {:sleep 500 :tries 2}
-                    #(http/get (str "http://doi.org/" (URLEncoder/encode doi "UTF-8"))
+                    #(http/get
+                      (str "http://doi.org/" doi)
                       {:follow-redirects false}))
         status (:status response)
         redirect-header (-> response :headers :location)]
       (cond
+        (:error response) nil
+
         ; If it's a shortDOI it will redirect to the real one. Use this.
         (= (try-hostname redirect-header) "doi.org") (crdoi/non-url-doi redirect-header)
         ; If it's a real DOI it will return a 30x. 
@@ -82,6 +87,14 @@
 
         ; If it's not anything then don't return anything.
         :default nil)))
+
+(defn resolve-doi-maybe-escaped
+  "Try to `resolve-doi`, escaped and unescaped."
+  [doi]
+  (if-let [unescaped (resolve-doi doi)]
+    unescaped
+    (when-let [escaped (resolve-doi (URLEncoder/encode doi "UTF-8"))]
+      (URLDecoder/decode escaped "UTF-8"))))
 
 (def max-drops 5)
 (defn validate-doi
@@ -99,10 +112,20 @@
       ; Stop recursion.
       nil
       ; Or try this substring.
-      (if-let [clean-doi (resolve-doi doi)] 
+      (if-let [clean-doi (resolve-doi-maybe-escaped doi)] 
         ; resolve-doi may alter the DOI it returns, e.g. resolving a shortDOI to a real DOI or lower-casing.
         clean-doi
         (recur (inc i) (.substring doi 0 (- (.length doi) 1)))))))
+
+(defn first-valid
+  "Return the first valid, possibly cleaned, DOI"
+  [dois]
+  ; using `keep` on a chunked seq would waste time evaluating whole chunk rather than each in sequence.
+  (loop [[doi & tail] dois]
+    (if-let [validated (validate-doi doi)]
+      validated
+      (when (not-empty tail)
+        (recur tail)))))
 
 (defn validate-pii
   "Validate a PII and return the DOI if it's been used as an alternative ID."
@@ -187,7 +210,7 @@
     (catch IllegalArgumentException _ nil)))
 
 (defn extract-doi-in-a-hrefs-from-html
-  "Extract all <a href> links from an HTML document."
+  "Extract all <a href> links from an HTML document. DEPRECATED"
   [input]
     (let [links (html/select (html/html-snippet input) [:a])
           hrefs (keep #(-> % :attrs :href) links)
@@ -207,67 +230,65 @@
   (let [matches (re-seq pii-re text)]
         (distinct matches)))
 
+(defn fetch
+  "Fetch the content at a URL, following redirects and accepting cookies."
+  [url]
+  (loop [headers {"Referer" "eventdata.crossref.org"
+                  "User-Agent" "CrossrefEventDataBot (labs@crossref.org)"}
+         depth 0
+         url url]
+    (if (> depth 4)
+      nil
+      (let [result @(org.httpkit.client/get url {:follow-redirects false :headers headers})
+            cookie (-> result :headers :set-cookie)
+            new-headers (merge headers (when cookie {"Cookie" cookie}))]
+
+        (condp = (:status result)
+          200 result
+          ; Weirdly some Nature pages return 401 with the content. http://www.nature.com/nrendo/journal/v10/n9/full/nrendo.2014.114.html
+          401 result
+          302 (recur new-headers (inc depth) (-> result :headers :location))
+          nil)))))
+
 (defn resolve-doi-from-url
-  "Take a URL and try to resolve it to find what DOI it corresponds to."
-  [url limit-to-member-domains]
+  "Take a URL and try to resolve it to find what valid DOI it corresponds to."
+  [url]
   (info "Try to resolve:" url)
 
   ; Check if we want to bother with this URL.
-  (when (or (->> url try-hostname (get @member-full-domains))
-            (not limit-to-member-domains))
-    (when-let [result (try-try-again {:sleep 500 :tries 2} #(http/get url
-                                                           {:follow-redirects true
-                                                            :throw-exceptions true
-                                                            :socket-timeout 5000
-                                                            :conn-timeout 5000
-                                                            :headers {"Referer" "chronograph.crossref.org"
-                                                                      "User-Agent" "CrossRefDOICheckerBot (labs@crossref.org)"}}))]
-      (let [body (:body @result)
-            text (extract-text-fragments-from-html body)
-            
-            dois-from-text (extract-potential-dois-from-text text)
-            links-from-text (extract-doi-in-a-hrefs-from-html body)
+  
+    (when-let [result (try-try-again {:sleep 500 :tries 2} #(fetch url))]
+      (let [body (:body result)
 
-            ; Look at the first DOI in the text before any of the others - high chance that it's the first one.
-            first-text-doi (url-matches-doi? url (first dois-from-text))]
+            doi-from-structured (structured-extraction/from-tags body)
+            doi-from-unstructured (unstructured-extraction/from-webpage body url)
 
-      (info "Found" (count dois-from-text) "DOIs in text," (count links-from-text) "DOIs from links")
-      (info "Match for first doi" (first dois-from-text) ":" first-text-doi)
+            ; DOI candidates in order of likelihood
+            candidates (distinct [doi-from-structured doi-from-unstructured])
 
-        ; If the first DOI in the text doesn't work then we need to start looking at the rest.
-        (if first-text-doi
-            first-text-doi
-            (let [; Now we have a set of DOIs we think it could be. Try to resolve each one to see if we end up in the same place.
-                  potential-dois (concat (rest dois-from-text) links-from-text)
+            ; Validate ones that exist. The regular expression might be a bit greedy, so this may chop bits off the end to make it work.
+            valid-doi (first-valid candidates)
 
-                  ; Validate ones that exist. The regular expression might be a bit greedy, so this may chop bits off the end to make it work.
-                  extant-dois (keep validate-doi potential-dois)
+            ; NB not using url-maches-doi, maybe reintroduce.
+            ]
 
-                  ; Matched DOIs. Some DOIs may map to the same page, e.g. components in PLOS.
-                  ; e.g. "10.1371/journal.pone.0144297.g002" goes to the sampe place as "10.1371/journal.pone.0144297"
-                  ; In the case of multiple results, choose the shortest.
-                  ; This does lots of network requests, so pmap is useful.
-                  matched-url-doi (->> extant-dois
-                                       (pmap #(url-matches-doi? url %))
-                                       (filter identity)
-                                       ; sort by length of DOI.
-                                       (sort-by count)
-                                       first)]
-              (info "Found matching DOI:" matched-url-doi)
-            matched-url-doi))))))
+        (info "Found from structured HTML:", doi-from-structured)
+        (info "Found from unstructured text:" doi-from-unstructured)
+        (info "Valid DOI: " valid-doi)
+        valid-doi)))
 
 ; Combined methods.
 ; Combine extraction methods and validate.
 
 (defn get-embedded-doi-from-string
-  "Get DOI that's embedded in a URL (or an arbitrary string) by a number of methods."
+  "Get valid DOI that's embedded in a URL (or an arbitrary string) by a number of methods."
   [url]
   ; First see if cleanly represented it's in the GET params.
   (if-let [doi (-> url extract-doi-from-get-params validate-doi)]
     doi
     ; Next try extracting DOIs and/or PII with regular expressions.
     (let [potential-dois (extract-potential-dois-from-text url)
-          validated-doi (->> potential-dois (keep validate-doi) first)
+          validated-doi (first-valid potential-dois)
           potential-alternative-ids (extract-potential-piis-from-text url)
           validated-pii-doi (->> potential-alternative-ids (keep validate-pii) first)]
 
@@ -300,58 +321,40 @@
               distinct-candidates (distinct candidates)
 
               ; Now take the first one that we could validate.
-              doi (->> distinct-candidates (keep validate-doi) first)]
-          (if doi
-            doi
-            nil))))))
+              doi (first-valid distinct-candidates)]
+          doi)))))
 
 (defn cleanup-doi
-  "Take a URL or DOI or something that could be a DOI, return the DOI if it is one."
+  "Take a URL or DOI or something that could be a DOI, return the valid DOI if it is one."
   [potential-doi]
+  (when (or 
+    (re-matches whole-doi-re potential-doi)
+    (re-find doi-re potential-doi)
+    (re-find doi-encoded-re potential-doi)
+    (re-matches shortdoi-find-re potential-doi))
   (let [normalized-doi (crdoi/non-url-doi potential-doi)
         doi-colon-prefixed-doi (remove-doi-colon-prefix potential-doi)]
 
-  ; Find the first operation that produces an output that looks like a DOI.
-  (cond
-    (matches-doi? normalized-doi) normalized-doi
-    (matches-doi? doi-colon-prefixed-doi) doi-colon-prefixed-doi
-    :default nil)))
-
+    ; Find the first operation that produces an output that looks like a DOI.
+    (first-valid [potential-doi normalized-doi doi-colon-prefixed-doi]))))
+  
 ; External functions.
 
-; This is exposed for testing.
-(defn lookup-uncached
-  "As lookup, but without the cache."
-  [input limit-to-member-domains]
+(defn lookup
+  "Lookup a DOI from an input. Return only valid DOI."
+  [input ]
   ; Try to treat it as a DOI in a particular encoding.
-  (if-let [cleaned-doi (cleanup-doi input)]
-    cleaned-doi
+  (if-let [cleaned-valid-doi (cleanup-doi input)]
+    [:cleaned cleaned-valid-doi]
 
     ; Try to treat it as a Publisher URL that has a DOI in the URL, or a string with a DOI in it somehow.
-    (if-let [embedded-doi (get-embedded-doi-from-string input)]
-      embedded-doi
+    (if-let [embedded-valid-doi (validate-doi (get-embedded-doi-from-string input))]
+      [:embedded embedded-valid-doi]
 
     ; Try to treat it as a Publisher URL that must be fetched to extract its DOI.
-    (if-let [resolved-doi (resolve-doi-from-url input limit-to-member-domains)]
-      resolved-doi
+    (if-let [resolved-valid-doi (resolve-doi-from-url input)]
+      [:resolved resolved-valid-doi]
       nil))))
-
-(defn lookup
-  "Look up some input and turn it into a DOI. Could be a URL landing page or a DOI in any form. Cached.
-  If limit-to-member-domains is true, don't try and resolve URLs for for domains that aren't member domains."
-  [url limit-to-member-domains]
-  (info "Lookup" url)
-  (if-let [doi (db/get-cache-doi-for-url url)]
-    doi
-    (if-let [doi (lookup-uncached url limit-to-member-domains)]
-      (do
-        (db/set-cache-doi-for-url url doi true)
-        doi)
-      ; Store for later analysis if it failed.
-      (do
-        (db/set-cache-doi-for-url url "" false)
-        nil))))
-
 
 (defn bifurcate
   "Using the given method, bifurcate a file into successes and failures."
