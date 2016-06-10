@@ -114,7 +114,17 @@
       ; Or try this substring.
       (if-let [clean-doi (resolve-doi-maybe-escaped doi)] 
         ; resolve-doi may alter the DOI it returns, e.g. resolving a shortDOI to a real DOI or lower-casing.
-        clean-doi
+        
+        ; We have a working DOI!
+        ; Just check it does't contain a sneaky question mark which would still resolve e.g. http://www.tandfonline.com/doi/full/10.1080/00325481.2016.1186487?platform=hootsuite
+        ; If there is a question mark, try removing it to see if it still works.
+        (if (.contains clean-doi "?")
+          (let [before-q (first (.split clean-doi "\\?"))]
+            (if (resolve-doi before-q)
+              before-q
+              clean-doi))
+          clean-doi)
+        
         (recur (inc i) (.substring doi 0 (- (.length doi) 1)))))))
 
 (defn first-valid
@@ -253,7 +263,7 @@
 (defn resolve-doi-from-url
   "Take a URL and try to resolve it to find what valid DOI it corresponds to."
   [url]
-  (info "Try to resolve:" url)
+  (info "Attempt resolve-doi-from-url: " url)
 
   ; Check if we want to bother with this URL.
   
@@ -283,6 +293,7 @@
 (defn get-embedded-doi-from-string
   "Get valid DOI that's embedded in a URL (or an arbitrary string) by a number of methods."
   [url]
+  (info "Attempt get-embedded-doi-from-string")
   ; First see if cleanly represented it's in the GET params.
   (if-let [doi (-> url extract-doi-from-get-params validate-doi)]
     doi
@@ -322,11 +333,12 @@
 
               ; Now take the first one that we could validate.
               doi (first-valid distinct-candidates)]
-          doi)))))
+          doi))))) 
 
 (defn cleanup-doi
   "Take a URL or DOI or something that could be a DOI, return the valid DOI if it is one."
   [potential-doi]
+  (info "Attempt cleanup-doi")
   (when (or 
     (re-matches whole-doi-re potential-doi)
     (re-find doi-re potential-doi)
@@ -352,7 +364,7 @@
       [:embedded embedded-valid-doi]
 
     ; Try to treat it as a Publisher URL that must be fetched to extract its DOI.
-    (if-let [resolved-valid-doi (resolve-doi-from-url input)]
+    (if-let [resolved-valid-doi (when-let [url (try-url input)] (resolve-doi-from-url input))]
       [:resolved resolved-valid-doi]
       nil))))
 
