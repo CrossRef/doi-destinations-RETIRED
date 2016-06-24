@@ -1,6 +1,6 @@
 # DOI Destinations
 
-Tool to resolve a sample of DOIs to find which domains are used by Crossref members. Runs at [http://destinations.labs.crossref.org](destinations.labs.crossref.org). 
+Tool to resolve a sample of DOIs to find which domains are used by Crossref members. Runs at [http://destinations.labs.crossref.org](http://destinations.labs.crossref.org). 
 
 # Provides:
 
