@@ -264,9 +264,9 @@
   "Take a URL and try to resolve it to find what valid DOI it corresponds to."
   [url]
   (info "Attempt resolve-doi-from-url: " url)
-
+  ; No hope for PDFs.
+  (when-not (.endsWith url ".pdf")
   ; Check if we want to bother with this URL.
-  
     (when-let [result (try-try-again {:sleep 500 :tries 2} #(fetch url))]
       (let [body (:body result)
 
@@ -285,7 +285,7 @@
         (info "Found from structured HTML:", doi-from-structured)
         (info "Found from unstructured text:" doi-from-unstructured)
         (info "Valid DOI: " valid-doi)
-        valid-doi)))
+        valid-doi))))
 
 ; Combined methods.
 ; Combine extraction methods and validate.
