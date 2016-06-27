@@ -11,11 +11,11 @@
             [korma.core :refer :all]))
 
 (defdb db
-  (mysql {:user (:database-username env)
-          :password (:database-password env)
-          :db (:database-name env)
-          :naming {:keys ->kebab-case
-          :fields ->snake_case}}))
+    (mysql {:user (:database-username env)
+            :password (:database-password env)
+            :db (:database-name env)
+            :naming {:keys ->kebab-case
+            :fields ->snake_case}}))
 
 (k/defentity member-domains
   (k/table "member_domains")

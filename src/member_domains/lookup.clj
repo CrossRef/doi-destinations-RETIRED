@@ -30,14 +30,6 @@
 ; Used by Elsevier and others.
 (def pii-re #"[SB][0-9XB]{16}")
 
-; Set of all full member domains.
-(def member-full-domains (atom #{}))
-
-(defn fetch-member-full-domains []
-  (reset! member-full-domains (set (db/unique-member-domains))))
-
-(fetch-member-full-domains)
-
 ; Helpers
 
 (defn try-url
