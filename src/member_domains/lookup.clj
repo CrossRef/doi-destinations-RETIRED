@@ -265,6 +265,7 @@
   [url]
   (info "Attempt resolve-doi-from-url: " url)
   ; No hope for PDFs.
+  ; TODO doesn't work with query strings. look at content type instaed!
   (when-not (.endsWith url ".pdf")
   ; Check if we want to bother with this URL.
     (when-let [result (try-try-again {:sleep 500 :tries 2} #(fetch url))]

@@ -1,6 +1,6 @@
 (defproject member-domains "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "DOI Destinations"
+  :url "http://destinations.labs.crossref.org"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.6.0"]
@@ -22,8 +22,11 @@
                  [enlive "1.1.6"]
                  [com.cemerick/url "0.1.1"]
                  [selmer "0.9.5"]
+                 [yogthos/config "0.8"]
                  [org.jsoup/jsoup "1.8.3"]]
   
   :main ^:skip-aot member-domains.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:aot :all}
+             :prod {:resource-paths ["config/prod"]}
+             :dev  {:resource-paths ["config/dev"]}})

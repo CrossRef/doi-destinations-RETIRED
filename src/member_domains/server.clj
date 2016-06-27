@@ -11,8 +11,8 @@
   (:require [selmer.parser :refer [render-file cache-off!]]
             [selmer.filters :refer [add-filter!]])
   (:require [clojure.data.json :as json])
-  (:require [crossref.util.doi :as crdoi]
-            [crossref.util.config :refer [config]])
+  (:require [crossref.util.doi :as crdoi])
+  (:require [config.core :refer [env]])
   (:require [org.httpkit.server :refer [with-channel on-close on-receive send! run-server]])
   (:require [heartbeat.core :refer [def-service-check]]
             [heartbeat.ring :refer [wrap-heartbeat]]))
@@ -116,4 +116,4 @@
       (wrap-heartbeat)))
 
 (defn start []
-  (reset! server (run-server #'app {:port (:port config)})))
+  (reset! server (run-server #'app {:port (:port env)})))

@@ -1,5 +1,5 @@
 (ns member-domains.db
-  (:require [crossref.util.config :refer [config]])
+  (:require [config.core :refer [env]])
   (:require [korma.db :as kdb])
   (:require [korma.core :as k])
   (:require [korma.db :refer [mysql with-db defdb]])
@@ -11,9 +11,9 @@
             [korma.core :refer :all]))
 
 (defdb db
-  (mysql {:user (:database-username config)
-          :password (:database-password config)
-          :db (:database-name config)
+  (mysql {:user (:database-username env)
+          :password (:database-password env)
+          :db (:database-name env)
           :naming {:keys ->kebab-case
           :fields ->snake_case}}))
 
