@@ -177,7 +177,7 @@ Some domains are just too broad (like Google Pages). Maintain a list of these, i
 2. `/home/deploy/doi-destinations` then `lein uberjar`
 3. `sudo cp /home/deploy/doi-destinations/etc/doi-destinations.service /etc/systemd/system/doi-destinations.service`
 4. `sudo systemctl enable doi-destinations.service`
-5. `systemctl start doi-destinations.service`
+5. `sudo systemctl start doi-destinations.service`
 
 ## License
 
