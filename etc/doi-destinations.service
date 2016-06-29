@@ -7,7 +7,7 @@ PIDFile=/var/run/doi-destinations.pid
 WorkingDirectory=/home/deploy/doi-destinations
 Environment=CONFIG=/home/deploy/doi-destinations/config/prod/config.edn
 ExecStart=/usr/bin/java -jar /home/deploy/doi-destinations/target/uberjar/member-domains-0.1.0-SNAPSHOT-standalone.jar server
-Restart=on-abort
+Restart=always
 User=deploy
 
 [Install]
