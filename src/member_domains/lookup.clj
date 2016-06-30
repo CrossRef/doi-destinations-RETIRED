@@ -161,11 +161,7 @@
       (= base-needle (strip-extras-from-url (first urls))) true
 
       (not-empty (rest urls)) (recur (rest urls))
-      :default nil
-
-    )
-
-  )))
+      :default nil))))
 
 (defn url-matches-doi?
   "Does the given DOI resolve to the given URL? Return DOI if so."
@@ -241,7 +237,7 @@
          url url]
     (if (> depth 4)
       nil
-      (let [result @(org.httpkit.client/get url {:follow-redirects false :headers headers})
+      (let [result @(org.httpkit.client/get url {:follow-redirects false :headers headers :as :text})
             cookie (-> result :headers :set-cookie)
             new-headers (merge headers (when cookie {"Cookie" cookie}))]
 
@@ -252,33 +248,37 @@
           302 (recur new-headers (inc depth) (-> result :headers :location))
           nil)))))
 
+(def recognised-content-types
+  "Content types we'll allow ourselves to inspect.
+  Notable in its absence is PDF, for now."
+   #{"text/plain" "text/html"})
+
 (defn resolve-doi-from-url
   "Take a URL and try to resolve it to find what valid DOI it corresponds to."
   [url]
   (info "Attempt resolve-doi-from-url: " url)
-  ; No hope for PDFs.
-  ; TODO doesn't work with query strings. look at content type instaed!
-  (when-not (.endsWith url ".pdf")
   ; Check if we want to bother with this URL.
     (when-let [result (try-try-again {:sleep 500 :tries 2} #(fetch url))]
-      (let [body (:body result)
+      (when (recognised-content-types
+              (.getBaseType (new javax.mail.internet.ContentType (.toLowerCase (get-in result [:headers :content-type] "unknown/unknown")))))
+        (let [body (:body result)
 
-            doi-from-structured (structured-extraction/from-tags body)
-            doi-from-unstructured (unstructured-extraction/from-webpage body url)
+              doi-from-structured (structured-extraction/from-tags body)
+              doi-from-unstructured (unstructured-extraction/from-webpage body url)
 
-            ; DOI candidates in order of likelihood
-            candidates (distinct [doi-from-structured doi-from-unstructured])
+              ; DOI candidates in order of likelihood
+              candidates (distinct [doi-from-structured doi-from-unstructured])
 
-            ; Validate ones that exist. The regular expression might be a bit greedy, so this may chop bits off the end to make it work.
-            valid-doi (first-valid candidates)
+              ; Validate ones that exist. The regular expression might be a bit greedy, so this may chop bits off the end to make it work.
+              valid-doi (first-valid candidates)
 
-            ; NB not using url-maches-doi, maybe reintroduce.
-            ]
+              ; NB not using url-maches-doi, maybe reintroduce.
+              ]
 
-        (info "Found from structured HTML:", doi-from-structured)
-        (info "Found from unstructured text:" doi-from-unstructured)
-        (info "Valid DOI: " valid-doi)
-        valid-doi))))
+          (info "Found from structured HTML:", doi-from-structured)
+          (info "Found from unstructured text:" doi-from-unstructured)
+          (info "Valid DOI: " valid-doi)
+          valid-doi))))
 
 ; Combined methods.
 ; Combine extraction methods and validate.

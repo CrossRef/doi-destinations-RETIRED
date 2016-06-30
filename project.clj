@@ -23,7 +23,8 @@
                  [com.cemerick/url "0.1.1"]
                  [selmer "0.9.5"]
                  [yogthos/config "0.8"]
-                 [org.jsoup/jsoup "1.8.3"]]
+                 [org.jsoup/jsoup "1.8.3"]
+                 [javax/javaee-api "7.0"]]
   
   :main ^:skip-aot member-domains.core
   :target-path "target/%s"
